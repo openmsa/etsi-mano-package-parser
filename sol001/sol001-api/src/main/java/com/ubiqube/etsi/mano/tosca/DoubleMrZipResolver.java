@@ -16,44 +16,31 @@
  */
 package com.ubiqube.etsi.mano.tosca;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
-import com.ubiqube.etsi.mano.sol004.Sol004Exception;
+import com.ubiqube.etsi.mano.sol004.vfs.DoubleZipMr;
 
 /**
  *
  * @author Olivier Vignaud <ovi@ubiqube.com>
  *
  */
-public class ZipResolver extends AbstractResolver {
+public class DoubleMrZipResolver extends AbstractResolver {
 
-	private final ZipFile zipFile;
+	private final DoubleZipMr dzm;
 
-	public ZipResolver(final String fileName) {
-		try {
-			zipFile = new ZipFile(fileName);
-		} catch (final IOException e) {
-			throw new Sol004Exception(e);
-		}
-	}
-
-	@Override
-	protected boolean exist(final String path) {
-		return zipFile.getEntry(path) != null;
+	public DoubleMrZipResolver(final DoubleZipMr dzm) {
+		this.dzm = dzm;
 	}
 
 	@Override
 	protected String handleContent(final String url) {
-		final ZipEntry entry = zipFile.getEntry(url);
-		try (InputStream is = zipFile.getInputStream(entry)) {
-			return new String(is.readAllBytes(), Charset.defaultCharset());
-		} catch (final IOException e) {
-			throw new Sol004Exception(e);
-		}
+		return new String(dzm.getFileContent(url), Charset.defaultCharset());
+	}
+
+	@Override
+	protected boolean exist(final String string) {
+		return dzm.exist(string);
 	}
 
 }
