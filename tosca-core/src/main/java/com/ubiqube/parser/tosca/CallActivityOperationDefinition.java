@@ -16,9 +16,6 @@
  */
 package com.ubiqube.parser.tosca;
 
-import java.util.Map;
-
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,10 +30,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Builder
-@AllArgsConstructor
-public class CallActivityOperationDefinition {
+public class CallActivityOperationDefinition extends CallActivity{
 	private String operation;
-	private Map<String, Object> inputs;
 
 	public CallActivityOperationDefinition(final String textValue) {
 		operation = textValue;
