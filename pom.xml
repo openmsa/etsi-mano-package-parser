@@ -30,9 +30,21 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.version.jackson.databind>2.15.2</project.version.jackson.databind>
-		<ubiqube.orika.version>1.5.6</ubiqube.orika.version>
+		<ubiqube.orika.version>1.5.7</ubiqube.orika.version>
 		<version.bouncycastle>1.75</version.bouncycastle>
+		<version.commons-io>2.13.0</version.commons-io>
+		<version.commons-vfs2>2.9.0</version.commons-vfs2>
+		<version.equalsverifier>3.15</version.equalsverifier>
+		<version.expressly>5.0.0</version.expressly>
+		<version.hibernate-validator>8.0.1.Final</version.hibernate-validator>
+		<version.jakarta.annotation-api>2.1.1</version.jakarta.annotation-api>
+		<version.jakarta.validation-api>3.0.2</version.jakarta.validation-api>
+		<version.javapoet>1.13.0</version.javapoet>
 		<version.junit.jupiter>5.9.3</version.junit.jupiter>
+		<version.logback-classic>1.4.8</version.logback-classic>
+		<version.lombok>1.18.28</version.lombok>
+		<version.mockito>5.4.0</version.mockito>
+		<version.slf4j-api>2.0.7</version.slf4j-api>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -54,59 +66,47 @@
 			<dependency>
 				<groupId>com.squareup</groupId>
 				<artifactId>javapoet</artifactId>
-				<version>1.13.0</version>
+				<version>${version.javapoet}</version>
 			</dependency>
 			<dependency>
 				<groupId>jakarta.validation</groupId>
 				<artifactId>jakarta.validation-api</artifactId>
-				<version>3.0.2</version>
+				<version>${version.jakarta.validation-api}</version>
 			</dependency>
 			<dependency>
 				<groupId>jakarta.annotation</groupId>
 				<artifactId>jakarta.annotation-api</artifactId>
-				<version>2.1.1</version>
+				<version>${version.jakarta.annotation-api}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
-				<version>2.0.7</version>
+				<version>${version.slf4j-api}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-vfs2</artifactId>
-				<version>2.9.0</version>
+				<version>${version.commons-vfs2}</version>
 			</dependency>
 			<dependency>
 				<groupId>commons-io</groupId>
 				<artifactId>commons-io</artifactId>
-				<version>2.13.0</version>
+				<version>${version.commons-io}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate.validator</groupId>
 				<artifactId>hibernate-validator</artifactId>
-				<version>8.0.1.Final</version>
+				<version>${version.hibernate-validator}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.glassfish.expressly</groupId>
 				<artifactId>expressly</artifactId>
-				<version>5.0.0</version>
-			</dependency>
-			<dependency>
-				<groupId>org.junit.jupiter</groupId>
-				<artifactId>junit-jupiter</artifactId>
-				<version>${version.junit.jupiter}</version>
-				<scope>test</scope>
+				<version>${version.expressly}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.junit.jupiter</groupId>
 				<artifactId>junit-jupiter-api</artifactId>
 				<version>${version.junit.jupiter}</version>
-			</dependency>
-			<dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-classic</artifactId>
-				<version>1.4.8</version>
-				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.bouncycastle</groupId>
@@ -119,6 +119,11 @@
 				<version>${version.bouncycastle}</version>
 			</dependency>
 			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${version.lombok}</version>
+			</dependency>
+			<dependency>
 				<groupId>ma.glasnost.orika</groupId>
 				<artifactId>ubi-orika-core</artifactId>
 				<version>${ubiqube.orika.version}</version>
@@ -129,9 +134,26 @@
 				<version>${ubiqube.orika.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter</artifactId>
+				<version>${version.junit.jupiter}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
 				<groupId>nl.jqno.equalsverifier</groupId>
 				<artifactId>equalsverifier</artifactId>
-				<version>3.14.3</version>
+				<version>${version.equalsverifier}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>${version.mockito}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${version.logback-classic}</version>
 				<scope>test</scope>
 			</dependency>
 		</dependencies>
