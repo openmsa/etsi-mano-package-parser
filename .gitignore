@@ -1,2 +1,8 @@
 *.csar
 *.img
+target/
+.classpath
+.project
+.settings/
+.factorypath
+
