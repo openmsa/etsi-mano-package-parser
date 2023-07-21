@@ -56,6 +56,10 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>jakarta.annotation</groupId>
+			<artifactId>jakarta.annotation-api</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>ma.glasnost.orika</groupId>
 			<artifactId>ubi-orika-eclipse-tools</artifactId>
 			<scope>test</scope>
