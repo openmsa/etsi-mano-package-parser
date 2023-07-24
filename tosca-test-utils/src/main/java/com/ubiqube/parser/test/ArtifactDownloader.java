@@ -23,12 +23,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class ArtifactDownloader {
-	private static final String JAR_PATH = "./target/test-classes/tosca-class-%s-2.0.0-SNAPSHOT.jar";
+	private static final String JAR_PATH = "./target/test-classes/tosca-class-%s-2.0.0.jar";
 	private static final String ARTIFACT_NAME = "tosca-class-%s";
 	private static final String ARTIFACT_URL = """
 			http://nexus.ubiqube.com/service/rest/v1/search/assets/download\
 			?sort=version\
-			&repository=maven-snapshots\
+			&repository=maven-releases\
 			&maven.groupId=com.ubiqube.mano.sol001\
 			&maven.artifactId=%s\
 			&maven.extension=jar\

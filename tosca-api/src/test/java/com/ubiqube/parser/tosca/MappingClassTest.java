@@ -51,7 +51,7 @@ import ma.glasnost.orika.impl.generator.EclipseJdtCompilerStrategy;
  *
  */
 class MappingClassTest {
-	private static final String JAR_PATH_JDK = "/tosca-class-%s-2.0.0-SNAPSHOT.jar";
+	private static final String JAR_PATH_JDK = "/tosca-class-%s-2.0.0.jar";
 
 	@Test
 	void testName() throws Exception {
@@ -66,7 +66,7 @@ class MappingClassTest {
 		final URL cls = this.getClass().getResource(String.format(JAR_PATH_JDK, toJarVersions(v)));
 		System.out.println("" + cls);
 		final URLClassLoader inst = URLClassLoader.newInstance(new URL[] { cls }, this.getClass().getClassLoader());
-		final ContextResolver ctx = new ContextResolver(root, new HashMap<String, String>());
+		final ContextResolver ctx = new ContextResolver(root, new HashMap<>());
 		final MapperFactory mapperFactory = configureMapper(inst);
 		final ToscaApi toscaApi = new ToscaApi(inst, mapperFactory.getMapperFacade());
 		final Class<?> clz = inst.loadClass("tosca.nodes.nfv.VNF");
