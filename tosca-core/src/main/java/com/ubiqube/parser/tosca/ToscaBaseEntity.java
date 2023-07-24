@@ -12,7 +12,7 @@
  *     GNU General Public License for more details.
  *
  *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *     along with this program.  If not, see https://www.gnu.org/licenses/.
  */
 package com.ubiqube.parser.tosca;
 
@@ -21,7 +21,8 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * @doc 3.7.1 Entity Type Schema
+ * Doc 3.7.1 Entity Type Schema
+ *
  * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
