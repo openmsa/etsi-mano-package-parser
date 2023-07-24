@@ -29,7 +29,7 @@ import com.ubiqube.etsi.mano.sol004.vfs.VirtualFileSystem;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 class ArtefactVerifierTest {

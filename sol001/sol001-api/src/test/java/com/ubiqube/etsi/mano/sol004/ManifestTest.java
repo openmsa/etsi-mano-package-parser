@@ -24,7 +24,7 @@ import com.ubiqube.etsi.mano.sol004.manifest.Sol004ManifestReader;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 @SuppressWarnings("static-method")

@@ -38,7 +38,7 @@ import ma.glasnost.orika.MapperFacade;
 /**
  * Main front API around tosca files.
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public class ToscaApi {
@@ -53,9 +53,10 @@ public class ToscaApi {
 	/**
 	 * Return a list of populated 'destination' objects.
 	 *
-	 * @param <T>         The type of returned objects.
-	 * @param root        Tosca context.
-	 * @param destination Destination class.
+	 * @param <T>        The type of returned objects.
+	 * @param root       Tosca context.
+	 * @param parameters Destination class.
+	 * @param toscaClass Tosca class to map and return.
 	 * @return A List of populated object.
 	 */
 	public <T> List<T> getObjects(final ToscaContext root, final Map<String, String> parameters, final Class<T> toscaClass) {

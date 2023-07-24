@@ -40,7 +40,7 @@ import jakarta.validation.constraints.NotNull;
 /**
  * Tosca parser entry point.
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public class ToscaParser {

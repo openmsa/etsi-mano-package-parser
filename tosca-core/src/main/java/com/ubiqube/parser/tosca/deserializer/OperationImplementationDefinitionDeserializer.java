@@ -32,7 +32,7 @@ import com.ubiqube.parser.tosca.OperationImplementationDefinition;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public class OperationImplementationDefinitionDeserializer extends StdDeserializer<OperationImplementationDefinition> {

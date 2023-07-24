@@ -31,7 +31,7 @@ import com.ubiqube.etsi.mano.sol004.builder.Pkcs7Certificate;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 class BuilderTest {

@@ -24,7 +24,7 @@ import lombok.Setter;
 /**
  * 3.6.19 Notification definition.
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 @Getter

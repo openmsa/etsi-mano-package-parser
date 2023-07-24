@@ -22,7 +22,7 @@ import com.ubiqube.parser.tosca.deserializer.OccurrencesDeserializer;
 /**
  * implied default of [1,UNBOUNDED]
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 @JsonDeserialize(using = OccurrencesDeserializer.class)

@@ -32,7 +32,7 @@ import com.ubiqube.parser.tosca.RequirementMapping;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public class RequirementMappingDeserializer extends StdDeserializer<Map<String, RequirementMapping>> {

@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 /**
  * Handle various problematic around SOL001 Zip / text file.
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public final class Sol001FileFactory {

@@ -27,7 +27,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 class ToscaTest {

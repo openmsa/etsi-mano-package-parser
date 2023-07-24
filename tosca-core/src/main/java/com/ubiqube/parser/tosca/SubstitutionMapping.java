@@ -28,7 +28,7 @@ import lombok.Setter;
 /**
  * 3.8.13 Substitution mapping
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 @Getter

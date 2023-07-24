@@ -55,7 +55,7 @@ import org.bouncycastle.util.Store;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public final class CryptoUtils {

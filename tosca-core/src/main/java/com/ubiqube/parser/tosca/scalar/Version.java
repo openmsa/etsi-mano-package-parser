@@ -18,7 +18,7 @@ package com.ubiqube.parser.tosca.scalar;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public class Version implements Scalar {

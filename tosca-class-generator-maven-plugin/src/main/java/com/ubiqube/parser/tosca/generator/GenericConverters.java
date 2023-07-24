@@ -26,7 +26,7 @@ import com.ubiqube.parser.tosca.scalar.Version;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public final class GenericConverters {

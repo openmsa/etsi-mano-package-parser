@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public enum Sol001Version {

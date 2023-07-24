@@ -18,7 +18,7 @@ package com.ubiqube.parser.tosca;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public interface ToscaBase {

@@ -27,7 +27,7 @@ import lombok.Setter;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  * @See https://www.rfc-editor.org/rfc/rfc7950#section-7.11.4
  */
 @Getter

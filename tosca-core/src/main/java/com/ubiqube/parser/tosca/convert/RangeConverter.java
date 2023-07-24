@@ -20,7 +20,7 @@ import com.ubiqube.parser.tosca.scalar.Range;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public class RangeConverter implements Converter<Range> {

@@ -20,7 +20,7 @@ import java.util.Map;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  * @deprecated This file have been split between callActivity*
  */
 @Deprecated

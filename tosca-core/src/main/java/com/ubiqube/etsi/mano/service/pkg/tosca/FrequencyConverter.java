@@ -24,7 +24,7 @@ import ma.glasnost.orika.metadata.Type;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public class FrequencyConverter extends BidirectionalConverter<Frequency, Double> {

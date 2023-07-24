@@ -18,7 +18,7 @@ package com.ubiqube.etsi.mano.sol004.manifest;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public class SignatureElements {

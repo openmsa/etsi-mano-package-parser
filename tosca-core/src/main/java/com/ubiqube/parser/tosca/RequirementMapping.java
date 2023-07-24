@@ -22,7 +22,7 @@ import lombok.Setter;
 /**
  * 3.8.11 Requirement mapping
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 @Getter

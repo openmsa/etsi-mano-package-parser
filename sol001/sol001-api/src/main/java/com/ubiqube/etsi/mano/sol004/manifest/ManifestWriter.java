@@ -29,7 +29,7 @@ import com.ubiqube.etsi.mano.sol004.manifest.Sol004ManifestReader.Certificate;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public class ManifestWriter {

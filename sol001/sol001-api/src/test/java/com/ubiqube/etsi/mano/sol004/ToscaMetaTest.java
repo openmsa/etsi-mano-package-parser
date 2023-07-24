@@ -30,7 +30,7 @@ import com.ubiqube.etsi.mano.sol004.metafile.ToscaMetaFile;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 class ToscaMetaTest {

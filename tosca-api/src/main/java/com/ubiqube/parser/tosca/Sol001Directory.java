@@ -36,7 +36,7 @@ import jakarta.validation.constraints.NotNull;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public class Sol001Directory extends AbstractSol001Fs {

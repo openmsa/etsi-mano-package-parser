@@ -26,7 +26,7 @@ import com.ubiqube.etsi.mano.sol004.Sol004Exception;
 /**
  * Context for parsing manifest.mf files.
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 

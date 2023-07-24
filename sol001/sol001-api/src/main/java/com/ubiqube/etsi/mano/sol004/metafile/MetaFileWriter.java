@@ -21,7 +21,7 @@ import java.io.Writer;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public class MetaFileWriter {

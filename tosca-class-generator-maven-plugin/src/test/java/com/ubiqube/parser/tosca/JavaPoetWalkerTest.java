@@ -25,7 +25,7 @@ import com.ubiqube.parser.tosca.generator.ToscaWalker;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 class JavaPoetWalkerTest {

@@ -32,7 +32,7 @@ import jakarta.validation.constraints.Null;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public class DoubleZipResolver extends Resolver {

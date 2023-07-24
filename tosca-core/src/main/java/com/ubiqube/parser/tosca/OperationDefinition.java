@@ -27,7 +27,7 @@ import lombok.Setter;
 /**
  * 3.6.17 Operation definition.
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 @Getter

@@ -27,7 +27,7 @@ import lombok.Setter;
 /**
  * @See TOSCA 3.6.20 Interface definition
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 @Getter

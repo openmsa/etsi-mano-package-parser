@@ -39,7 +39,7 @@ import com.ubiqube.etsi.mano.tosca.ZipResolver;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public class DirectZip implements VirtualFileSystem {

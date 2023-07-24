@@ -34,7 +34,7 @@ import ma.glasnost.orika.impl.DefaultMapperFactory;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 class SubstitutionMappingTest {

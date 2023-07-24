@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public final class Sol004Utils {

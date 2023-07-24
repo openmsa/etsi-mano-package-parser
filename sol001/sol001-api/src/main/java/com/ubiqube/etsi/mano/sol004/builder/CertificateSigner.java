@@ -23,7 +23,7 @@ import com.ubiqube.etsi.mano.sol004.crypto.SignatureInputStream;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public interface CertificateSigner {

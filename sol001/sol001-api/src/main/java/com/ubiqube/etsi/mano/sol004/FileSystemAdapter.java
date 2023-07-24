@@ -22,7 +22,7 @@ import com.ubiqube.etsi.mano.repository.VirtualFileSystem;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public class FileSystemAdapter implements VirtualFileSystem {

@@ -37,7 +37,7 @@ import com.ubiqube.etsi.mano.tosca.ArtefactInformations;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public class Sol004ManifestReader {

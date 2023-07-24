@@ -18,7 +18,7 @@ package com.ubiqube.parser.tosca.sol006.statement;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public class NamespaceStatement extends AbstractStatementImpl {

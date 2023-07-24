@@ -40,7 +40,7 @@ import com.ubiqube.etsi.mano.sol004.ZipUtil.Entry;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 class OnboardingTest {

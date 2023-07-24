@@ -24,7 +24,7 @@ import lombok.Setter;
 /**
  * XXX to do.
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 @Getter

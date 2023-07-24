@@ -30,7 +30,7 @@ import com.ubiqube.etsi.mano.tosca.ZipMrResolver;
 
 /**
  *
- * @author Olivier Vignaud <ovi@ubiqube.com>
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 public class DirectZipMr extends AbstractZip implements VirtualFileSystem {
