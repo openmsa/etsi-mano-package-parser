@@ -13,7 +13,7 @@
 		<module>tosca-test-utils</module>
 	</modules>
 	<scm>
-		<developerConnection>scm:git:https://github.com/openmsa/etsi-mano-java.git</developerConnection>
+		<developerConnection>scm:git:https://github.com/openmsa/etsi-mano-package-parser.git</developerConnection>
 	</scm>
 	<distributionManagement>
 		<snapshotRepository>
