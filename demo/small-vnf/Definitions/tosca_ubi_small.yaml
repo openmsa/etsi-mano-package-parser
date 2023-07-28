@@ -127,10 +127,8 @@ topology_template:
             nic_io_requirements:
               logical_node_requirements: #map
       requirements:
-        - external_virtual_link: 
-            node: public
-        - internal_virtual_link: 
-            node: leftVl01
+        - external_virtual_link: public
+        - internal_virtual_link: leftVl01
 
 
 
