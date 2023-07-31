@@ -160,7 +160,6 @@ topology_template:
               logical_node_requirements: #map
                 key: value
       requirements:
-        - external_virtual_link: public
         - internal_virtual_link: leftVl01
 
     leftVdu01:
