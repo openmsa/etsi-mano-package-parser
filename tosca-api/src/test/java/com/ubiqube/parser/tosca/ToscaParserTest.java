@@ -49,7 +49,7 @@ class ToscaParserTest {
 		final ToscaContext root = tp.getContext();
 		assertNotNull(root);
 		toscaApi.getObjects(root, new HashMap<>(), String.class);
-		final ContextResolver ctx = new ContextResolver(root, new HashMap<String, String>());
+		final ContextResolver ctx = new ContextResolver(root, new HashMap<>());
 		final List<PolicyDefinition> policies = new ArrayList<>();
 		policies.add(new PolicyDefinition());
 		ctx.resolvValue("");
@@ -62,7 +62,7 @@ class ToscaParserTest {
 		final ToscaParser tp = new ToscaParser(new File("src/test/resources/ubi-tosca/Definitions/tosca_ubi.yaml"));
 		final ToscaContext root = tp.getContext();
 		assertNotNull(root);
-		final ContextResolver ctx = new ContextResolver(root, new HashMap<String, String>());
+		final ContextResolver ctx = new ContextResolver(root, new HashMap<>());
 		final List<GroupDefinition> groups = getGroups();
 		ctx.mapGroupsToClass(groups, Bean.class);
 		final List<PolicyDefinition> policies = getPolicies();
@@ -76,7 +76,7 @@ class ToscaParserTest {
 		final NodeTemplate nt = new NodeTemplate();
 		final Map<String, Object> artifacts = new HashMap<>();
 		nt.setArtifacts(artifacts);
-		final Map<String, ValueObject> attributes = new HashMap<>();
+		final Map<String, AttributeAssignement> attributes = new HashMap<>();
 		nt.setAttributes(attributes);
 		final Object capabilities = new HashMap<>();
 		nt.setCapabilities(capabilities);

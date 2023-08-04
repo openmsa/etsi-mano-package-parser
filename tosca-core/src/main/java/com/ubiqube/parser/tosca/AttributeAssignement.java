@@ -16,26 +16,21 @@
  */
 package com.ubiqube.parser.tosca;
 
-import java.util.Map;
+import java.util.List;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.ubiqube.parser.tosca.deserializer.AttributeAssignementDeserializer;
 
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- *
- * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
- *
- */
 @Getter
 @Setter
-public class NodeTemplate implements ToscaBase {
-	private String type;
-	private String name;
+@JsonDeserialize(using = AttributeAssignementDeserializer.class)
+public class AttributeAssignement {
+
 	private String description;
-	private Object capabilities;
-	private Map<String, Object> properties;
-	private RequirementDefinition requirements;
-	private Map<String, AttributeAssignement> attributes;
-	private Map<String, Object> artifacts;
-	private Map<String, InterfaceDefinition> interfaces;
+
+	private List<String> value;
+
 }

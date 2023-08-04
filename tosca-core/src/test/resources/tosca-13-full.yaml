@@ -129,6 +129,11 @@ topology_template:
                   - a
                   - b
                   - c
+      attributes:
+        test: { get_attribute: [SELF, scale_status, call_proc, scale_level ]}
+        second_syntax:
+          value: { get_attribute: [SELF, scale_status, call_proc, scale_level ]}
+          description: description with some space
 
     dbBackend:
       type: MyCompany.nodes.nfv.Vdu.Aux
