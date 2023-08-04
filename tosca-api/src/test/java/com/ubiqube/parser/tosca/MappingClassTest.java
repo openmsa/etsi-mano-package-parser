@@ -51,7 +51,7 @@ import ma.glasnost.orika.impl.generator.EclipseJdtCompilerStrategy;
  *
  */
 class MappingClassTest {
-	private static final String JAR_PATH_JDK = "/tosca-class-%s-2.0.0.jar";
+	private static final String JAR_PATH_JDK = "/tosca-class-%s-2.0.0-SNAPSHOT.jar";
 
 	@Test
 	void testName() throws Exception {

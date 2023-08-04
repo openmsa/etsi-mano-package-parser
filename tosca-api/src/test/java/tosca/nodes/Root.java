@@ -19,8 +19,8 @@ package tosca.nodes;
 import java.util.Map;
 
 import com.ubiqube.parser.tosca.Artifact;
+import com.ubiqube.parser.tosca.AttributeAssignement;
 import com.ubiqube.parser.tosca.RequirementDefinition;
-import com.ubiqube.parser.tosca.ValueObject;
 import com.ubiqube.parser.tosca.api.ToscaInernalBase;
 
 import jakarta.validation.Valid;
@@ -30,7 +30,7 @@ public class Root extends ToscaInernalBase {
 	private Map<String, Artifact> artifacts;
 
 	@Valid
-	private Map<String, ValueObject> overloadedAttributes;
+	private Map<String, AttributeAssignement> overloadedAttributes;
 
 	@Valid
 	private RequirementDefinition overloadedRequirements;
@@ -43,11 +43,11 @@ public class Root extends ToscaInernalBase {
 		this.artifacts = artifacts;
 	}
 
-	public Map<String, ValueObject> getOverloadedAttributes() {
+	public Map<String, AttributeAssignement> getOverloadedAttributes() {
 		return this.overloadedAttributes;
 	}
 
-	public void setOverloadedAttributes(final Map<String, ValueObject> overloadedAttributes) {
+	public void setOverloadedAttributes(final Map<String, AttributeAssignement> overloadedAttributes) {
 		this.overloadedAttributes = overloadedAttributes;
 	}
 

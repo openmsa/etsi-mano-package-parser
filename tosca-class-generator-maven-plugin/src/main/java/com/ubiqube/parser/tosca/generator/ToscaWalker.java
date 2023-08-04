@@ -33,6 +33,7 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ubiqube.parser.tosca.Artifact;
+import com.ubiqube.parser.tosca.AttributeAssignement;
 import com.ubiqube.parser.tosca.CapabilityDefinition;
 import com.ubiqube.parser.tosca.CapabilityTypes;
 import com.ubiqube.parser.tosca.DataType;
@@ -195,7 +196,7 @@ public class ToscaWalker {
 		startClass(TOSCA_NODES_ROOT, null, listener);
 		listener.startField("artifacts", ValueObject.mapOf(Artifact.class.getName()));
 		listener.onFieldTerminate();
-		listener.startField("overloadedAttributes", ValueObject.mapOf(ValueObject.class.getName()));
+		listener.startField("overloadedAttributes", ValueObject.mapOf(AttributeAssignement.class.getName()));
 		listener.onFieldAnnotate(JsonIgnore.class);
 		listener.onFieldTerminate();
 		listener.startField("overloadedRequirements", new ValueObject(RequirementDefinition.class.getName()));
