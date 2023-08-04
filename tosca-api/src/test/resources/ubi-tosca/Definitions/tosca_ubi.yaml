@@ -5,6 +5,32 @@ description: >
 imports:
   - etsi_nfv_sol001_vnfd_types.yaml
 
+interface_types:
+  MyCompany.nfv.interfaces.VnfIndicator:
+    derived_from: tosca.interfaces.nfv.VnfIndicator
+    notifications:
+      utilization:
+        description: this notification is used to received asynchronous information of value change of the utilization_vnf_indicator
+      health:
+        description: this notification is used to received asynchronous information of value change of the health_vnf_indicator
+      utilization_vnf_indicator:
+        description: Description
+
+node_types:
+  com.ubiqube.VNF:
+    derived_from: tosca.nodes.nfv.VNF
+    attributes:
+      call_proc_scale_level:
+        type: integer
+      database_scale_level:
+        type: integer
+      utilization_vnf_indicator:
+        type: integer
+    interfaces:
+      VnfIndicator:
+        type: MyCompany.nfv.interfaces.VnfIndicator
+
+
 topology_template:
   inputs:
     VL1_name:
@@ -24,7 +50,7 @@ topology_template:
 
   node_templates:
     ubiVdo.1_0:
-      type: tosca.nodes.nfv.VNF
+      type: com.ubiqube.VNF
       properties:
         descriptor_id: dcd11fbf-c767-41eb-abc9-cec35dd95bca
         provider: Ubiqube internal.
@@ -85,6 +111,8 @@ topology_template:
         - virtual_link: 
             node: public
       attributes:
+        call_proc_scale_level: { get_attribute: [ SELF, scale_status, left_aspect, scale_level ] }
+        database_scale_level:  { get_attribute: [ SELF, scale_status, middle_aspect, scale_level ] }
         utilization_vnf_indicator: { get_attribute: [ SELF, scale_status, call_proc, scale_level ] }
       interfaces:
         Vnflcm:

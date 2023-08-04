@@ -47,6 +47,17 @@ group_types:
        required: true
     members: [ tosca.nodes.nfv.Vdu.Compute, tosca.nodes.nfv.VnfVirtualLink ]
 
+interface_types:
+  MyCompany.nfv.interfaces.VnfIndicator:
+    derived_from: tosca.interfaces.nfv.VnfIndicator
+    notifications:
+      utilization:
+        description: this notification is used to received asynchronous information of value change of the utilization_vnf_indicator
+      health:
+        description: this notification is used to received asynchronous information of value change of the health_vnf_indicator
+      utilization_vnf_indicator:
+        description: Description
+
 node_types:
   MyCompany.nodes.nfv.Vdu.Aux:
     derived_from: tosca.nodes.nfv.Vdu.Compute
@@ -54,6 +65,19 @@ node_types:
       configurable_properties:
         type: MyCompany.datatypes.nfv.AuxVnfcConfigurableProperties
         required: false
+
+  com.ubiqube.VNF:
+    derived_from: tosca.nodes.nfv.VNF
+    attributes:
+      call_proc_scale_level:
+        type: integer
+      database_scale_level:
+        type: integer
+      utilization_vnf_indicator:
+        type: integer
+    interfaces:
+      VnfIndicator:
+        type: MyCompany.nfv.interfaces.VnfIndicator
 
 data_types:
   MyCompany.datatypes.nfv.AuxVnfcConfigurableProperties:
@@ -96,7 +120,7 @@ policy_types:
 
 topology_template:
   substitution_mappings:
-    node_type: MyCompany.SunshineDB.1_0.1_0 
+    node_type: com.ubiqube.VNF
     substitution_filter:
       properties:   
         - flavour_id: { equal: complex }
@@ -106,7 +130,7 @@ topology_template:
 
   node_templates:
     SunshineDB:
-      type: MyCompany.SunshineDB.1_0.1_0
+      type: com.ubiqube.VNF
       properties:
         flavour_description: A complex flavour
       interfaces:

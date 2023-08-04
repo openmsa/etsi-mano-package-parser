@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.StreamSupport;
 
-import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -43,7 +42,7 @@ public class AttributeAssignementDeserializer extends StdDeserializer<AttributeA
 	}
 
 	@Override
-	public AttributeAssignement deserialize(final JsonParser p, final DeserializationContext ctxt) throws IOException, JacksonException {
+	public AttributeAssignement deserialize(final JsonParser p, final DeserializationContext ctxt) throws IOException {
 		final ObjectNode value = p.getCodec().readTree(p);
 		final JsonNode val = value.get("value");
 		if (null != val) {
