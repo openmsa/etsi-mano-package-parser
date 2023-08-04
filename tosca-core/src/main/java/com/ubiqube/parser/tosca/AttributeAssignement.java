@@ -23,9 +23,11 @@ import com.ubiqube.parser.tosca.deserializer.AttributeAssignementDeserializer;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 @JsonDeserialize(using = AttributeAssignementDeserializer.class)
 public class AttributeAssignement {
 
