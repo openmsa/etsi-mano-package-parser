@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.ubiqube.mano.sol001</groupId>
 		<artifactId>sol001-version-aggregator</artifactId>
-		<version>2.1.0</version>
+		<version>2.1.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>tosca-class-361</artifactId>
@@ -70,7 +70,7 @@
 			<plugin>
 				<groupId>com.ubiqube.mano</groupId>
 				<artifactId>tosca-class-generator-maven-plugin</artifactId>
-				<version>2.1.0</version>
+				<version>2.1.1-SNAPSHOT</version>
 				<configuration>
 						<files>
 							<param>src/main/resources/etsi_nfv_sol001_vnfd_types.yaml</param>
