@@ -63,11 +63,14 @@ public class ToscaContext {
 
 	private Map<String, String> metadata;
 
+	private Map<String, RepositoryDefinition> repositories = new LinkedHashMap<>();
+
 	@JsonIgnore
 	private final List<ToscaContext> childContext = new ArrayList<>();
 
 	public ToscaContext(final ToscaRoot root, final IResolver inResolver) {
 		artifacts = root.getArtifactTypes();
+		repositories = root.getRepositories();
 		capabilities = root.getCapabilityTypes();
 		description = root.getDescription();
 		imports = root.getImports();
@@ -187,6 +190,10 @@ public class ToscaContext {
 		return metadata;
 	}
 
+	public Map<String, RepositoryDefinition> getRepositories() {
+		return repositories;
+	}
+
 	@Override
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();
@@ -267,6 +274,8 @@ public class ToscaContext {
 		// policy
 		Optional.ofNullable(context.getPolicies()).ifPresent(x -> policies.putAll(x));
 		Optional.ofNullable(context.getPoliciesType()).ifPresent(x -> policiesType.putAll(x));
+		// Repositories
+		Optional.ofNullable(context.getRepositories()).ifPresent(x -> repositories.putAll(x));
 		if (null != context.getInterfaceTypes()) {
 			if (null == interfaceTypes) {
 				interfaceTypes = context.getInterfaceTypes();
@@ -410,6 +419,7 @@ public class ToscaContext {
 		policiesType = assign(root2.getPolicyTypes(), policiesType);
 		interfaceTypes = assign(root2.getInterfaceTypes(), interfaceTypes);
 		metadata = assign(root2.getMetadata(), metadata);
+		repositories = assign(root2.getRepositories(), repositories);
 	}
 
 	private static <K, V> Map<K, V> assign(final Map<K, V> in, final Map<K, V> here) {

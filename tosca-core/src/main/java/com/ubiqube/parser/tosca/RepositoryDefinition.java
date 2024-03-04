@@ -39,8 +39,12 @@ public class RepositoryDefinition {
 	@Getter
 	public class Credential {
 		private String protocol;
+		/**
+		 * password, bearer(oauth2), basic_auth(http), identifier(ssh),
+		 * X-Auth-Token(xauth) for example.
+		 */
 		@JsonProperty("token_type")
-		private String tokenType;
+		private String tokenType = "password";
 		private String token;
 		private Map<String, String> keys;
 		private String user;
