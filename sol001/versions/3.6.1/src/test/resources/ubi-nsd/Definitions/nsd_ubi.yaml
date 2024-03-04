@@ -160,7 +160,7 @@ topology_template:
                   fixed_ip_address: 
                     - 1.2.3.4
                     - 4.5.6.7
-                  ip_address_assignment_subtype: true
+                  ip_address_assignment_subtype: dynamic
         trunk_mode: false
       requirements:
         - external_virtual_link: public
