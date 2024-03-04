@@ -18,12 +18,12 @@ package com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ubiqube.parser.tosca.objects.tosca.datatypes.Root;
+
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ubiqube.parser.tosca.objects.tosca.datatypes.Root;
 
 /**
  * Provides information about Layer 3 level addressing scheme and parameters
@@ -42,7 +42,7 @@ public class L3AddressData extends Root {
 	 */
 	@Valid
 	@JsonProperty("ip_address_assignment_subtype")
-	private Boolean ipAddressAssignmentSubtype;
+	private String ipAddressAssignmentSubtype;
 
 	/**
 	 * Minimum number of IP addresses to be assigned
@@ -95,11 +95,11 @@ public class L3AddressData extends Root {
 	@JsonProperty("floating_ip_activated")
 	private Boolean floatingIpActivated;
 
-	public Boolean getIpAddressAssignmentSubtype() {
+	public String getIpAddressAssignmentSubtype() {
 		return this.ipAddressAssignmentSubtype;
 	}
 
-	public void setIpAddressAssignmentSubtype(final Boolean ipAddressAssignmentSubtype) {
+	public void setIpAddressAssignmentSubtype(final String ipAddressAssignmentSubtype) {
 		this.ipAddressAssignmentSubtype = ipAddressAssignmentSubtype;
 	}
 
