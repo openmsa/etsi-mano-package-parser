@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ubiqube.mano</groupId>
 	<artifactId>tosca-parser-parent</artifactId>
-	<version>2.1.1-SNAPSHOT</version>
+	<version>3.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
 		<module>tosca-core</module>
@@ -27,27 +27,26 @@
 		</repository>
 	</distributionManagement>
 	<properties>
-		<maven.compiler.target>17</maven.compiler.target>
-		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
+		<maven.compiler.source>21</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.version.jackson.databind>2.15.2</project.version.jackson.databind>
+		<project.version.jackson.databind>2.16.1</project.version.jackson.databind>
 		<ubiqube.orika.version>1.5.7</ubiqube.orika.version>
-		<version.bouncycastle>1.76</version.bouncycastle>
-		<version.commons-io>2.13.0</version.commons-io>
+		<version.bouncycastle>1.77</version.bouncycastle>
+		<version.commons-io>2.15.1</version.commons-io>
 		<version.commons-vfs2>2.9.0</version.commons-vfs2>
-		<version.equalsverifier>3.15.1</version.equalsverifier>
+		<version.equalsverifier>3.15.8</version.equalsverifier>
 		<version.expressly>5.0.0</version.expressly>
 		<version.hibernate-validator>8.0.1.Final</version.hibernate-validator>
 		<version.jakarta.annotation-api>2.1.1</version.jakarta.annotation-api>
 		<version.jakarta.validation-api>3.0.2</version.jakarta.validation-api>
 		<version.javapoet>1.13.0</version.javapoet>
-		<version.junit.jupiter>5.10.0</version.junit.jupiter>
-		<version.logback-classic>1.4.11</version.logback-classic>
-		<version.lombok>1.18.28</version.lombok>
-		<version.mockito>5.5.0</version.mockito>
-		<version.slf4j-api>2.0.7</version.slf4j-api>
-		<version.mano-repo-api>3.0.0</version.mano-repo-api>
-		<version.mano-repo-fs>3.0.0</version.mano-repo-fs>
+		<version.junit.jupiter>5.10.2</version.junit.jupiter>
+		<version.logback-classic>1.5.1</version.logback-classic>
+		<version.lombok>1.18.30</version.lombok>
+		<version.mockito>5.11.0</version.mockito>
+		<version.slf4j-api>2.0.12</version.slf4j-api>
+		<version.mano-repo-api>3.2.0</version.mano-repo-api>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -171,7 +170,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.10</version>
+				<version>0.8.11</version>
 				<executions>
 					<execution>
 						<id>default-prepare-agent</id>

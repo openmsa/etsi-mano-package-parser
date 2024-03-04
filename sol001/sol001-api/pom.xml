@@ -4,14 +4,10 @@
 	<parent>
 		<groupId>com.ubiqube.mano.sol001</groupId>
 		<artifactId>sol001-aggregator</artifactId>
-		<version>2.1.1-SNAPSHOT</version>
+		<version>3.0.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>sol001-api</artifactId>
-	<properties>
-		<maven.compiler.target>17</maven.compiler.target>
-		<maven.compiler.source>17</maven.compiler.source>
-	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>jakarta.validation</groupId>
@@ -64,7 +60,7 @@
 		<dependency>
 			<groupId>com.ubiqube.mano.repository</groupId>
 			<artifactId>mano-repo-fs</artifactId>
-			<version>${version.mano-repo-fs}</version>
+			<version>${version.mano-repo-api}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
