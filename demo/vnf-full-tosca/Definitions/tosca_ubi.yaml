@@ -58,7 +58,7 @@ topology_template:
     param_size:
       type: scalar-unit.size
       description: Integer parameter
-      default: 1 GB
+      default: 1 GiB
 
 
 
@@ -258,7 +258,7 @@ topology_template:
                 - rule0
                 - rule1
           virtual_local_storage: # list tosca.datatypes.nfv.VirtualBlockStorageData
-            - size_of_storage: 1 gb
+            - size_of_storage: 1 GiB
               vdu_storage_requirements: # map string
                 read: openstack
               rdma_enabled: false
