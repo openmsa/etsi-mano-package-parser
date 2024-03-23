@@ -1,0 +1,140 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+description: >
+  Sample VNF for integration testing.
+
+imports:
+  - etsi_nfv_sol001_vnfd_types.yaml
+
+topology_template:
+
+  node_templates:
+    conn_vnf:
+      type: tosca.nodes.nfv.VNF
+      properties:
+        descriptor_id: 0155ca44-e826-11ee-a698-c8f750509d3b
+        provider: ♨️ Ubiqube internal.
+        product_name: Connection integration 🧪
+        software_version: 1.0.0
+        descriptor_version: 1.0.0
+        flavour_id: flavor01
+        flavour_description: VNF connection demonstrration.
+        product_info_name: Connection demonstration package.
+        product_info_description: product info descr.
+        vnfm_info:
+          - etsivnfm:v4.3.1
+          - 100:ubi-v4.3.1
+        localization_languages:
+          - en_US
+          - fr_FR
+        default_localization_language: en_US
+        vnf_profile: # tosca.datatypes.nfv.VnfProfile
+          instantiation_level: level0
+          min_number_of_instances: 1
+          max_number_of_instances: 10
+      requirements:
+        - virtual_link: public
+
+    webserver:
+      type: tosca.nodes.nfv.Vdu.Compute
+      name: webserver
+      description: A node.
+      artifacts:
+        cirros-0.6.2:
+          type: tosca.artifacts.nfv.SwImage
+          deploy_path: deploy path
+          checksum: 
+            algorithm: sha-512
+            hash: 1103b92ce8ad966e41235a4de260deb791ff571670c0342666c8582fbb9caefe6af07ebb11d34f44f8414b609b29c1bdf1d72ffa6faa39c88e8721d09847952b
+          description: desc 💯
+          repository: repo
+      properties:
+        vdu_profile:
+          min_number_of_instances: 1
+          max_number_of_instances: 2
+      capabilities:
+        virtual_compute:
+          virtual_memory: # tosca.datatypes.nfv.VirtualMemory
+            virtual_mem_size: 512 MiB
+          virtual_cpu: # tosca.datatypes.nfv.VirtualCpu
+            cpu_architecture: x86_64
+            num_virtual_cpu: 1
+            virtual_cpu_clock: 3 GHz
+          virtual_local_storage: # list tosca.datatypes.nfv.VirtualBlockStorageData
+            - size_of_storage: 1 GiB
+
+    ext01:
+      type: tosca.nodes.nfv.VnfExtCp
+      properties:
+        virtual_network_interface_requirements:
+          - name: vl01
+            description: descr
+            support_mandatory: false
+            network_interface_requirements: # map
+            nic_io_requirements:
+              logical_node_requirements: #map
+      requirements:
+        - internal_virtual_link: leftVl01
+
+    leftVl01:
+      type: tosca.nodes.nfv.VnfVirtualLink
+      properties:
+        connectivity_type: # tosca.datatypes.nfv.ConnectivityType
+          layer_protocols:
+            - ipv4
+          flow_pattern: line
+        description: Description of VL 01
+        vl_profile: # tosca.datatypes.nfv.VlProfile
+          max_bitrate_requirements:
+            root: 10
+            leaf: 15
+          min_bitrate_requirements:
+            root: 11
+            leaf: 16
+          virtual_link_protocol_data: # list tosca.datatypes.nfv.VirtualLinkProtocolData
+            - associated_layer_protocol: ipv4
+              l2_protocol_data: # tosca.datatypes.nfv.L2ProtocolData
+                name: vl01L2
+                #vlan_transparent: true
+                #network_type: VXLAN
+                mtu: 1442
+              l3_protocol_data: # tosca.datatypes.nfv.L3ProtocolData
+                dhcp_enabled: true
+                cidr: 192.168.0.0/24
+                gateway_ip: 192.168.0.12
+                ip_version: ipv4
+                name: vl01L3
+                ipv6_address_mode: dhcpv6-stateful
+                ip_allocation_pools: # list tosca.datatypes.nfv.IpAllocationPool
+                  - start_ip_address: 192.168.0.100
+                    end_ip_address: 192.168.0.254
+          qos: # tosca.datatypes.nfv.Qos
+            latency: 5 ms
+            packet_delay_variation: 1 s
+            packet_loss_ratio: 0.01
+      capabilities:
+        # virtual_linkable: test
+
+    cpLc01:
+      type: tosca.nodes.nfv.VduCp
+      properties:
+        bitrate_requirement: 5
+        virtual_network_interface_requirements:
+          - name: vl01
+            description: descr
+            support_mandatory: false
+            network_interface_requirements: # map
+            nic_io_requirements:
+              logical_node_requirements: #map
+        order: 5
+        vnic_type: normal
+      requirements:
+        - virtual_link: public
+        - virtual_binding: webserver
+
+
+
+
+
+
+
+
