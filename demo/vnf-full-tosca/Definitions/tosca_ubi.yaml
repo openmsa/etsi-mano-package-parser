@@ -7,10 +7,10 @@ imports:
 
 repositories:
   github:
-    description: My project’s code repository in GitHub
+    description: My project’s code repository in GitHub 📦
     url: https://github.com/my-project/
   docker:
-    description: Docker local registry
+    description: Docker local registry 🛟
     url: https://nexus.ubiqube.com/
     credential:
       protocol: http
@@ -67,8 +67,8 @@ topology_template:
       type: com.ubiqube.VNF
       properties:
         descriptor_id: dcd11fbf-c767-41eb-abc9-cec35dd95bca
-        provider: Ubiqube internal.
-        product_name: Integration tests
+        provider: ♨️ Ubiqube internal.
+        product_name: Full Integration tests 🧪
         software_version: 1.0.0
         descriptor_version: 1.0.1
         flavour_id: flavor01
