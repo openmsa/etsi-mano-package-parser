@@ -18,11 +18,11 @@ package com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv;
 
 import java.util.List;
 
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ubiqube.parser.tosca.objects.tosca.datatypes.Root;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * describes the additional service data of the VirtualCp used to expose
@@ -34,7 +34,7 @@ public class AdditionalServiceData extends Root {
 	 */
 	@Valid
 	@JsonProperty("serviceData")
-	private String serviceData;
+	private ServiceData serviceData;
 
 	/**
 	 * Service port numbers exposed by the VirtualCp.
@@ -44,11 +44,11 @@ public class AdditionalServiceData extends Root {
 	@JsonProperty("portData")
 	private List<ServicePortData> portData;
 
-	public String getServiceData() {
+	public ServiceData getServiceData() {
 		return this.serviceData;
 	}
 
-	public void setServiceData(final String serviceData) {
+	public void setServiceData(final ServiceData serviceData) {
 		this.serviceData = serviceData;
 	}
 
