@@ -19,15 +19,22 @@ package com.ubiqube.etsi.mano.sol001;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.ubiqube.etsi.mano.service.pkg.tosca.Frequency2Converter;
+import com.ubiqube.etsi.mano.service.pkg.tosca.Range2Converter;
+import com.ubiqube.etsi.mano.service.pkg.tosca.Size2Converter;
+import com.ubiqube.etsi.mano.service.pkg.tosca.Time2Converter;
 import com.ubiqube.parser.tosca.Artifact;
-import com.ubiqube.parser.tosca.api.OrikaMapper;
+import com.ubiqube.parser.tosca.api.ToscaMapper;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.VNF;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.VnfVirtualLink;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.vdu.Compute;
 
 import ma.glasnost.orika.CustomMapper;
+import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.MappingContext;
+import ma.glasnost.orika.converter.ConverterFactory;
+import ma.glasnost.orika.impl.DefaultMapperFactory;
 import tosca.datatypes.nfv.SwImageData;
 
 /**
@@ -35,14 +42,25 @@ import tosca.datatypes.nfv.SwImageData;
  * @author olivier
  *
  */
-public class OrikaMapper271Impl implements OrikaMapper {
+public class OrikaMapper271Impl implements ToscaMapper {
 
 	private static final String MONITORING_PARAMETERS_NAME_LIST = "monitoringParameters{name}";
 	private static final String MONITORING_PARAMETERS_LIST = "monitoringParameters{}";
 	private static final String MONITORING_PARAMETERS_KEY_MAP = "monitoringParameters{key}";
 	private static final String MONITORING_PARAMETERS_VALUE_MAP = "monitoringParameters{value}";
+	private final MapperFacade mapper;
 
-	@Override
+	public OrikaMapper271Impl() {
+		final DefaultMapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
+		final ConverterFactory conv = mapperFactory.getConverterFactory();
+		conv.registerConverter(new Size2Converter());
+		conv.registerConverter(new Frequency2Converter());
+		conv.registerConverter(new Time2Converter());
+		conv.registerConverter(new Range2Converter());
+		configureMapper(mapperFactory);
+		mapper = mapperFactory.getMapperFacade();
+	}
+
 	public void configureMapper(final MapperFactory mapper) {
 		mapper.classMap(VnfVirtualLink.class, tosca.nodes.nfv.VnfVirtualLink.class)
 				.field(MONITORING_PARAMETERS_VALUE_MAP, MONITORING_PARAMETERS_LIST)
@@ -86,4 +104,8 @@ public class OrikaMapper271Impl implements OrikaMapper {
 				.register();
 	}
 
+	@Override
+	public <U> U map(final Object x, final Class<U> dest) {
+		return mapper.map(x, dest);
+	}
 }
