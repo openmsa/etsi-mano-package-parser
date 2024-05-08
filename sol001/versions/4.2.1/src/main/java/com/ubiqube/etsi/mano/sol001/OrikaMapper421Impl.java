@@ -16,22 +16,40 @@
  */
 package com.ubiqube.etsi.mano.sol001;
 
-import com.ubiqube.parser.tosca.api.OrikaMapper;
+import com.ubiqube.etsi.mano.service.pkg.tosca.Frequency2Converter;
+import com.ubiqube.etsi.mano.service.pkg.tosca.Range2Converter;
+import com.ubiqube.etsi.mano.service.pkg.tosca.Size2Converter;
+import com.ubiqube.etsi.mano.service.pkg.tosca.Time2Converter;
+import com.ubiqube.parser.tosca.api.ToscaMapper;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.Mciop;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.vdu.Compute;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.vdu.OsContainer;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.vdu.VirtualBlockStorage;
 
+import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
+import ma.glasnost.orika.converter.ConverterFactory;
+import ma.glasnost.orika.impl.DefaultMapperFactory;
 
 /**
  *
  * @author olivier
  *
  */
-public class OrikaMapper421Impl implements OrikaMapper {
+public class OrikaMapper421Impl implements ToscaMapper {
+	private final MapperFacade mapper;
 
-	@Override
+	public OrikaMapper421Impl() {
+		final DefaultMapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
+		final ConverterFactory conv = mapperFactory.getConverterFactory();
+		conv.registerConverter(new Size2Converter());
+		conv.registerConverter(new Frequency2Converter());
+		conv.registerConverter(new Time2Converter());
+		conv.registerConverter(new Range2Converter());
+		configureMapper(mapperFactory);
+		mapper = mapperFactory.getMapperFacade();
+	}
+
 	public void configureMapper(final MapperFactory mapper) {
 		mapper.classMap(Compute.class, tosca.nodes.nfv.vdu.Compute.class)
 				.customize(new ArtifactMapper())
@@ -51,4 +69,8 @@ public class OrikaMapper421Impl implements OrikaMapper {
 				.register();
 	}
 
+	@Override
+	public <U> U map(final Object x, final Class<U> dest) {
+		return mapper.map(x, dest);
+	}
 }
