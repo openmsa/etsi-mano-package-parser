@@ -31,15 +31,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 import com.ubiqube.parser.tosca.api.ContextResolver;
 import com.ubiqube.parser.tosca.api.ToscaApi;
 
-import ma.glasnost.orika.MapperFactory;
-import ma.glasnost.orika.impl.DefaultMapperFactory;
-
 class ToscaParserTest {
 	private final ToscaApi toscaApi;
 
 	public ToscaParserTest() {
-		final MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
-		toscaApi = new ToscaApi(this.getClass().getClassLoader(), mapperFactory.getMapperFacade());
+		final ToscaOrikaMapper map = new ToscaOrikaMapper();
+		toscaApi = new ToscaApi(this.getClass().getClassLoader(), map);
 	}
 
 	/// Remote URL use some tosca 1.0 @Test

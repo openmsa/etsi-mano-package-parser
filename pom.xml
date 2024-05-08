@@ -11,6 +11,7 @@
 		<module>tosca-class-generator-maven-plugin</module>
 		<module>sol001</module>
 		<module>tosca-test-utils</module>
+		<module>tosca-mapping-orika</module>
 	</modules>
 	<scm>
 		<developerConnection>scm:git:https://github.com/openmsa/etsi-mano-package-parser.git</developerConnection>
@@ -44,6 +45,7 @@
 		<version.junit.jupiter>5.10.2</version.junit.jupiter>
 		<version.logback-classic>1.5.1</version.logback-classic>
 		<version.lombok>1.18.30</version.lombok>
+		<version.mapstruct>1.5.5.Final</version.mapstruct>
 		<version.mockito>5.11.0</version.mockito>
 		<version.slf4j-api>2.0.12</version.slf4j-api>
 		<version.mano-repo-api>3.2.0</version.mano-repo-api>
@@ -284,6 +286,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.16.2</version>
 				<configuration>
 					<rulesUri>file:///${session.executionRootDirectory}/rules.xml</rulesUri>
 				</configuration>

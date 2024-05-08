@@ -7,14 +7,32 @@
   </parent>
   <artifactId>test-tools</artifactId>
   <dependencies>
-	  <dependency>
+		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>tosca-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>com.ubiqube.mano</groupId>
+			<artifactId>tosca-mapping-orika</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ma.glasnost.orika</groupId>
+			<artifactId>ubi-orika-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup</groupId>
+			<artifactId>javapoet</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${version.mapstruct}</version>
 		</dependency>
   </dependencies>
 </project>

@@ -35,15 +35,12 @@ import org.junit.jupiter.api.Test;
 
 import com.ubiqube.parser.test.ArtifactDownloader;
 import com.ubiqube.parser.tosca.api.ContextResolver;
-import com.ubiqube.parser.tosca.api.OrikaMapper;
 import com.ubiqube.parser.tosca.api.ToscaApi;
+import com.ubiqube.parser.tosca.api.ToscaMapper;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.VNF;
 import com.ubiqube.parser.tosca.scalar.Version;
 
-import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.OrikaSystemProperties;
-import ma.glasnost.orika.impl.DefaultMapperFactory;
-import ma.glasnost.orika.impl.generator.EclipseJdtCompilerStrategy;
 
 /**
  *
@@ -67,37 +64,29 @@ class MappingClassTest {
 		System.out.println("" + cls);
 		final URLClassLoader inst = URLClassLoader.newInstance(new URL[] { cls }, this.getClass().getClassLoader());
 		final ContextResolver ctx = new ContextResolver(root, new HashMap<>());
-		final MapperFactory mapperFactory = configureMapper(inst);
-		final ToscaApi toscaApi = new ToscaApi(inst, mapperFactory.getMapperFacade());
+		final ToscaMapper mapperFactory = configureMapper(inst);
+		final ToscaApi toscaApi = new ToscaApi(inst, mapperFactory);
 		final Class<?> clz = inst.loadClass("tosca.nodes.nfv.VNF");
 		assertNotNull(clz);
 		final List<VNF> objs = toscaApi.getObjects(root, Map.of(), VNF.class);
-		final List<?> fin = mapperFactory.getMapperFacade().mapAsList(objs, clz);
+		final List<?> fin = objs.stream().map(x -> mapperFactory.map(x, Object.class)).toList();
 		assertNotNull(fin);
 		assertEquals(1, fin.size());
 		final Object vnf = fin.get(0);
 		assertNotNull(vnf);
 	}
 
-	private static MapperFactory configureMapper(final URLClassLoader inst) throws SecurityException {
+	private static ToscaMapper configureMapper(final URLClassLoader inst) throws SecurityException {
 		Thread.currentThread().setContextClassLoader(inst);
-		System.setProperty(OrikaSystemProperties.COMPILER_STRATEGY, EclipseJdtCompilerStrategy.class.getName());
-		System.setProperty(OrikaSystemProperties.WRITE_SOURCE_FILES, "true");
-		System.setProperty(OrikaSystemProperties.WRITE_SOURCE_FILES_TO_PATH, "/tmp/orika-test");
-		final MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
-		mapperFactory.getConverterFactory().registerConverter(new OrikaTimeConverter());
-		// com.ubiqube.etsi.mano.sol001.OrikaMapperImpl
-		final OrikaMapper ins = getVersionedMapperMethod(inst);
-		ins.configureMapper(mapperFactory);
-		return mapperFactory;
+		return getVersionedMapperMethod(inst);
 	}
 
-	private static OrikaMapper getVersionedMapperMethod(final URLClassLoader urlLoader) {
+	private static ToscaMapper getVersionedMapperMethod(final URLClassLoader urlLoader) {
 		try (InputStream is = urlLoader.getResourceAsStream("META-INF/tosca-resources.properties")) {
 			final Properties props = new Properties();
 			props.load(is);
 			final Class<?> clz = urlLoader.loadClass(props.getProperty("mapper"));
-			return (OrikaMapper) clz.getDeclaredConstructor().newInstance();
+			return (ToscaMapper) clz.getDeclaredConstructor().newInstance();
 		} catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException | IOException e) {
 			throw new ParseException(e);
 		}

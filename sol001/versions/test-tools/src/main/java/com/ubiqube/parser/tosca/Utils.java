@@ -39,9 +39,8 @@ import com.ubiqube.etsi.mano.service.pkg.tosca.Frequency2Converter;
 import com.ubiqube.etsi.mano.service.pkg.tosca.Range2Converter;
 import com.ubiqube.etsi.mano.service.pkg.tosca.Size2Converter;
 import com.ubiqube.etsi.mano.service.pkg.tosca.Time2Converter;
-import com.ubiqube.parser.tosca.api.OrikaMapper;
+import com.ubiqube.parser.tosca.api.ToscaMapper;
 
-import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.OrikaSystemProperties;
 import ma.glasnost.orika.converter.ConverterFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
@@ -53,7 +52,7 @@ public class Utils {
 		// Nothing.
 	}
 
-	public static MapperFactory createMapperFactory() {
+	public static ToscaMapper createMapperFactory() {
 		System.setProperty(OrikaSystemProperties.COMPILER_STRATEGY, EclipseJdtCompilerStrategy.class.getName());
 		System.setProperty(OrikaSystemProperties.WRITE_SOURCE_FILES, "true");
 		System.setProperty(OrikaSystemProperties.WRITE_SOURCE_FILES_TO_PATH, "/tmp/orika-tests");
@@ -63,18 +62,16 @@ public class Utils {
 		conv.registerConverter(new Frequency2Converter());
 		conv.registerConverter(new Time2Converter());
 		conv.registerConverter(new Range2Converter());
-		registerMapper(mapper);
-		return mapper;
+		return registerMapper();
 	}
 
-	private static void registerMapper(final MapperFactory mapper) {
+	private static ToscaMapper registerMapper() {
 		final ClassLoader urlLoader = Utils.class.getClassLoader();
 		try (InputStream is = urlLoader.getResourceAsStream("META-INF/tosca-resources.properties")) {
 			final Properties props = new Properties();
 			props.load(is);
 			final Class<?> clz = urlLoader.loadClass(props.getProperty("mapper"));
-			final OrikaMapper m = (OrikaMapper) clz.getDeclaredConstructor().newInstance();
-			m.configureMapper(mapper);
+			return (ToscaMapper) clz.getDeclaredConstructor().newInstance();
 		} catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException | IOException e) {
 			throw new ParseException(e);
 		}

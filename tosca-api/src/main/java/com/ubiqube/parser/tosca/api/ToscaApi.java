@@ -23,6 +23,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.ubiqube.parser.tosca.GroupDefinition;
 import com.ubiqube.parser.tosca.NodeTemplate;
 import com.ubiqube.parser.tosca.ParseException;
@@ -33,7 +36,6 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
-import ma.glasnost.orika.MapperFacade;
 
 /**
  * Main front API around tosca files.
@@ -42,10 +44,13 @@ import ma.glasnost.orika.MapperFacade;
  *
  */
 public class ToscaApi {
-	private final ClassLoader loader;
-	private final MapperFacade toscaMapper;
+	/** Logger. */
+	private static final Logger LOG = LoggerFactory.getLogger(ToscaApi.class);
 
-	public ToscaApi(final ClassLoader loader, final MapperFacade toscaMapper) {
+	private final ClassLoader loader;
+	private final ToscaMapper toscaMapper;
+
+	public ToscaApi(final ClassLoader loader, final ToscaMapper toscaMapper) {
 		this.loader = loader;
 		this.toscaMapper = toscaMapper;
 	}
@@ -64,6 +69,7 @@ public class ToscaApi {
 		try {
 			destination = getVersionizedClass(loader, toscaClass);
 		} catch (final ClassNotFoundException e) {
+			LOG.trace("", e);
 			return List.of();
 		}
 		final ContextResolver contextResolver = new ContextResolver(root, parameters);
@@ -86,7 +92,7 @@ public class ToscaApi {
 		final List<T> tmp = sup.get();
 		final Set<ConstraintViolation<List<T>>> res = validate(tmp);
 		if (res.isEmpty()) {
-			return toscaMapper.mapAsList(tmp, manoClass);
+			return tmp.stream().map(x -> toscaMapper.map(x, manoClass)).toList();
 		}
 		throw new ParseException("SOL001 file contain the following errors: " + res);
 	}

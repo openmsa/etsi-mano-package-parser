@@ -57,13 +57,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ubiqube.parser.tosca.api.ToscaApi;
+import com.ubiqube.parser.tosca.api.ToscaMapper;
 import com.ubiqube.parser.tosca.convert.ConvertApi;
 import com.ubiqube.parser.tosca.convert.SizeConverter;
 import com.ubiqube.parser.tosca.scalar.Frequency;
 import com.ubiqube.parser.tosca.scalar.Size;
 import com.ubiqube.parser.tosca.scalar.Time;
-
-import ma.glasnost.orika.MapperFactory;
 
 public abstract class AbstractToscaApiTest {
 	private static final String LOOPING = "  + Looping: {}";
@@ -93,8 +92,8 @@ public abstract class AbstractToscaApiTest {
 		complex.add(Size.class);
 		complex.add(Frequency.class);
 		complex.add(Time.class);
-		final MapperFactory mapperFactory = Utils.createMapperFactory();
-		toscaApi = new ToscaApi(this.getClass().getClassLoader(), mapperFactory.getMapperFacade());
+		final ToscaMapper mapperFactory = Utils.createMapperFactory();
+		toscaApi = new ToscaApi(this.getClass().getClassLoader(), mapperFactory);
 		prepareArchive();
 		final ToscaParser tp = new ToscaParser(new File("/tmp/ubi-tosca.csar"));
 		root = tp.getContext();

@@ -26,27 +26,17 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-import com.ubiqube.etsi.mano.service.pkg.tosca.Time2Converter;
 import com.ubiqube.parser.tosca.api.ContextResolver;
 import com.ubiqube.parser.tosca.api.ToscaApi;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.VNF;
-
-import ma.glasnost.orika.MapperFactory;
-import ma.glasnost.orika.OrikaSystemProperties;
-import ma.glasnost.orika.impl.DefaultMapperFactory;
-import ma.glasnost.orika.impl.generator.EclipseJdtCompilerStrategy;
 
 class InterfaceTest {
 
 	private final ToscaApi toscaApi;
 
 	public InterfaceTest() {
-		System.setProperty(OrikaSystemProperties.COMPILER_STRATEGY, EclipseJdtCompilerStrategy.class.getName());
-		System.setProperty(OrikaSystemProperties.WRITE_SOURCE_FILES, "true");
-		System.setProperty(OrikaSystemProperties.WRITE_SOURCE_FILES_TO_PATH, "/tmp/orika-tosca");
-		final MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
-		mapperFactory.getConverterFactory().registerConverter(new Time2Converter());
-		toscaApi = new ToscaApi(this.getClass().getClassLoader(), mapperFactory.getMapperFacade());
+		final ToscaOrikaMapper map = new ToscaOrikaMapper();
+		toscaApi = new ToscaApi(this.getClass().getClassLoader(), map);
 	}
 
 	@Test
@@ -55,7 +45,7 @@ class InterfaceTest {
 		final ToscaContext root = tp.getContext();
 		assertNotNull(root);
 		final List<VNF> obj = toscaApi.getObjects(root, new HashMap<>(), VNF.class);
-		final ContextResolver ctx = new ContextResolver(root, new HashMap<String, String>());
+		final ContextResolver ctx = new ContextResolver(root, new HashMap<>());
 		ctx.resolvValue("");
 		assertEquals(1, obj.size());
 	}

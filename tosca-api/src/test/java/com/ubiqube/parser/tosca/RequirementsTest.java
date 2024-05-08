@@ -32,11 +32,6 @@ import com.ubiqube.parser.tosca.objects.tosca.groups.nfv.PlacementGroup;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.Compute;
 import com.ubiqube.parser.tosca.objects.tosca.policies.nfv.AffinityRule;
 
-import ma.glasnost.orika.MapperFactory;
-import ma.glasnost.orika.OrikaSystemProperties;
-import ma.glasnost.orika.impl.DefaultMapperFactory;
-import ma.glasnost.orika.impl.generator.EclipseJdtCompilerStrategy;
-
 @SuppressWarnings("static-method")
 class RequirementsTest {
 
@@ -44,11 +39,8 @@ class RequirementsTest {
 	private final ToscaApi toscaApi;
 
 	public RequirementsTest() {
-		System.setProperty(OrikaSystemProperties.WRITE_SOURCE_FILES, "true");
-		System.setProperty(OrikaSystemProperties.WRITE_SOURCE_FILES_TO_PATH, "/tmp/orika-tosca");
-		System.setProperty(OrikaSystemProperties.COMPILER_STRATEGY, EclipseJdtCompilerStrategy.class.getName());
-		final MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
-		toscaApi = new ToscaApi(this.getClass().getClassLoader(), mapperFactory.getMapperFacade());
+		final ToscaOrikaMapper map = new ToscaOrikaMapper();
+		toscaApi = new ToscaApi(this.getClass().getClassLoader(), map);
 	}
 
 	@Test

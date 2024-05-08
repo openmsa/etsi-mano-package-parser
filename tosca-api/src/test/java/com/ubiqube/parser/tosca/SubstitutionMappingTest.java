@@ -29,9 +29,6 @@ import com.ubiqube.parser.tosca.api.ContextResolver;
 import com.ubiqube.parser.tosca.api.ToscaApi;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.NS;
 
-import ma.glasnost.orika.MapperFactory;
-import ma.glasnost.orika.impl.DefaultMapperFactory;
-
 /**
  *
  * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
@@ -41,8 +38,8 @@ class SubstitutionMappingTest {
 	private final ToscaApi toscaApi;
 
 	public SubstitutionMappingTest() {
-		final MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
-		toscaApi = new ToscaApi(this.getClass().getClassLoader(), mapperFactory.getMapperFacade());
+		final ToscaOrikaMapper map = new ToscaOrikaMapper();
+		toscaApi = new ToscaApi(this.getClass().getClassLoader(), map);
 	}
 
 	@Test
@@ -51,7 +48,7 @@ class SubstitutionMappingTest {
 		final ToscaContext root = tp.getContext();
 		assertNotNull(root);
 		final List<NS> obj = toscaApi.getObjects(root, new HashMap<>(), NS.class);
-		final ContextResolver ctx = new ContextResolver(root, new HashMap<String, String>());
+		final ContextResolver ctx = new ContextResolver(root, new HashMap<>());
 		ctx.resolvValue("");
 		assertEquals(1, obj.size());
 		final NS elem = obj.get(0);
