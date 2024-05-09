@@ -111,6 +111,7 @@ public class MapstructMapper421Impl implements ToscaMapper {
 		case "com.ubiqube.parser.tosca.objects.tosca.policies.nfv.VnfPackageChange" -> policyMapper.mapToVnfPackageChange((tosca.policies.nfv.VnfPackageChange) arg);
 		case "com.ubiqube.parser.tosca.objects.tosca.policies.nfv.LcmCoordinationAction" -> policyMapper.mapToLcmCoordinationAction((tosca.policies.nfv.LcmCoordinationAction) arg);
 		case "com.ubiqube.parser.tosca.objects.tosca.policies.nfv.LcmCoordinationsForLcmOperation" -> policyMapper.mapToLcmCoordinationsForLcmOperation((tosca.policies.nfv.LcmCoordinationsForLcmOperation) arg);
+		case "com.ubiqube.parser.tosca.objects.tosca.nodes.Compute" -> nodeMapper.mapToCompute((tosca.nodes.Compute) arg);
 		default -> throw new IllegalArgumentException("Unexpected value: " + destClass);
 		};
 		return (U) r;
