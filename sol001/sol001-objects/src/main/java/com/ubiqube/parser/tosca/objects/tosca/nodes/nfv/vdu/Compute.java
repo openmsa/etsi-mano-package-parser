@@ -19,9 +19,6 @@ package com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.vdu;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ubiqube.parser.tosca.annotations.Capability;
 import com.ubiqube.parser.tosca.annotations.Occurence;
@@ -33,9 +30,15 @@ import com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv.VduProfile;
 import com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv.VnfcMonitoringParameter;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.Root;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
 /**
  * Describes the virtual compute part of a VDU which is a construct supporting
  * the description of the deployment and operational behavior of a VNFC
+ */
+/**
+ * .field("virtualCompute.virtualLocalStorage[0].sizeOfStorage", "diskSize")
  */
 public class Compute extends Root {
 	/**
