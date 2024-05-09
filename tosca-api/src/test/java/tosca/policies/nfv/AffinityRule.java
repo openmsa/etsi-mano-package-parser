@@ -17,42 +17,58 @@
 package tosca.policies.nfv;
 
 import java.util.List;
-import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ubiqube.parser.tosca.PolicyDefinition;
-import com.ubiqube.parser.tosca.api.ToscaInernalBase;
 
-public class AffinityRule extends ToscaInernalBase {
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import tosca.datatypes.nfv.NfviMaintenanceInfo;
+import tosca.policies.Placement;
+
+public class AffinityRule extends Placement {
 	/**
 	 * scope of the rule is an NFVI_node, an NFVI_PoP, etc.
 	 */
+	@Valid
+	@NotNull
 	@JsonProperty("scope")
 	private String scope;
 
+	/**
+	 * Provides information on the impact tolerance and rules to be observed when a
+	 * group of instances based on the same Vdu.Compute node is impacted during NFVI
+	 * operation and maintenance (e.g. NFVI resource upgrades).
+	 */
+	@Valid
+	@JsonProperty("nfvi_maintenance_group_info")
+	private NfviMaintenanceInfo nfviMaintenanceGroupInfo;
+
+	@Valid
 	private List<String> targets;
-	private Map<String, PolicyDefinition> triggers;
 
-	public Map<String, PolicyDefinition> getTriggers() {
-		return this.triggers;
-	}
-
-	public void setTriggers(final Map<String, PolicyDefinition> triggers) {
-		this.triggers = triggers;
-	}
-
+	@NotNull
 	public String getScope() {
 		return this.scope;
 	}
 
-	public void setScope(final String scope) {
+	public void setScope(@NotNull final String scope) {
 		this.scope = scope;
 	}
 
+	public NfviMaintenanceInfo getNfviMaintenanceGroupInfo() {
+		return this.nfviMaintenanceGroupInfo;
+	}
+
+	public void setNfviMaintenanceGroupInfo(final NfviMaintenanceInfo nfviMaintenanceGroupInfo) {
+		this.nfviMaintenanceGroupInfo = nfviMaintenanceGroupInfo;
+	}
+
+	@Override
 	public List<String> getTargets() {
 		return this.targets;
 	}
 
+	@Override
 	public void setTargets(final List<String> targets) {
 		this.targets = targets;
 	}

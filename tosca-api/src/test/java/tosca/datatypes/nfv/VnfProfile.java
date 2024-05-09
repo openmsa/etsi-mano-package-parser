@@ -16,13 +16,14 @@
  */
 package tosca.datatypes.nfv;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
+import tosca.datatypes.Root;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-public class VnfProfile {
+public class VnfProfile extends Root {
 	/**
 	 * Identifier of the instantiation level of the VNF DF to be used for
 	 * instantiation. If not present, the default instantiation level as declared in

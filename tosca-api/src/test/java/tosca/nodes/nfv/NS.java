@@ -20,6 +20,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ubiqube.parser.tosca.annotations.Capability;
+import com.ubiqube.parser.tosca.annotations.Interface;
 import com.ubiqube.parser.tosca.annotations.Node;
 import com.ubiqube.parser.tosca.annotations.Occurence;
 import com.ubiqube.parser.tosca.annotations.Relationship;
@@ -28,6 +29,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import tosca.datatypes.nfv.NsProfile;
+import tosca.interfaces.nfv.Nslcm;
 import tosca.nodes.Root;
 
 public class NS extends Root {
@@ -115,21 +117,24 @@ public class NS extends Root {
 	private Map<String, Integer> scaleStatus;
 
 	@Occurence({ "0", "1" })
-	@Node("tosca.nodes.nfv.NsVirtualLink")
 	@Capability("tosca.capabilities.nfv.VirtualLinkable")
 	@Relationship("tosca.relationships.nfv.VirtualLinksTo")
 	@JsonProperty("virtual_link_9")
 	private String virtualLink9Req;
 
 	@Occurence({ "0", "1" })
-	@Node("tosca.nodes.nfv.NsVirtualLink")
 	@Capability("tosca.capabilities.nfv.VirtualLinkable")
 	@Relationship("tosca.relationships.nfv.VirtualLinksTo")
 	@JsonProperty("virtual_link_2")
 	private String virtualLink2Req;
 
 	@Occurence({ "0", "1" })
-	@Node("tosca.nodes.nfv.NsVirtualLink")
+	@Capability("tosca.capabilities.nfv.VirtualLinkable")
+	@Relationship("tosca.relationships.nfv.VirtualLinksTo")
+	@JsonProperty("virtual_link_10")
+	private String virtualLink10Req;
+
+	@Occurence({ "0", "1" })
 	@Capability("tosca.capabilities.nfv.VirtualLinkable")
 	@Relationship("tosca.relationships.nfv.VirtualLinksTo")
 	@JsonProperty("virtual_link_1")
@@ -143,46 +148,43 @@ public class NS extends Root {
 	private String virtualLinkReq;
 
 	@Occurence({ "0", "1" })
-	@Node("tosca.nodes.nfv.NsVirtualLink")
 	@Capability("tosca.capabilities.nfv.VirtualLinkable")
 	@Relationship("tosca.relationships.nfv.VirtualLinksTo")
 	@JsonProperty("virtual_link_4")
 	private String virtualLink4Req;
 
 	@Occurence({ "0", "1" })
-	@Node("tosca.nodes.nfv.NsVirtualLink")
 	@Capability("tosca.capabilities.nfv.VirtualLinkable")
 	@Relationship("tosca.relationships.nfv.VirtualLinksTo")
 	@JsonProperty("virtual_link_3")
 	private String virtualLink3Req;
 
 	@Occurence({ "0", "1" })
-	@Node("tosca.nodes.nfv.NsVirtualLink")
 	@Capability("tosca.capabilities.nfv.VirtualLinkable")
 	@Relationship("tosca.relationships.nfv.VirtualLinksTo")
 	@JsonProperty("virtual_link_6")
 	private String virtualLink6Req;
 
 	@Occurence({ "0", "1" })
-	@Node("tosca.nodes.nfv.NsVirtualLink")
 	@Capability("tosca.capabilities.nfv.VirtualLinkable")
 	@Relationship("tosca.relationships.nfv.VirtualLinksTo")
 	@JsonProperty("virtual_link_5")
 	private String virtualLink5Req;
 
 	@Occurence({ "0", "1" })
-	@Node("tosca.nodes.nfv.NsVirtualLink")
 	@Capability("tosca.capabilities.nfv.VirtualLinkable")
 	@Relationship("tosca.relationships.nfv.VirtualLinksTo")
 	@JsonProperty("virtual_link_8")
 	private String virtualLink8Req;
 
 	@Occurence({ "0", "1" })
-	@Node("tosca.nodes.nfv.NsVirtualLink")
 	@Capability("tosca.capabilities.nfv.VirtualLinkable")
 	@Relationship("tosca.relationships.nfv.VirtualLinksTo")
 	@JsonProperty("virtual_link_7")
 	private String virtualLink7Req;
+
+	@Interface
+	private Nslcm nslcm;
 
 	@NotNull
 	public String getDescriptorId() {
@@ -287,6 +289,14 @@ public class NS extends Root {
 		this.virtualLink2Req = virtualLink2Req;
 	}
 
+	public String getVirtualLink10Req() {
+		return this.virtualLink10Req;
+	}
+
+	public void setVirtualLink10Req(final String virtualLink10Req) {
+		this.virtualLink10Req = virtualLink10Req;
+	}
+
 	public String getVirtualLink1Req() {
 		return this.virtualLink1Req;
 	}
@@ -349,6 +359,14 @@ public class NS extends Root {
 
 	public void setVirtualLink7Req(final String virtualLink7Req) {
 		this.virtualLink7Req = virtualLink7Req;
+	}
+
+	public Nslcm getNslcm() {
+		return this.nslcm;
+	}
+
+	public void setNslcm(final Nslcm nslcm) {
+		this.nslcm = nslcm;
 	}
 
 }

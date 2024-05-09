@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,9 +38,8 @@ import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.NS;
 class SubstitutionMappingTest {
 	private final ToscaApi toscaApi;
 
-	public SubstitutionMappingTest() {
-		final ToscaOrikaMapper map = new ToscaOrikaMapper();
-		toscaApi = new ToscaApi(this.getClass().getClassLoader(), map);
+	public SubstitutionMappingTest() throws MalformedURLException {
+		toscaApi = ToscaApiFactory.createToscaApi();
 	}
 
 	@Test

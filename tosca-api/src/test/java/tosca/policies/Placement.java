@@ -12,34 +12,23 @@
  *     GNU General Public License for more details.
  *
  *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package tosca.datatypes.nfv;
+package tosca.policies;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotNull;
-import tosca.datatypes.Root;
 
-public class ScaleInfo extends Root {
-	/**
-	 * The scale level for a particular aspect
-	 */
+public class Placement extends Root {
 	@Valid
-	@NotNull
-	@JsonProperty("scale_level")
-	@DecimalMin(value = "0", inclusive = true)
-	private Integer scaleLevel;
+	private List<String> targets;
 
-	@NotNull
-	public Integer getScaleLevel() {
-		return this.scaleLevel;
+	public List<String> getTargets() {
+		return this.targets;
 	}
 
-	public void setScaleLevel(@NotNull final Integer scaleLevel) {
-		this.scaleLevel = scaleLevel;
+	public void setTargets(final List<String> targets) {
+		this.targets = targets;
 	}
-
 }

@@ -18,8 +18,10 @@ package tosca.nodes;
 
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ubiqube.parser.tosca.Artifact;
 import com.ubiqube.parser.tosca.AttributeAssignement;
+import com.ubiqube.parser.tosca.InterfaceDefinition;
 import com.ubiqube.parser.tosca.RequirementDefinition;
 import com.ubiqube.parser.tosca.api.ToscaInernalBase;
 
@@ -30,10 +32,16 @@ public class Root extends ToscaInernalBase {
 	private Map<String, Artifact> artifacts;
 
 	@Valid
+	@JsonIgnore
 	private Map<String, AttributeAssignement> overloadedAttributes;
 
 	@Valid
+	@JsonIgnore
 	private RequirementDefinition overloadedRequirements;
+
+	@Valid
+	@JsonIgnore
+	private Map<String, InterfaceDefinition> overloadedInterfaces;
 
 	public Map<String, Artifact> getArtifacts() {
 		return this.artifacts;
@@ -57,6 +65,14 @@ public class Root extends ToscaInernalBase {
 
 	public void setOverloadedRequirements(final RequirementDefinition overloadedRequirements) {
 		this.overloadedRequirements = overloadedRequirements;
+	}
+
+	public Map<String, InterfaceDefinition> getOverloadedInterfaces() {
+		return this.overloadedInterfaces;
+	}
+
+	public void setOverloadedInterfaces(final Map<String, InterfaceDefinition> overloadedInterfaces) {
+		this.overloadedInterfaces = overloadedInterfaces;
 	}
 
 }

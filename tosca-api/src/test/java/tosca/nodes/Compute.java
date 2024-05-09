@@ -17,6 +17,7 @@
 package tosca.nodes;
 
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ubiqube.parser.tosca.annotations.Capability;
@@ -26,6 +27,12 @@ import com.ubiqube.parser.tosca.annotations.Relationship;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import tosca.capabilities.OperatingSystem;
+import tosca.capabilities.Scalable;
+import tosca.capabilities.endpoint.Admin;
+import tosca.capabilities.network.Bindable;
+import tosca.datatypes.network.NetworkInfo;
+import tosca.datatypes.network.PortInfo;
 
 public class Compute extends Root {
 	@Valid
@@ -38,6 +45,16 @@ public class Compute extends Root {
 	@JsonProperty("public_address")
 	private String publicAddress;
 
+	@Valid
+	@NotNull
+	@JsonProperty("networks")
+	private Map<String, NetworkInfo> networks;
+
+	@Valid
+	@NotNull
+	@JsonProperty("ports")
+	private Map<String, PortInfo> ports;
+
 	/**
 	 * Caps.
 	 */
@@ -46,18 +63,22 @@ public class Compute extends Root {
 	/**
 	 * Caps.
 	 */
+	private Admin endpoint;
 
 	/**
 	 * Caps.
 	 */
+	private OperatingSystem os;
 
 	/**
 	 * Caps.
 	 */
+	private Scalable scalable;
 
 	/**
 	 * Caps.
 	 */
+	private Bindable binding;
 
 	@Occurence({ "0", "UNBOUNDED" })
 	@Node("tosca.nodes.Storage.BlockStorage")
@@ -84,6 +105,24 @@ public class Compute extends Root {
 		this.publicAddress = publicAddress;
 	}
 
+	@NotNull
+	public Map<String, NetworkInfo> getNetworks() {
+		return this.networks;
+	}
+
+	public void setNetworks(@NotNull final Map<String, NetworkInfo> networks) {
+		this.networks = networks;
+	}
+
+	@NotNull
+	public Map<String, PortInfo> getPorts() {
+		return this.ports;
+	}
+
+	public void setPorts(@NotNull final Map<String, PortInfo> ports) {
+		this.ports = ports;
+	}
+
 	public tosca.capabilities.Compute getHost() {
 		return this.host;
 	}
@@ -92,12 +131,43 @@ public class Compute extends Root {
 		this.host = host;
 	}
 
+	public Admin getEndpoint() {
+		return this.endpoint;
+	}
+
+	public void setEndpoint(final Admin endpoint) {
+		this.endpoint = endpoint;
+	}
+
+	public OperatingSystem getOs() {
+		return this.os;
+	}
+
+	public void setOs(final OperatingSystem os) {
+		this.os = os;
+	}
+
+	public Scalable getScalable() {
+		return this.scalable;
+	}
+
+	public void setScalable(final Scalable scalable) {
+		this.scalable = scalable;
+	}
+
+	public Bindable getBinding() {
+		return this.binding;
+	}
+
+	public void setBinding(final Bindable binding) {
+		this.binding = binding;
+	}
+
 	public List<String> getLocalStorageReq() {
-		return localStorageReq;
+		return this.localStorageReq;
 	}
 
 	public void setLocalStorageReq(final List<String> localStorageReq) {
 		this.localStorageReq = localStorageReq;
 	}
-
 }

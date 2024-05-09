@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,9 +35,8 @@ class ParameterCheckerTest {
 
 	private final ToscaApi toscaApi;
 
-	public ParameterCheckerTest() {
-		final ToscaOrikaMapper map = new ToscaOrikaMapper();
-		toscaApi = new ToscaApi(this.getClass().getClassLoader(), map);
+	public ParameterCheckerTest() throws MalformedURLException {
+		toscaApi = ToscaApiFactory.createToscaApi();
 	}
 
 	@Test

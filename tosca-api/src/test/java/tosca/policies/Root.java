@@ -12,34 +12,26 @@
  *     GNU General Public License for more details.
  *
  *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package tosca.datatypes.nfv;
+package tosca.policies;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Map;
+
+import com.ubiqube.parser.tosca.TriggerDefinition;
+import com.ubiqube.parser.tosca.api.ToscaInernalBase;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotNull;
-import tosca.datatypes.Root;
 
-public class ScaleInfo extends Root {
-	/**
-	 * The scale level for a particular aspect
-	 */
+public class Root extends ToscaInernalBase {
 	@Valid
-	@NotNull
-	@JsonProperty("scale_level")
-	@DecimalMin(value = "0", inclusive = true)
-	private Integer scaleLevel;
+	private Map<String, TriggerDefinition> triggers;
 
-	@NotNull
-	public Integer getScaleLevel() {
-		return this.scaleLevel;
+	public Map<String, TriggerDefinition> getTriggers() {
+		return this.triggers;
 	}
 
-	public void setScaleLevel(@NotNull final Integer scaleLevel) {
-		this.scaleLevel = scaleLevel;
+	public void setTriggers(final Map<String, TriggerDefinition> triggers) {
+		this.triggers = triggers;
 	}
-
 }

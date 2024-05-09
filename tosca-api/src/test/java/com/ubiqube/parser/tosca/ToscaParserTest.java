@@ -19,6 +19,7 @@ package com.ubiqube.parser.tosca;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,9 +35,8 @@ import com.ubiqube.parser.tosca.api.ToscaApi;
 class ToscaParserTest {
 	private final ToscaApi toscaApi;
 
-	public ToscaParserTest() {
-		final ToscaOrikaMapper map = new ToscaOrikaMapper();
-		toscaApi = new ToscaApi(this.getClass().getClassLoader(), map);
+	public ToscaParserTest() throws MalformedURLException {
+		toscaApi = ToscaApiFactory.createToscaApi();
 	}
 
 	/// Remote URL use some tosca 1.0 @Test

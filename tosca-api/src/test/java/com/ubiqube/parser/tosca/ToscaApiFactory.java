@@ -16,59 +16,37 @@
  */
 package com.ubiqube.parser.tosca;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.Properties;
 
-import org.junit.jupiter.api.Test;
-
 import com.ubiqube.parser.test.ArtifactDownloader;
-import com.ubiqube.parser.tosca.api.ContextResolver;
 import com.ubiqube.parser.tosca.api.ToscaApi;
 import com.ubiqube.parser.tosca.api.ToscaMapper;
-import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.VNF;
 import com.ubiqube.parser.tosca.scalar.Version;
 
-/**
- *
- * @author olivier
- *
- */
-class MappingClassTest {
+public class ToscaApiFactory {
 	private static final String JAR_PATH_JDK = "/tosca-class-%s-2.0.0-SNAPSHOT.jar";
 
-	@Test
-	void testName() throws Exception {
-		final ToscaParser tp = new ToscaParser(new File("src/test/resources/ubi-tosca/Definitions/tosca_ubi.yaml"));
-		final ToscaContext root = tp.getContext();
-		assertNotNull(root);
-		Version v = getVersion(root.getMetadata());
-		v = new Version("3.6.1");
+	private ToscaApiFactory() {
+		//
+	}
+
+	static ToscaApi createToscaApi() throws MalformedURLException {
+		final Version v = new Version("3.6.1");
 		ArtifactDownloader.prepareArtifact(toJarVersions(v));
-		final URL cls = this.getClass().getResource(String.format(JAR_PATH_JDK, toJarVersions(v)));
-		System.out.println("" + cls);
-		final URLClassLoader inst = URLClassLoader.newInstance(new URL[] { cls }, this.getClass().getClassLoader());
-		final ContextResolver ctx = new ContextResolver(root, new HashMap<>());
-		final ToscaMapper mapperFactory = configureMapper(inst);
-		final ToscaApi toscaApi = new ToscaApi(inst, mapperFactory);
-		final Class<?> clz = inst.loadClass("tosca.nodes.nfv.VNF");
-		assertNotNull(clz);
-		final List<VNF> objs = toscaApi.getObjects(root, Map.of(), VNF.class);
-		assertNotNull(objs);
-		assertEquals(1, objs.size());
-		final Object vnf = objs.get(0);
-		assertNotNull(vnf);
+		final URL cls = ToscaApiFactory.class.getResource(String.format(JAR_PATH_JDK, toJarVersions(v)));
+		final URLClassLoader inst = URLClassLoader.newInstance(new URL[] { cls }, ToscaApiFactory.class.getClassLoader());
+		final ToscaMapper tm = getVersionedMapperMethod(inst);
+		return new ToscaApi(inst, tm);
+	}
+
+	private static String toJarVersions(final Version v) {
+		return v.toString().replace(".", "");
 	}
 
 	private static ToscaMapper configureMapper(final URLClassLoader inst) throws SecurityException {
@@ -87,17 +65,4 @@ class MappingClassTest {
 		}
 	}
 
-	private static String toJarVersions(final Version v) {
-		return v.toString().replace(".", "");
-	}
-
-	private static Version getVersion(final Map<String, String> metadata) {
-		final String author = metadata.get("template_author");
-		if (null == author) {
-			return new Version("2.5.1");
-		}
-		return Optional.ofNullable(metadata.get("template_version"))
-				.map(Version::new)
-				.orElseGet(() -> new Version("2.5.1"));
-	}
 }

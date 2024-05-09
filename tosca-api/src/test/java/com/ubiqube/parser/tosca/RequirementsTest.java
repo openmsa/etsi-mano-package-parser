@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -38,9 +39,8 @@ class RequirementsTest {
 	private static final Logger LOG = LoggerFactory.getLogger(RequirementsTest.class);
 	private final ToscaApi toscaApi;
 
-	public RequirementsTest() {
-		final ToscaOrikaMapper map = new ToscaOrikaMapper();
-		toscaApi = new ToscaApi(this.getClass().getClassLoader(), map);
+	public RequirementsTest() throws MalformedURLException {
+		toscaApi = ToscaApiFactory.createToscaApi();
 	}
 
 	@Test

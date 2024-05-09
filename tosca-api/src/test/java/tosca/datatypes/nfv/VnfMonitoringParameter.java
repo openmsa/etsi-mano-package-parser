@@ -16,13 +16,14 @@
  */
 package tosca.datatypes.nfv;
 
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ubiqube.parser.tosca.scalar.Time;
 
-public class VnfMonitoringParameter {
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import tosca.datatypes.Root;
+
+public class VnfMonitoringParameter extends Root {
 	/**
 	 * Describes the periodicity at which to collect the performance information.
 	 */

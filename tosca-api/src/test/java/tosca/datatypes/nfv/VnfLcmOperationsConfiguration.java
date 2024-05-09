@@ -16,11 +16,12 @@
  */
 package tosca.datatypes.nfv;
 
-import jakarta.validation.Valid;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class VnfLcmOperationsConfiguration {
+import jakarta.validation.Valid;
+import tosca.datatypes.Root;
+
+public class VnfLcmOperationsConfiguration extends Root {
 	/**
 	 * Configuration parameters for the OperateVnf operation
 	 */
