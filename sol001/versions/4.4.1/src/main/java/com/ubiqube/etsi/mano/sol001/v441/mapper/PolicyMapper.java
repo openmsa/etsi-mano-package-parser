@@ -54,6 +54,7 @@ import com.ubiqube.parser.tosca.objects.tosca.policies.nfv.VnfMonitoring;
 import com.ubiqube.parser.tosca.objects.tosca.policies.nfv.VnfPackageChange;
 import com.ubiqube.parser.tosca.objects.tosca.policies.nfv.VnfToInstantiationLevelMapping;
 import com.ubiqube.parser.tosca.objects.tosca.policies.nfv.VnfToLevelMapping;
+import org.mapstruct.Mapping;
 
 @Mapper
 public interface PolicyMapper {
@@ -122,6 +123,7 @@ public interface PolicyMapper {
 
 	SecurityGroupRule mapToSecurityGroupRule(tosca.policies.nfv.SecurityGroupRule o);
 
+	@Mapping(target = "name", ignore = true)
 	VnfIndicator mapToVnfIndicator(tosca.policies.nfv.VnfIndicator o);
 
 	VnfPackageChange mapToVnfPackageChange(tosca.policies.nfv.VnfPackageChange o);

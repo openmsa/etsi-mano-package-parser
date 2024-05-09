@@ -17,7 +17,10 @@
 package com.ubiqube.etsi.mano.sol001.v441.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
+import com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv.NsProfile;
+import com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv.VirtualNetworkInterfaceRequirements;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.Forwarding;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.Mciop;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.NFP;
@@ -46,6 +49,9 @@ import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.vdu.VirtualObjectStorage
 public interface NodeMapper {
 	NS mapToNS(tosca.nodes.nfv.NS o);
 
+	@Mapping(target = "flavourId", ignore = true)
+	NsProfile mapToNsProfile(tosca.datatypes.nfv.NsProfile o);
+
 	Sap mapToSap(tosca.nodes.nfv.Sap o);
 
 	NsVirtualLink mapToNsVirtualLink(tosca.nodes.nfv.NsVirtualLink o);
@@ -58,6 +64,15 @@ public interface NodeMapper {
 
 	Forwarding mapToForwarding(tosca.nodes.nfv.Forwarding o);
 
+	@Mapping(target = "artifacts", ignore = true)
+	@Mapping(target = "overloadedAttributes", ignore = true)
+	@Mapping(target = "overloadedInterfaces", ignore = true)
+	@Mapping(target = "overloadedRequirements", ignore = true)
+	@Mapping(target = "forwarding", ignore = true)
+	@Mapping(target = "virtualLinkReq", ignore = true)
+	@Mapping(target = "virtualLinkable", ignore = true)
+	com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.Forwarding map(tosca.capabilities.nfv.Forwarding o);
+
 	PNF mapToPNF(tosca.nodes.nfv.PNF o);
 
 	PnfExtCp mapToPnfExtCp(tosca.nodes.nfv.PnfExtCp o);
@@ -65,6 +80,9 @@ public interface NodeMapper {
 	VNF mapToVNF(tosca.nodes.nfv.VNF o);
 
 	VnfExtCp mapToVnfExtCp(tosca.nodes.nfv.VnfExtCp o);
+
+	@Mapping(target = "supportMandatory", ignore = true)
+	VirtualNetworkInterfaceRequirements mapToVirtualNetworkInterfaceRequirements(tosca.datatypes.nfv.VirtualNetworkInterfaceRequirements o);
 
 	Compute mapToCompute(tosca.nodes.nfv.vdu.Compute o);
 
