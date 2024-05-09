@@ -189,4 +189,6 @@ public interface NodeMapper {
 		sd.setHost(string);
 		return sd;
 	}
+
+	com.ubiqube.parser.tosca.objects.tosca.nodes.Compute mapToCompute(tosca.nodes.Compute arg);
 }
