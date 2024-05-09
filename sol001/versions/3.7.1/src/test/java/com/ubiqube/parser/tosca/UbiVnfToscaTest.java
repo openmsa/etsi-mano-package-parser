@@ -28,7 +28,6 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.ubiqube.etsi.mano.sol001.OrikaMapper371Impl;
 import com.ubiqube.parser.tosca.api.ToscaApi;
 import com.ubiqube.parser.tosca.api.ToscaMapper;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.VnfExtCp;
@@ -47,7 +46,6 @@ class UbiVnfToscaTest {
 
 	public UbiVnfToscaTest() {
 		final ToscaMapper mapperFactory = Utils.createMapperFactory();
-		final OrikaMapper371Impl orika = new OrikaMapper371Impl();
 		toscaApi = new ToscaApi(this.getClass().getClassLoader(), mapperFactory);
 	}
 
