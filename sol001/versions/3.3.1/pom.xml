@@ -19,11 +19,6 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.ubiqube.mano</groupId>
-			<artifactId>tosca-mapping-orika</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 		</dependency>
@@ -45,10 +40,6 @@
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
 			<version>${version.mapstruct}</version>
-		</dependency>
-		<dependency>
-			<groupId>ma.glasnost.orika</groupId>
-			<artifactId>ubi-orika-eclipse-tools</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano.sol001</groupId>
