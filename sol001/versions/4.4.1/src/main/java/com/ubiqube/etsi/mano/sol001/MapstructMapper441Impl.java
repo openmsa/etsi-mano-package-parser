@@ -115,6 +115,7 @@ public class MapstructMapper441Impl implements ToscaMapper {
 		case "com.ubiqube.parser.tosca.objects.tosca.policies.nfv.VipCpScalingAspectDeltas" -> policyMapper.mapToVipCpScalingAspectDeltas((tosca.policies.nfv.VipCpScalingAspectDeltas) arg);
 		case "com.ubiqube.parser.tosca.objects.tosca.policies.nfv.VipCpInitialDelta" -> policyMapper.mapToVipCpInitialDelta((tosca.policies.nfv.VipCpInitialDelta) arg);
 		case "com.ubiqube.parser.tosca.objects.tosca.policies.nfv.VipCpInstantiationLevels" -> policyMapper.mapToVipCpInstantiationLevels((tosca.policies.nfv.VipCpInstantiationLevels) arg);
+		case "com.ubiqube.parser.tosca.objects.tosca.nodes.Compute" -> nodeMapper.mapToCompute((tosca.nodes.Compute) arg);
 		default -> throw new IllegalArgumentException("Unexpected value: " + destClass);
 		};
 		return (U) r;

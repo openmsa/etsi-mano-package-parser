@@ -108,4 +108,6 @@ public interface NodeMapper {
 	Mciop mapToMciop(tosca.nodes.nfv.Mciop o);
 
 	VirtualCp mapToVirtualCp(tosca.nodes.nfv.VirtualCp o);
+
+	com.ubiqube.parser.tosca.objects.tosca.nodes.Compute mapToCompute(tosca.nodes.Compute arg);
 }
