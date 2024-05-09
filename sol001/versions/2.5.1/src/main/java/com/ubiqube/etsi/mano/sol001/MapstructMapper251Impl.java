@@ -71,6 +71,7 @@ public class MapstructMapper251Impl implements ToscaMapper {
 		case "com.ubiqube.parser.tosca.objects.tosca.policies.nfv.AntiAffinityRule" -> policyMapper.mapToAntiAffinityRule((tosca.policies.nfv.AntiAffinityRule) arg);
 		case "com.ubiqube.parser.tosca.objects.tosca.policies.nfv.SupportedVnfInterface" -> policyMapper.mapToSupportedVnfInterface((tosca.policies.nfv.SupportedVnfInterface) arg);
 		case "com.ubiqube.parser.tosca.objects.tosca.policies.nfv.SecurityGroupRule" -> policyMapper.mapToSecurityGroupRule((tosca.policies.nfv.SecurityGroupRule) arg);
+		case "com.ubiqube.parser.tosca.objects.tosca.nodes.Compute" -> nodeMapper.mapToCompute((tosca.nodes.Compute) arg);
 		default -> throw new IllegalArgumentException("Unexpected value: " + destClass);
 		};
 		return (U) r;
