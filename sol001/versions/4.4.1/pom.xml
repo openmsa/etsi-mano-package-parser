@@ -37,10 +37,6 @@
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>ma.glasnost.orika</groupId>
-			<artifactId>ubi-orika-eclipse-tools</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
 			<version>${version.mapstruct}</version>
