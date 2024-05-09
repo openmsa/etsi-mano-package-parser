@@ -119,4 +119,5 @@ public interface NodeMapper {
 		return sd;
 	}
 
+	com.ubiqube.parser.tosca.objects.tosca.nodes.Compute mapToCompute(tosca.nodes.Compute arg);
 }
