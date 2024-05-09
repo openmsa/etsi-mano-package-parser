@@ -116,7 +116,6 @@ public interface NodeMapper {
 
 	VnfExtCp mapToVnfExtCp(tosca.nodes.nfv.VnfExtCp o);
 
-	@Mapping(target = "supportMandatory", ignore = true)
 	VirtualNetworkInterfaceRequirements mapToVirtualNetworkInterfaceRequirements(tosca.datatypes.nfv.VirtualNetworkInterfaceRequirements o);
 
 	@Mapping(target = "bootOrder", ignore = true)
