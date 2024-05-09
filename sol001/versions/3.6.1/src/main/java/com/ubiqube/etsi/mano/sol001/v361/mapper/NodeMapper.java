@@ -47,7 +47,6 @@ import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.vdu.VirtualObjectStorage
 public interface NodeMapper {
 	NS mapToNS(tosca.nodes.nfv.NS o);
 
-	@Mapping(target = "flavourId", ignore = true)
 	NsProfile mapToNsProfile(tosca.datatypes.nfv.NsProfile o);
 
 	Sap mapToSap(tosca.nodes.nfv.Sap o);
