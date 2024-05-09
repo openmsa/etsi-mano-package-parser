@@ -60,7 +60,6 @@ public interface NodeMapper {
 	@Mapping(target = "scaleStatus", ignore = true)
 	NS mapToNS(tosca.nodes.nfv.NS o);
 
-	@Mapping(target = "flavourId", ignore = true)
 	NsProfile mapToNsProfile(tosca.datatypes.nfv.NsProfile o);
 
 	Sap mapToSap(tosca.nodes.nfv.Sap o);
@@ -117,7 +116,6 @@ public interface NodeMapper {
 
 	VnfExtCp mapToVnfExtCp(tosca.nodes.nfv.VnfExtCp o);
 
-	@Mapping(target = "supportMandatory", ignore = true)
 	VirtualNetworkInterfaceRequirements mapToVirtualNetworkInterfaceRequirements(tosca.datatypes.nfv.VirtualNetworkInterfaceRequirements o);
 
 	@Mapping(target = "bootOrder", ignore = true)
