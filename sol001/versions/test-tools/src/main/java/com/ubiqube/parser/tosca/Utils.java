@@ -35,16 +35,7 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
-import com.ubiqube.etsi.mano.service.pkg.tosca.Frequency2Converter;
-import com.ubiqube.etsi.mano.service.pkg.tosca.Range2Converter;
-import com.ubiqube.etsi.mano.service.pkg.tosca.Size2Converter;
-import com.ubiqube.etsi.mano.service.pkg.tosca.Time2Converter;
 import com.ubiqube.parser.tosca.api.ToscaMapper;
-
-import ma.glasnost.orika.OrikaSystemProperties;
-import ma.glasnost.orika.converter.ConverterFactory;
-import ma.glasnost.orika.impl.DefaultMapperFactory;
-import ma.glasnost.orika.impl.generator.EclipseJdtCompilerStrategy;
 
 public class Utils {
 
@@ -53,15 +44,6 @@ public class Utils {
 	}
 
 	public static ToscaMapper createMapperFactory() {
-		System.setProperty(OrikaSystemProperties.COMPILER_STRATEGY, EclipseJdtCompilerStrategy.class.getName());
-		System.setProperty(OrikaSystemProperties.WRITE_SOURCE_FILES, "true");
-		System.setProperty(OrikaSystemProperties.WRITE_SOURCE_FILES_TO_PATH, "/tmp/orika-tests");
-		final DefaultMapperFactory mapper = new DefaultMapperFactory.Builder().build();
-		final ConverterFactory conv = mapper.getConverterFactory();
-		conv.registerConverter(new Size2Converter());
-		conv.registerConverter(new Frequency2Converter());
-		conv.registerConverter(new Time2Converter());
-		conv.registerConverter(new Range2Converter());
 		return registerMapper();
 	}
 
