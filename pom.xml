@@ -41,7 +41,7 @@
 		<version.jakarta.validation-api>3.0.2</version.jakarta.validation-api>
 		<version.javapoet>1.13.0</version.javapoet>
 		<version.junit.jupiter>5.10.2</version.junit.jupiter>
-		<version.logback-classic>1.5.1</version.logback-classic>
+		<version.logback-classic>1.5.6</version.logback-classic>
 		<version.lombok>1.18.30</version.lombok>
 		<version.mapstruct>1.5.5.Final</version.mapstruct>
 		<version.mockito>5.11.0</version.mockito>
