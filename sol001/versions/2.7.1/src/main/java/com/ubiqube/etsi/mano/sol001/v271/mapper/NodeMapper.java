@@ -16,13 +16,19 @@
  */
 package com.ubiqube.etsi.mano.sol001.v271.mapper;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
+import com.ubiqube.parser.tosca.Artifact;
+import com.ubiqube.parser.tosca.objects.tosca.artifacts.nfv.SwImage;
 import com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv.L3AddressData;
 import com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv.LocationInfo;
 import com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv.NsProfile;
@@ -54,6 +60,8 @@ import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.vdu.Compute;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.vdu.VirtualBlockStorage;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.vdu.VirtualFileStorage;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.vdu.VirtualObjectStorage;
+
+import tosca.datatypes.nfv.SwImageData;
 
 @Mapper
 public interface NodeMapper {
@@ -138,6 +146,30 @@ public interface NodeMapper {
 	VirtualNetworkInterfaceRequirements mapToVirtualNetworkInterfaceRequirements(tosca.datatypes.nfv.VirtualNetworkInterfaceRequirements o);
 
 	Compute mapToCompute(tosca.nodes.nfv.vdu.Compute o);
+
+	@AfterMapping
+	default void mapSwImageData(final tosca.nodes.nfv.vdu.Compute src, @MappingTarget final Compute dst) {
+		final Map<String, Artifact> arts = Optional.ofNullable(dst.getArtifacts()).orElseGet(Map::of);
+		final Map<String, Artifact> newArts = new LinkedHashMap<>(arts);
+		final SwImageData swid = src.getSwImageData();
+		dst.setArtifacts(newArts);
+		if (null == swid) {
+			return;
+		}
+		final SwImage mapped = mapToSwImage(swid);
+		mapped.setInternalName(mapped.getName());
+		newArts.put(mapped.getName(), mapped);
+	}
+
+	@Mapping(target = "properties", ignore = true)
+	@Mapping(target = "artifactVersion", source = "version")
+	@Mapping(target = "checksumAlgorithm", source = "checksum.algorithm")
+	@Mapping(target = "deployPath", ignore = true)
+	@Mapping(target = "description", ignore = true)
+	@Mapping(target = "file", ignore = true)
+	@Mapping(target = "repository", ignore = true)
+	@Mapping(target = "type", ignore = true)
+	SwImage mapToSwImage(SwImageData o);
 
 	default Map<String, VnfcMonitoringParameter> mapTpoVnfcMonitoringParameter(final List<tosca.datatypes.nfv.VnfcMonitoringParameter> value) {
 		if ((null == value) || value.isEmpty()) {
