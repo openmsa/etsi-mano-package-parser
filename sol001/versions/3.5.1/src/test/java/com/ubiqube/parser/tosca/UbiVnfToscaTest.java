@@ -18,6 +18,7 @@ package com.ubiqube.parser.tosca;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.util.HashMap;
@@ -30,6 +31,7 @@ import org.slf4j.LoggerFactory;
 
 import com.ubiqube.parser.tosca.api.ToscaApi;
 import com.ubiqube.parser.tosca.api.ToscaMapper;
+import com.ubiqube.parser.tosca.objects.tosca.artifacts.nfv.SwImage;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.VnfExtCp;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.VnfVirtualLink;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.vdu.Compute;
@@ -66,7 +68,14 @@ class UbiVnfToscaTest {
 		final List<Compute> lComp = toscaApi.getObjects(root, parameters, Compute.class);
 		assertEquals(2, lComp.size());
 		lComp.stream().forEach(x -> {
-			assertEquals(1, x.getArtifacts().size());
+			assertTrue(x.getArtifacts().size() >= 1);
+			x.getArtifacts().entrySet().forEach(y -> {
+				final SwImage v = (SwImage) y.getValue();
+				assertNotNull(v.getInternalName());
+				assertNotNull(v.getName());
+				assertEquals(v.getInternalName(), v.getName());
+				assertEquals(y.getKey(), v.getName());
+			});
 		});
 	}
 
