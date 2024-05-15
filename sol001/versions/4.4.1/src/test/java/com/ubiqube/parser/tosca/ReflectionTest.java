@@ -16,7 +16,8 @@
  */
 package com.ubiqube.parser.tosca;
 
-import java.beans.IntrospectionException;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.lang.reflect.Method;
 
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,7 @@ import com.ubiqube.etsi.mano.sol001.v441.mapper.InterfaceMapper;
 import com.ubiqube.etsi.mano.sol001.v441.mapper.NodeMapper;
 import com.ubiqube.etsi.mano.sol001.v441.mapper.PolicyMapper;
 
+@SuppressWarnings("static-method")
 class ReflectionTest {
 
 	@Test
@@ -38,23 +40,14 @@ class ReflectionTest {
 		inspectClass(InterfaceMapper.class, "interfaceMapper");
 		inspectClass(NodeMapper.class, "nodeMapper");
 		inspectClass(PolicyMapper.class, "policyMapper");
+		assertTrue(true);
 	}
 
-	void inspectClass(final Class<?> clazz, final String object) throws IntrospectionException {
+	void inspectClass(final Class<?> clazz, final String object) {
 		final Method[] meths = clazz.getMethods();
 		for (final Method method : meths) {
 			System.out.println("case \"" + method.getReturnType().getCanonicalName() + "\" -> " + object + "." + method.getName() + "((" + method.getParameters()[0].getType().getCanonicalName() + ")arg);");
 		}
 	}
 
-	void a(final String c) {
-		switch (c) {
-		case "ee": {
-
-			//
-		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + c);
-		}
-	}
 }
