@@ -92,29 +92,30 @@ topology_template:
 
   node_templates:
     VNF:
-        type: ExampleCorp.vDB.0_1.0_2
-        properties:
-          product_info_name: "Firewall"
-          product_info_description: "Firewall with new functionality"
-            # modifiable_attributes: {}   # All of the VNF  modifiable properties should go here
-          flavour_id: simple
-          flavour_description: "A specimen copy of the VNF Descriptor for containers"
-        interfaces:
-          Vnflcm:
-            operations: 
-              # instantiate_start:
-              # instantiate: # A sample illustration to run a instantiation script without any inputs.
-              instantiate_end: helm_test
-              
-              scale: #Invoked upon receipt of a Scale VNF request                
-                inputs:
-                  type: "scale_out"
-                  aspect: "default"
-        artifacts:
-          helm_test:
-            description: Post instantiation test script
-            type: tosca.artifacts.Implementation.Bash
-            file: Artifacts/Tests/helm_test.sh
+      type: ExampleCorp.vDB.0_1.0_2
+      properties:
+        product_info_name: "Firewall 🔒"
+        product_info_description: "🧱 Firewall with new functionality"
+          # modifiable_attributes: {}   # All of the VNF  modifiable properties should go here
+        flavour_id: simple
+        flavour_description: "🧱 A specimen copy of the VNF Descriptor for containers"
+      interfaces:
+        Vnflcm:
+          operations: 
+            # instantiate_start:
+            # instantiate: # A sample illustration to run a instantiation script without any inputs.
+            instantiate_end: helm_test
+            scale: #Invoked upon receipt of a Scale VNF request
+              inputs:
+                type: "scale_out"
+                aspect: "default"
+      artifacts:
+        helm_test:
+          description: Post instantiation test script
+          type: tosca.artifacts.Implementation.Bash
+          file: Artifacts/Tests/helm_test.sh
+      requirements:
+        - virtual_link: public
 
     lb_mciop:
       type: tosca.nodes.nfv.Mciop
@@ -215,5 +216,5 @@ topology_template:
       type: tosca.nodes.nfv.Vdu.VirtualBlockStorage
       properties:
         virtual_block_storage_data:
-          size_of_storage: 100 GB
+          size_of_storage: 5 GB
           rdma_enabled: false
