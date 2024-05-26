@@ -126,6 +126,7 @@ topology_template:
         lb_helm:
           description: Helm Chart for lb Pod
           type: tosca.artifacts.nfv.HelmChart
+          #file: http://nexus.ubiqube.com/repository/raw/ci-artefacts/docker-alpine.tar
           file: Artifacts/Scripts/lb.tgz
 
     vdu1Cp1:
