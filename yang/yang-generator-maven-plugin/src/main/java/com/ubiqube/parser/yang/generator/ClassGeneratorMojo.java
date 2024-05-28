@@ -12,13 +12,12 @@
  *     GNU General Public License for more details.
  *
  *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *     along with this program.  If not, see https://www.gnu.org/licenses/.
  */
 package com.ubiqube.parser.yang.generator;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.List;
 
 import org.apache.maven.plugin.AbstractMojo;
@@ -43,7 +42,7 @@ public class ClassGeneratorMojo extends AbstractMojo {
 	private static final Logger LOG = LoggerFactory.getLogger(ClassGeneratorMojo.class);
 
 	@Parameter(property = "directory")
-	private Path directory;
+	private File directory;
 
 	@Parameter(defaultValue = "${project.build.directory}/generated-sources/yang", required = true)
 	private File outputDirectory;
@@ -56,7 +55,7 @@ public class ClassGeneratorMojo extends AbstractMojo {
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		final YangLoader yl = new YangLoader();
-		final List<YangRoot> res = yl.loadDirectory(directory);
+		final List<YangRoot> res = yl.loadDirectory(directory.toPath());
 		final YangRoot yr = YangGenerator.mergeRoot(res);
 		yr.rebuildNameSpaces();
 		final List<ModuleStatement> r = YangGenerator.findRoots(yr);
