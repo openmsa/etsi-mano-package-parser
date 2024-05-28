@@ -10,7 +10,7 @@
 	<artifactId>mano-yang-sol006-aggregator</artifactId>
 	<packaging>pom</packaging>
 	<modules>
-		<module>3.3.1</module>
+		<!--<module>3.3.1</module>-->
 		<module>4.3.1</module>
 		<module>mano-yang-reader</module>
 	</modules>
