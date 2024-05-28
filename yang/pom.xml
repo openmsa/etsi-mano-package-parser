@@ -12,5 +12,6 @@
 	<modules>
 		<module>yang-core</module>
 		<module>yang-generator-maven-plugin</module>
+		<module>sol006</module>
 	</modules>
 </project>
