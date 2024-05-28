@@ -1,5 +1,5 @@
 /**
- *     Copyright (C) 2019-2020 Ubiqube.
+ *     Copyright (C) 2019-2024 Ubiqube.
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  *     GNU General Public License for more details.
  *
  *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *     along with this program.  If not, see https://www.gnu.org/licenses/.
  */
 package com.ubiqube.parser.tosca.sol006.statement;
 
@@ -32,7 +32,7 @@ import lombok.Setter;
  *
  * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
- * @see https://www.rfc-editor.org/rfc/rfc7950#section-7.2
+ *         https://www.rfc-editor.org/rfc/rfc7950#section-7.2
  */
 @Getter
 @Setter
