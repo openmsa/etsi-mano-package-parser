@@ -1,13 +1,13 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
-description: ETSI NFV SOL 001 vnfd types definitions version 4.2.1
+description: ETSI NFV SOL 001 vnfd types definitions version 4.4.1
 metadata:
   template_name: etsi_nfv_sol001_vnfd_types
   template_author: ETSI_NFV
-  template_version: 4.2.1
+  template_version: 4.4.1
 
 imports:
    - etsi_nfv_sol001_common_types.yaml
-# editor's note: During the development of the SOL001ed421 GS, to enable this file to be verified by a TOSCA parser, the imports statement has to be replaced with a reference to a local copy of the common definitions YAML file
+
 data_types:
   tosca.datatypes.nfv.VirtualNetworkInterfaceRequirements:
    derived_from: tosca.datatypes.Root
@@ -21,10 +21,6 @@ data_types:
        type: string
        description: Provides a human readable description of the requirement.
        required: false
-     support_mandatory:
-       type: boolean
-       description: Indicates whether fulfilling the constraint is mandatory (TRUE) for successful operation or desirable (FALSE).
-       required: true
      network_interface_requirements:
        type: map
        description: The network interface requirements. A map of strings that contain a set of key-value pairs that describes the hardware platform specific  network interface deployment requirements.
@@ -87,6 +83,12 @@ data_types:
          description: It specifies the memory allocation to be cognisant of the relevant process/core allocation.
          required: true
          default: false
+       huge_pages_requirements:
+         type: list
+         description: The requirement for huge pages resources. Each element in the list indicates a hugepage size and the total memory requested for hugepages of that size.
+         required: false
+         entry_schema: 
+           type: tosca.datatypes.nfv.Hugepages
 
   tosca.datatypes.nfv.VirtualCpu:
    derived_from: tosca.datatypes.Root
@@ -142,11 +144,11 @@ data_types:
   tosca.datatypes.nfv.VnfcConfigurableProperties:
    derived_from: tosca.datatypes.Root
    description: Defines the configurable properties of a VNFC 
-   #properties:
-     # additional_vnfc_configurable_properties:
-     #   type: tosca.datatypes.nfv.VnfcAdditionalConfigurableProperties  
-     #   description: Describes additional configuration for VNFC that can be modified using the ModifyVnfInfo operation 
-     #   required: false
+   properties:
+     additional_vnfc_configurable_properties:
+       type: tosca.datatypes.nfv.VnfcAdditionalConfigurableProperties  
+       description: Describes additional configuration for VNFC that can be modified using the ModifyVnfInfo operation 
+       required: false
      # derived types are expected to introduce
      # additional_vnfc_configurable_properties with its type derived from
      # tosca.datatypes.nfv.VnfcAdditionalConfigurableProperties
@@ -382,8 +384,12 @@ data_types:
   tosca.datatypes.nfv.VnfInstantiateOperationConfiguration:
    derived_from: tosca.datatypes.Root
    description: represents information that affect the invocation of the InstantiateVnf operation.
-   # This data type definition is reserved for future use in the present document.
-   # properties:
+   properties:
+      target_scale_levels_supported:
+        type: boolean
+        description: Signals whether passing a value larger than one in the numScalingSteps parameter of the ScaleVnf operation is supported by this VNF.
+        required: true
+        default: false
 
   tosca.datatypes.nfv.VnfScaleOperationConfiguration:
    derived_from: tosca.datatypes.Root
@@ -441,17 +447,6 @@ data_types:
        description: Maximum recommended timeout value that can be needed to gracefully stop a VNF instance of a particular type under certain conditions, such as maximum load condition. This is provided by VNF provider as information for the operator facilitating the selection of optimal timeout value. This value is not used as constraint
        required: false
 
-  tosca.datatypes.nfv.ScaleInfo:
-   derived_from: tosca.datatypes.Root
-   description: Indicates for a given scaleAspect the corresponding scaleLevel 
-   properties:
-     scale_level:
-       type: integer
-       description: The scale level for a particular aspect 
-       required: true
-       constraints:
-         - greater_or_equal: 0
-
   tosca.datatypes.nfv.ScalingAspect:
    derived_from: tosca.datatypes.Root
    description: describes the details of an aspect used for horizontal scaling
@@ -490,9 +485,11 @@ data_types:
        description: It permits to enable (TRUE)/disable (FALSE) the auto-healing functionality. If the property is not present, then configuring this VNF property is not supported 
        required: false
      vnfm_interface_info:
-       type: tosca.datatypes.nfv.VnfmInterfaceInfo
+       type: list
        description: Contains information enabling access to the NFV-MANO interfaces produced by the VNFM (e.g. URIs and credentials), If the property is not present, then configuring this VNF property is not supported.
        required: false
+       entry_schema:
+         type: tosca.datatypes.nfv.VnfmInterfaceInfo
      vnfm_oauth_server_info:
        type: tosca.datatypes.nfv.OauthServerInfo
        description: Contains information to enable discovery of the authorization server protecting access to VNFM interfaces. If the property is not present, then configuring this VNF property is not supported.
@@ -501,11 +498,10 @@ data_types:
        type: tosca.datatypes.nfv.OauthServerInfo
        description: Contains information to enable discovery of the authorization server to validate the access tokens provided by the VNFM when  the VNFM accesses the VNF interfaces, if that functionality (token introspection) is supported by the authorization server. If the property is not present, then configuring this VNF property is not supported.
        required: false
-     # additional_configurable_properties:
-       # description: It provides VNF specific configurable properties that can be
-       # modified using the ModifyVnfInfo operation 
-       # required: false
-       # type: tosca.datatypes.nfv.VnfAdditionalConfigurableProperties
+     additional_configurable_properties:
+       description: It provides VNF specific configurable properties that can be modified using the ModifyVnfInfo operation 
+       required: false
+       type: tosca.datatypes.nfv.VnfAdditionalConfigurableProperties
      # derived types are expected to introduce
      # additional_configurable_properties with its type derived from
      # tosca.datatypes.nfv.VnfAdditionalConfigurableProperties
@@ -523,18 +519,18 @@ data_types:
   tosca.datatypes.nfv.VnfInfoModifiableAttributes:
    derived_from: tosca.datatypes.Root
    description: Describes VNF-specific extension and metadata for a given VNF 
-   #properties:
-     #extensions:
-       #type: tosca.datatypes.nfv.VnfInfoModifiableAttributesExtensions
-       #description: "Extension" properties of VnfInfo that are writeable 
-       #required: false
+   properties:
+     extensions:
+       type: tosca.datatypes.nfv.VnfInfoModifiableAttributesExtensions
+       description: Extension properties of VnfInfo that are writeable 
+       required: false
        # derived types are expected to introduce
        # extensions with its type derived from
        # tosca.datatypes.nfv.VnfInfoModifiableAttributesExtensions
-     #metadata:
-       #type: tosca.datatypes.nfv.VnfInfoModifiableAttributesMetadata
-       #description: "Metadata" properties of VnfInfo that are writeable 
-       #required: false
+     metadata:
+       type: tosca.datatypes.nfv.VnfInfoModifiableAttributesMetadata
+       description: Metadata properties of VnfInfo that are writeable 
+       required: false
        # derived types are expected to introduce
        # metadata with its type derived from
        # tosca.datatypes.nfv.VnfInfoModifiableAttributesMetadata
@@ -557,65 +553,6 @@ data_types:
        required: false
        entry_schema:
          type: string 
-
-  tosca.datatypes.nfv.SwImageData:
-   derived_from: tosca.datatypes.Root
-   description: describes information  related to a software image artifact 
-   properties: 
-     name:
-       type: string
-       description: Name of this software image 
-       required: true
-     version:
-       type: string
-       description: Version of this software image 
-       required: true
-     provider:
-       type: string
-       description: Provider of this software image
-       required: false
-     checksum:
-       type: tosca.datatypes.nfv.ChecksumData
-       description:  Checksum of the software image file 
-       required: true
-     container_format:
-       type: string
-       description: The container format describes the container file format in which software image is provided 
-       required: true
-       constraints:
-         - valid_values: [ aki, ami, ari, bare, docker, ova, ovf ]
-     disk_format:
-       type: string
-       description: The disk format of a software image is the format of the underlying disk image 
-       required: true
-       constraints:
-         - valid_values: [ aki, ami, ari, iso, qcow2, raw, vdi, vhd, vhdx, vmdk ]  
-     min_disk:
-       type: scalar-unit.size # Number
-       description:  The minimal disk size requirement for this software image 
-       required: true
-       constraints:
-         - greater_or_equal: 0 B
-     min_ram:
-       type: scalar-unit.size # Number
-       description: The minimal RAM requirement for this software image 
-       required: false
-       constraints:
-         - greater_or_equal: 0 B
-     size:
-       type: scalar-unit.size # Number
-       description: The size of this software image 
-       required: true
-     operating_system:
-       type: string
-       description: Identifies the operating system used in the software image 
-       required: false
-     supported_virtualisation_environments:
-       type: list
-       description: Identifies the virtualisation environments (e.g. hypervisor) compatible with this software image 
-       required: false
-       entry_schema:
-         type: string
 
   tosca.datatypes.nfv.VirtualBlockStorageData:
    derived_from: tosca.datatypes.Root
@@ -662,8 +599,11 @@ data_types:
              - greater_or_equal: 0 B
          file_system_protocol:
            type: string
-           description: The shared file system protocol (e.g. NFS, CIFS)
+           description: The shared file system protocol
            required: true
+           constraints:
+             - valid_values: [ nfs, cifs ]
+
 
   tosca.datatypes.nfv.VirtualLinkBitrateLevel:
     derived_from: tosca.datatypes.Root
@@ -890,7 +830,7 @@ data_types:
       vim_type:
         type: string 
         description: Discriminator for the different types of the VIM information.
-        required: true
+        required: false
       properties:
         type: map
         description: Properties used for selecting VIM specific capabilities when setting the boot data
@@ -993,10 +933,47 @@ data_types:
         description: Service port numbers exposed by the VirtualCp.
         required: true
       serviceData:
-        type: string
+        type: tosca.datatypes.nfv.ServiceData
         description: Service matching information exposed by the VirtualCp.
         required: false
 
+  tosca.datatypes.nfv.VnfLcmOpCoord:
+    derived_from: tosca.datatypes.Root
+    description: describes a set of information used for a coordination action in a VNF lifecycle management operation for a given VNF.
+    properties:
+      description:
+        type: string
+        description: Human readable description of the coordination action. 
+        required: false
+      endpoint_type:
+        type: string
+        description: Specifies the type of the endpoint exposing the LCM operation coordination such as other operations supporting or management systems (e.g. an EM) or the VNF instance. If the VNF produces the LCM coordination interface, this property may be omitted or may have the value "vnf". If this attribute is omitted, the type of endpoint that provides the interface is determined at deployment time. If the VNF does not produce the LCM coordination interface but coordination via this interface is needed, it is expected that a management entity such as the EM exposes the coordination interface, and consequently, this attribute shall be present and shall have the value "mgmt".
+        required: false
+        constraints:
+          - valid_values: [ mgmt, vnf ]
+      coordination_stage:
+        type: string
+        description: Indicates whether the coordination action is invoked before or after all other changes performed by the VNF LCM operation. coordination_stage property shall be omitted if the coordination action is intended to be invoked at an intermediate stage of the LCM operation, i.e. neither at the start nor at the end. In this case, the time at which to invoke the coordination during the execution of the LCM operation is determined by means outside the scope of the present document such as VNFM-internal logic or LCM script.
+        required: false
+        constraints:
+          - valid_values: [ start, end ]
+      input_parameters:
+        type: tosca.datatypes.nfv.InputOpCoordParams
+        description: Input parameters to be provided in the LCM coordination request.
+        required: false
+      output_parameters:
+        type: tosca.datatypes.nfv.OutputOpCoordParams
+        description: Output parameters provided in the LCM coordination response.
+        required: false
+
+  tosca.datatypes.nfv.InputOpCoordParams:
+    derived_from: tosca.datatypes.Root 
+    description: is an empty base type for deriving data types for describing additional input operation coordination parameters for a given coordination action
+
+  tosca.datatypes.nfv.OutputOpCoordParams:
+    derived_from: tosca.datatypes.Root 
+    description: is an empty base type for deriving data types for describing additional Output operation coordination parameters for a given coordination action
+    
   tosca.datatypes.nfv.ExtendedResourceData:
     derived_from: tosca.datatypes.Root
     description: Supports the specification of requirements related to extended resources of a container.
@@ -1014,7 +991,9 @@ data_types:
         type: integer
         description: Requested amount of the indicated extended resource.
         required: true
-
+        constraints:
+          - greater_than: 0
+          
   tosca.datatypes.nfv.Hugepages:
     derived_from: tosca.datatypes.Root
     description: Supports the specification of requirements on a particular hugepage size in terms of total memory needs. 
@@ -1036,10 +1015,14 @@ data_types:
         type: integer
         description: Determines the size of the group for which the max_number_of_impacted_instances is specified. If not present the size is not limited.   
         required: false
+        constraints:
+          - greater_than: 0
       max_number_of_impacted_instances:
         type: integer
         description: The maximum number of instances that can be impacted simultaneously within the group of the specified size.   
         required: true
+        constraints:
+          - greater_than: 0
  
   tosca.datatypes.nfv.MinNumberOfPreservedInstances:
     derived_from: tosca.datatypes.Root
@@ -1049,10 +1032,14 @@ data_types:
         type: integer
         description: Determines the size of the group for which the min_number_of_preserved_instances is specified. If not present the size is not limited.   
         required: false
+        constraints:
+          - greater_than: 0
       min_number_of_preserved_instances:
         type: integer
         description: The minimum number of instances which need to be preserved simultaneously within the group of the specified size.   
         required: true
+        constraints:
+          - greater_than: 0
 
   tosca.datatypes.nfv.NfviMaintenanceInfo:
     derived_from: tosca.datatypes.Root
@@ -1095,7 +1082,48 @@ data_types:
         required: false
         entry_schema:
           type: tosca.datatypes.nfv.MinNumberOfPreservedInstances
-        
+ 
+  tosca.datatypes.nfv.McioIdentificationData:
+    derived_from: tosca.datatypes.Root
+    description: contains data needed to identify an MCIO when interworking with the CISM.
+    properties: 
+      name:
+        type: string
+        description: The name of the mcio.
+        required: true
+      type:
+        type: string
+        description: The type of the mcio.
+        required: true
+        constraints:
+          - valid_values: [ Deployment, StatefulSet ] #Name capitalized as in k8s 
+
+  tosca.datatypes.nfv.VipCpLevel:
+    derived_from: tosca.datatypes.Root
+    description: Indicates for a given VipCp in a given level the number of instances to deploy 
+    properties:
+      number_of_instances:
+        type: integer
+        description: Number of instances of VipCp based on the referenced VipCp node template to deploy for an instantiation level or for a scaling delta.  
+        required: true
+        constraints:
+          - greater_or_equal: 0
+
+  tosca.datatypes.nfv.ServiceData:
+    derived_from: tosca.datatypes.Root
+    description: Indicates the service matching information exposed by the VirtualCp 
+    properties:
+      host:
+        type: string # shall comply with IETF RFC 3986
+        description: Corresponds to the fully qualified domain name of a network host 
+        required: false
+      path:
+        type: list 
+        description: path component of a URI.
+        required: false
+        entry_schema:
+          type: string  # shall comply with IETF RFC 3986
+         
 artifact_types:  
   tosca.artifacts.nfv.SwImage:
     derived_from: tosca.artifacts.Deployment.Image
@@ -1116,7 +1144,7 @@ artifact_types:
       checksum:
         type: tosca.datatypes.nfv.ChecksumData
         description:  Checksum of the software image file 
-        required: true
+        required: false
       container_format:
         type: string
         description: The container format describes the container file format in which software image is provided 
@@ -1144,7 +1172,7 @@ artifact_types:
       size:
         type: scalar-unit.size # Number
         description: The size of this software image 
-        required: true
+        required: false
       operating_system:
         type: string
         description: Identifies the operating system used in the software image 
@@ -1259,24 +1287,24 @@ interface_types:
     operations:
       instantiate:
         description: Invoked upon receipt of an Instantiate VNF request
-      # inputs:
-        # additional_parameters:
-        # type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
-        # required: false
-     # derived types are expected to introduce additional_parameters with its
-     # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
+        inputs:
+          additional_parameters:
+            type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
+            required: false
+            # derived types are expected to introduce additional_parameters with its
+            # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
       instantiate_start:
         description: Invoked before instantiate
       instantiate_end:
         description: Invoked after instantiate
       terminate:
         description: Invoked upon receipt Terminate VNF request
-      # inputs:
-        # additional_parameters:
-        # type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
-        # required: false
-     # derived types are expected to introduce additional_parameters with its
-     # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
+        inputs:
+          additional_parameters:
+            type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
+            required: false
+            # derived types are expected to introduce additional_parameters with its
+            # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
       terminate_start:
         description: Invoked before terminate
       terminate_end:
@@ -1289,49 +1317,48 @@ interface_types:
         description: Invoked after modify_information
       change_flavour:
         description: Invoked upon receipt of a Change VNF Flavour request
-      # inputs:
-        # additional_parameters:
-        # type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
-        # required: false
-     # derived types are expected to introduce additional_parameters with its
-     # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
+        inputs:
+          additional_parameters:
+            type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
+            required: false
+            # derived types are expected to introduce additional_parameters with its
+            # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
       change_flavour_start:
         description: Invoked before change_flavour
       change_flavour_end:
         description: Invoked after change_flavour
       change_external_connectivity:
         description: Invoked upon receipt of a Change External VNF Connectivity  request
-      # inputs:
-        # additional_parameters:
-        # type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
-        # required: false
-     # derived types are expected to introduce additional_parameters with its
-     # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
+        inputs:
+          additional_parameters:
+            type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
+            required: false
+          # derived types are expected to introduce additional_parameters with its
+          # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
       change_external_connectivity_start:
         description: Invoked before change_external_connectivity
       change_external_connectivity_end:
         description: Invoked after change_external_connectivity
       operate:
         description: Invoked upon receipt of an Operate VNF request
-      # inputs:
-        # additional_parameters:
-        # type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
-        # required: false
-     # derived types are expected to introduce additional_parameters with its
-     # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
+        inputs:
+          additional_parameters:
+            type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
+            required: false
+            # derived types are expected to introduce additional_parameters with its
+            # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
       operate_start:
         description: Invoked before operate
       operate_end:
         description: Invoked after operate
       heal:
         description: Invoked upon receipt of a Heal VNF request
-      # inputs:
-      #   additional_parameters:
-      #     type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
-      #     required: false
-      # derived types are expected to introduce additional_parameters with its
-      # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
         inputs:
+          additional_parameters:
+            type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
+            required: false
+            # derived types are expected to introduce additional_parameters with its
+            # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
           cause:
             type: string
             description: Indicates the reason why a healing procedure is required.
@@ -1348,13 +1375,12 @@ interface_types:
         description: Invoked after heal
       scale:
         description: Invoked upon receipt of a Scale VNF request
-      # inputs:
-        # additional_parameters:
-        # type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
-        # required: false
-     # derived types are expected to introduce additional_parameters with its
-     # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
         inputs:
+          additional_parameters:
+            type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
+            required: false
+            # derived types are expected to introduce additional_parameters with its
+            # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
           type:
             type: string
             description: Indicates the type of the scale operation requested.
@@ -1378,13 +1404,12 @@ interface_types:
         description: Invoked after scale 
       scale_to_level:
         description: Invoked upon receipt of a Scale VNF to Level request
-      # inputs:
-        # additional_parameters:
-        # type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
-        # required: false
+        inputs:
+          additional_parameters:
+            type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
+            required: false
      # derived types are expected to introduce additional_parameters with its
      # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
-        inputs:
           instantiation_level:
             type: string
             description: Identifier of the target instantiation level of the current deployment flavour to which the VNF is requested to be scaled. Either instantiation_level or scale_info shall be provided.
@@ -1401,36 +1426,36 @@ interface_types:
         description: Invoked after scale_to_level
       create_snapshot:
         description: Invoked upon receipt of a Create VNF snapshot request
-        # inputs:
-          # additional_parameters:
-          #   type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
-          #   required: false
-      # derived types are expected to introduce additional_parameters with its
-      # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
+        inputs:
+          additional_parameters:
+            type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
+            required: false
+            # derived types are expected to introduce additional_parameters with its
+            # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
       create_snapshot_start:
         description: Invoked before create_snapshot
       create_snapshot_end:
         description: Invoked after create_snapshot
       revert_to_snapshot:
         description: Invoked upon receipt of a Revert to VNF snapshot request
-        # inputs:
-          # additional_parameters:
-          #   type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
-          #   required: false
-      # derived types are expected to introduce additional_parameters with its
-      # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
+        inputs:
+          additional_parameters:
+            type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
+            required: false
+            # derived types are expected to introduce additional_parameters with its
+            # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
       revert_to_snapshot_start:
         description: Invoked before revert_to_snapshot
       revert_to_snapshot_end:
         description: Invoked after revert_to_snapshot
       change_current_package:
         description: Invoked by tosca.policies.nfv.VnfPackageChange
-        # inputs:
-          # additional_parameters:
-          #   type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
-          #   required: false
-      # derived types are expected to introduce additional_parameters with its
-      # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
+        inputs:
+          additional_parameters:
+            type: tosca.datatypes.nfv.VnfOperationAdditionalParameters
+            required: false
+            # derived types are expected to introduce additional_parameters with its
+            # type derived from tosca.datatypes.nfv.VnfOperationAdditionalParameters
       change_current_package_start:
         description: Invoked by tosca.policies.nfv.VnfPackageChange 
       change_current_package_end:
@@ -1466,33 +1491,37 @@ node_types:
     description: The generic abstract type from which all VNF specific node types shall be derived to form, together with other node types, the TOSCA service template(s) representing the VNFD
     properties:
       descriptor_id: # instead of vnfd_id
-       type: string # UUID
-       description: Identifier of this VNFD information element. This attribute shall be globally unique
-       required: true
+        type: string # UUID
+        description: Identifier of this VNFD information element. This attribute shall be globally unique
+        required: true
+      ext_invariant_id:
+        type: string # UUID
+        description: Identifies the VNFD in a version independent manner. This property is invariant across versions of the VNFD that fulfil certain conditions related to the external connectivity and management of the VNF. When used in a VNF node template in an NSD it allows for VNF instances during NS LCM the use of a VNFD different from the one referenced by the descriptor_id property, provided they have the same ext_invariant_id. This attribute shall be globally unique.
+        required: false
       descriptor_version: # instead of vnfd_version
-       type: string
-       description: Identifies the version of the VNFD
-       required: true
+        type: string
+        description: Identifies the version of the VNFD
+        required: true
       provider: # instead of vnf_provider
-       type: string
-       description: Provider of the VNF and of the VNFD
-       required: true
+        type: string
+        description: Provider of the VNF and of the VNFD
+        required: true
       product_name: # instead of vnf_product_name
-       type: string
-       description: Human readable name for the VNF Product
-       required: true
+        type: string
+        description: Human readable name for the VNF Product
+        required: true
       software_version: # instead of vnf_software_version
-       type: string
-       description: Software version of the VNF
-       required: true
+        type: string
+        description: Software version of the VNF
+        required: true
       product_info_name: # instead of vnf_product_info_name
-       type: string
-       description: Human readable name for the VNF Product
-       required: false
+        type: string
+        description: Human readable name for the VNF Product
+        required: false
       product_info_description: # instead of vnf_product_info_description
-       type: string
-       description: Human readable description of the VNF Product
-       required: false
+        type: string
+        description: Human readable description of the VNF Product
+        required: false
       vnfm_info:
        type: list
        required: true
@@ -1511,16 +1540,16 @@ node_types:
        type: string #IETF RFC 5646 string
        description: Default localization language that is instantiated if no information about selected localization language is available
        required: false
-      #configurable_properties:
-       #type: tosca.datatypes.nfv.VnfConfigurableProperties
-       #description: Describes the configurable properties of the VNF
-       #required: false
+      configurable_properties:
+       type: tosca.datatypes.nfv.VnfConfigurableProperties
+       description: Describes the configurable properties of the VNF
+       required: false
        # derived types are expected to introduce configurable_properties 
        # with its type derived from tosca.datatypes.nfv.VnfConfigurableProperties
-      #modifiable_attributes:
-       #type: tosca.datatypes.nfv.VnfInfoModifiableAttributes
-       #description: Describes the modifiable attributes of the VNF
-       #required: false 
+      modifiable_attributes:
+       type: tosca.datatypes.nfv.VnfInfoModifiableAttributes
+       description: Describes the modifiable attributes of the VNF
+       required: false 
        # derived types are expected to introduce modifiable_attributes
        # with its type derived from
        # tosca.datatypes.nfv.VnfInfoModifiableAttributes
@@ -1601,10 +1630,10 @@ node_types:
     interfaces:
       Vnflcm:
         type: tosca.interfaces.nfv.Vnflcm
-    # VnfIndicator:
-    #   type: tosca.interfaces.nfv.VnfIndicator
-    # derived types are expected to introduce Vnf Indicator interfaces 
-    # with their type derived from tosca.interfaces.nfv.VnfIndicator
+      VnfIndicator:
+        type: tosca.interfaces.nfv.VnfIndicator
+        # derived types are expected to introduce Vnf Indicator interfaces 
+        # with their type derived from tosca.interfaces.nfv.VnfIndicator
 
   tosca.nodes.nfv.VnfExtCp:
     derived_from: tosca.nodes.nfv.Cp
@@ -1655,9 +1684,9 @@ node_types:
         required: false
         entry_schema: 
           type: tosca.datatypes.nfv.VnfcMonitoringParameter
-      #configurable_properties:
-        #type: tosca.datatypes.nfv.VnfcConfigurableProperties
-        #required: false 
+      configurable_properties:
+        type: tosca.datatypes.nfv.VnfcConfigurableProperties
+        required: false 
         # derived types are expected to introduce
         # configurable_properties with its type derived from
         # tosca.datatypes.nfv.VnfcConfigurableProperties
@@ -1746,7 +1775,7 @@ node_types:
      capabilities:
        virtual_storage:
          type: tosca.capabilities.nfv.VirtualStorage
-         #description: Defines the capabilities of virtual_storage.
+         description: Defines the capabilities of virtual_storage.
      requirements:
       - virtual_link:
           capability: tosca.capabilities.nfv.VirtualLinkable
@@ -1766,7 +1795,7 @@ node_types:
            - greater_or_equal: 0
        virtual_network_interface_requirements:
          type: list
-         description: Specifies requirements on a virtual network interface realising  the CPs instantiated from this CPD 
+         description: Specifies requirements on a virtual network interface realising the CPs instantiated from this CPD 
          required: false
          entry_schema:
            type: tosca.datatypes.nfv.VirtualNetworkInterfaceRequirements
@@ -1830,6 +1859,12 @@ node_types:
         type: tosca.datatypes.nfv.NfviMaintenanceInfo
         description: Provides information on the rules to be observed when an instance based on this VnfVirtualLink is impacted during NFVI operation and maintenance (e.g. NFVI resource upgrades). 
         required: false
+      externally_managed:
+        type: string
+        description: Specifies the intent of the VNF designer w.r.t. the external management of the internal VL instances created from this descriptor, i.e. whether it is "allowed" or "required" that these are externally managed. If this property is absent, the value "allowed" is assumed. If the VNFD does not reference any LCM script and if the "vnfm_info" property in the VNF-specific node type derived from the tosca.nodes.nfv.VNF node type indicates that the VNF can be managed by any ETSI NFV compliant VNFM, this property shall not be present. 
+        required: false
+        constraints:
+          - valid_values: [ allowed, required ]
     capabilities:
       virtual_linkable:
        type: tosca.capabilities.nfv.VirtualLinkable
@@ -1897,13 +1932,13 @@ node_types:
         required: true
       requested_cpu_resources:
         type: integer
-        description: Number of CPU resources requested for the OS container (e.g. in milli-CPU-s).
+        description: Number of CPU resources requested for the OS container in milli-CPU.
         required: false
         constraints:
           - greater_or_equal: 0
       cpu_resource_limit:
         type: integer
-        description: Number of CPU resources the OS container can maximally use (e.g. in milli-CPU).
+        description: Number of CPU resources the OS container can maximally use in milli-CPU.
         required: false
         constraints:
           - greater_or_equal: 0
@@ -1936,7 +1971,11 @@ node_types:
         description: The requirement for huge pages resources. Each element in the list indicates a hugepage size and the total memory requested for hugepages of that size.
         required: false
         entry_schema: 
-          type: tosca.datatypes.nfv.Hugepages          
+          type: tosca.datatypes.nfv.Hugepages
+      cpu_pinning_requirements:
+        type: tosca.datatypes.nfv.VirtualCpuPinning
+        description: Requirements for CPU pinning configuration.
+        required: false          
     capabilities:
       container_deployable:
         type: tosca.capabilities.nfv.ContainerDeployable
@@ -1972,9 +2011,9 @@ node_types:
         required: false
         entry_schema:
           type: string
-     # configurable_properties:
-     #   type: tosca.datatypes.nfv.VnfcConfigurableProperties
-     #   required: false 
+      configurable_properties:
+        type: tosca.datatypes.nfv.VnfcConfigurableProperties
+        required: false 
      #    derived types are expected to introduce
      #    configurable_properties with its type derived from
      #    tosca.datatypes.nfv.VnfcConfigurableProperties
@@ -2018,6 +2057,9 @@ node_types:
                 - node_pool
         description: Defines the parameter names for constraints expected to be assigned to MCIOs realizing this Vdu.OsContainerDeployableUnit. The value specifies the standardized semantical context of the MCIO constraints.
         required: false
+      mcio_identification_data:
+        type: tosca.datatypes.nfv.McioIdentificationData
+        description: Name and type of the MCIO that realizes this Vdu.OsContainerDeployableUnit. It allows the VNFM to identify the MCIO e.g. when querying the CISM.
     capabilities:
       virtual_binding:
         type: tosca.capabilities.nfv.VirtualBindable
@@ -2053,12 +2095,18 @@ node_types:
         type: list
         entry_schema:
           type: tosca.datatypes.nfv.AdditionalServiceData
-        description: References the VDU(s) which implement this service
+        description: Additional service identification data of the VirtualCp exposed to NFV-MANO
+        required: false
+      address_pool_name_configurable:
+        type: boolean
+        description: Indicates whether the corresponding MCIO supports configuration of an address pool name.
         required: true
+        default: false        
     requirements:
       - target:
           capability: tosca.capabilities.Node
           relationship: tosca.relationships.DependsOn
+          node: tosca.nodes.nfv.Vdu.OsContainerDeployableUnit 
           occurrences: [ 1, UNBOUNDED ]
       - virtual_link:
           capability: tosca.capabilities.nfv.VirtualLinkable
@@ -2310,10 +2358,10 @@ policy_types:
         type: string
         description: Coordination action name.
         required: true
-      # action:  #represents a place holder for specifying actions of a VNF-specific type derived from tosca.datatypes.nfv.VnfLcmOpCoord
-        # type: tosca.datatypes.nfv.VnfLcmOpCoord
-        # description: Describes a set of information needed for coordination action in the VNF LCM operation.
-        # required: true
+      action:  #represents a place holder for specifying actions of a VNF-specific type derived from tosca.datatypes.nfv.VnfLcmOpCoord
+        type: tosca.datatypes.nfv.VnfLcmOpCoord
+        description: Describes a set of information needed for coordination action in the VNF LCM operation.
+        required: true
 
   tosca.policies.nfv.LcmCoordinationsForLcmOperation:
     derived_from: tosca.policies.Root
@@ -2337,3 +2385,45 @@ policy_types:
         required: false
         entry_schema:
           type: string
+
+  tosca.policies.nfv.VipCpScalingAspectDeltas:
+    derived_from: tosca.policies.Root
+    description: The VipCpScalingAspectDeltas type is a policy type representing the VipCp detail of an aspect deltas used for horizontal scaling, as defined in ETSI GS NFV-IFA 011 [1]
+    properties:
+      aspect:
+        type: string
+        description: Represents the scaling aspect to which this policy applies
+        required: true
+      deltas:
+        type: map # key: scalingDeltaId
+        description: Describes the VipCp scaling deltas to be applied for every scaling steps of a particular aspect.
+        required: true
+        entry_schema:
+          type: tosca.datatypes.nfv.VipCpLevel
+        constraints:
+          - min_length: 1
+    targets: [ tosca.nodes.nfv.VipCp ]
+
+  tosca.policies.nfv.VipCpInitialDelta:
+    derived_from: tosca.policies.Root
+    description: The VipCpInitialDelta type is a policy type representing the VipCp detail of an initial delta used for horizontal scaling, as defined in ETSI GS NFV-IFA 011 [1]
+    properties:
+      initial_delta:
+        type: tosca.datatypes.nfv.VipCpLevel
+        description: Represents the initial minimum size of the VNF.
+        required: true
+    targets: [ tosca.nodes.nfv.VipCp ]
+    
+  tosca.policies.nfv.VipCpInstantiationLevels:
+    derived_from: tosca.policies.Root
+    description: The VipCpInstantiationLevels type is a policy type representing all the instantiation levels of resources to be instantiated within a deployment flavour in term of the number of VipCp instances to be created from each VipCp as defined in ETSI GS NFV-IFA 011.
+    properties:
+      levels:
+        type: map # key: levelId
+        description: Describes the VipCp levels of resources that can be used to instantiate the VNF using this flavour
+        required: true
+        entry_schema:
+          type: tosca.datatypes.nfv.VipCpLevel
+        constraints:
+          - min_length: 1
+    targets: [ tosca.nodes.nfv.VipCp ]

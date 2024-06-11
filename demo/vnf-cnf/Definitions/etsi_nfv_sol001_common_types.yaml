@@ -1,9 +1,9 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
-description: ETSI NFV SOL 001 common types definitions version 4.2.1
+description: ETSI NFV SOL 001 common types definitions version 4.4.1
 metadata:
   template_name: etsi_nfv_sol001_common_types
   template_author: ETSI_NFV
-  template_version: 4.2.1
+  template_version: 4.4.1
 
 data_types:
   tosca.datatypes.nfv.L2AddressData:
@@ -12,7 +12,7 @@ data_types:
     properties:
       mac_address_assignment:
         type: boolean
-        description: Specifies if the address assignment is the responsibility of management and orchestration function or not. If it is set to True, it is the management and orchestration function responsibility
+        description: Specifies which mode is used for the MAC address assignment. If it is set to True, a MAC address is expected to be provided by a management entity via the NFV MANO interfaces towards the VNFM using attributes standardized for this purpose in the NFV-MANO information model and is further transferred from the VNFM to the VIM/CISM. A MAC address will be automatically assigned by the VIM/NFVI/CISM as fallback if not provided. If it is set to False, a MAC address is expected to it will be assigned by means specific to the VNF itself (e.g., by an LCM script, by the EM) and is further transferred from the VNFM to the VIM/CISM. A MAC address will be automatically assigned by the VIM/NFVI/CISM as fallback if not provided to the VIM/CISM.
         required: true 
   
   tosca.datatypes.nfv.L3AddressData:
@@ -21,8 +21,14 @@ data_types:
     properties:
       ip_address_assignment:
         type: boolean
-        description: Specifies if the address assignment is the responsibility of management and orchestration function or not. If it is set to True, it is the management and orchestration function responsibility
-        required: true
+        description: Specify which mode is used for the IP address assignment. If it is set to True and this property is not used in the context of the VirtualCp node type, IP configuration information shall be provided for the VNF by a management entity using the NFV MANO interfaces towards the VNFM. If it is set to True and this property is used in the context of the VirtualCp node type, IP configuration information should be provided for the VNF by a management entity using the NFV MANO interfaces towards the VNFM. If it is not provided, the CISM assigns an IP address. If it is set to False, the value of the ip_address_assignment_subtype property defines the method of IP address assignment. Shall be present if the fixed_ip_address property is not present and should be absent otherwise.
+        required: false
+      ip_address_assignment_subtype:
+        type: string
+        description: "Method of IP address assignment in case the IP configuration is not provided using the NFV MANO interfaces towards the VNFM. Description of the valid values: (1) dynamic: the VNF gets an IP address that is dynamically assigned by the NFVI/VIM/CISM without receiving IP configuration information from the MANO interfaces, (2) vnf_pkg: an IP address defined by the VNF provider is assigned by means included as part of the VNF package (e.g., LCM script); (3) external: an IP address is provided by an external management entity (such as EM) directly towards the VNF. Shall be present in case the ip_address_assignment property is set to False and shall be absent otherwise."
+        required: false
+        constraints:
+          - valid_values: [ dynamic, vnf_pkg, external ]
       floating_ip_activated:
         type: boolean
         description: Specifies if the floating IP scheme is activated on the Connection Point or not 
@@ -41,7 +47,7 @@ data_types:
           - greater_than: 0
       fixed_ip_address:
         type: list
-        description: IP address to be assigned to the CP instance. This attribute is only permitted for Cpds without external connectivity, i.e. connectivity outside the VNF. If present, it shall be compatible with the values of the L3ProtocolData of the VnfVirtualLink referred to by the Cp, if L3ProtocolData is included in the VnfVirtualLink
+        description: Fixed IP addresses to be assigned to the internal CP instance. This property enables the VNF provider to define fixed IP addresses for internal CP instances to be assigned by the VNFM or the NFVO. This attribute property is only permitted for Cpds without external connectivity, i.e. connectivity outside the VNF. If present, it shall be compatible with the values of the L3ProtocolData of the VnfVirtualLink referred to by the Cp, if L3ProtocolData is included in the VnfVirtualLink
         required: false
         entry_schema:
           type: string
@@ -126,6 +132,12 @@ data_types:
         type: string
         description: Identifier of the instantiation level of the VNF DF to be used for instantiation. If not present, the default instantiation level as declared in the VNFD shall be used.
         required: false
+      target_vnf_scale_level_info:
+        type: map # key: aspectId
+        description: For each scaling aspect of the current VNF deployment flavour, it specifies the scale level of VNF constituents (e.g., VDU level) to be instantiated. If the property is present it shall contain all scaling aspects
+        required: false
+        entry_schema:
+          type: tosca.datatypes.nfv.ScaleInfo
       min_number_of_instances:
         type: integer
         description: Minimum number of instances of the VNF based on this VNFD that is permitted to exist for this VnfProfile.
@@ -144,6 +156,12 @@ data_types:
         required: false
         constraints:
           - greater_or_equal: 1
+      version_dependency:
+        type: list
+        description: Identifies versions of descriptors of other constituents in the NSD upon which the VNF depends. The dependencies may be described for the VNFD referenced with descriptor_id in the VNF node where this profile is defined and for VNFDs with the same ext_invariant_id.
+        required: false
+        entry_schema:
+          type: tosca.datatypes.nfv.VersionDependency
 
   tosca.datatypes.nfv.Qos:
     derived_from: tosca.datatypes.Root
@@ -188,7 +206,44 @@ data_types:
        required: false
        constraints: 
         - greater_than: 0 s
-        
+
+  tosca.datatypes.nfv.VersionDependency:
+    derived_from: tosca.datatypes.Root
+    description: Describes and associates the protocol layer that a CP uses together with other protocol and connection point information.
+    properties:
+      dependent_constituent_id:
+        type: string
+        description: Identifier of the NSD constituent which has version dependencies on other NSD constituents.
+        required: true
+      version_dependency_statement:
+        type: list
+        description: Identifies one or multiple versions of an NSD constituent upon which the dependent constituent  identified by dependent_constituent_id has a dependency.
+        entry_schema: 
+          type: tosca.datatypes.nfv.VersionDependencyStatement
+        required: true
+
+  tosca.datatypes.nfv.VersionDependencyStatement:
+    derived_from: tosca.datatypes.Root
+    description: Lists one or more VNF, NS or PNF descriptor identifiers which describe one single dependency.
+    properties:
+      descriptor_id: 
+        description: List of identifiers of VNFDs, NSDs or PNFDs upon which the entity using this information element depends. When more than one descriptor is indicated, they shall correspond to versions of the same VNF, NS or PNF and they represent. alternatives, i.e. the presence of one of them fulfills the dependency.
+        type: list
+        entry_schema: 
+          type: string
+        required: true
+ 
+  tosca.datatypes.nfv.ScaleInfo:
+   derived_from: tosca.datatypes.Root
+   description: Indicates for a given scaleAspect the corresponding scaleLevel 
+   properties:
+     scale_level:
+       type: integer
+       description: The scale level for a particular aspect 
+       required: true
+       constraints:
+         - greater_or_equal: 0
+       
 capability_types:
   tosca.capabilities.nfv.VirtualLinkable:
     derived_from: tosca.capabilities.Node
@@ -218,6 +273,12 @@ node_types:
           type: string
           constraints:
             - valid_values: [ ethernet, mpls, odu2, ipv4, ipv6, pseudo-wire ]
+      ip_stack_mode:
+        type: string
+        description: Specifies the capability of the CP to support IP dual stack or tunnelling
+        required: false
+        constraints:
+          - valid_values: [ ipv4_xor_ipv6, ipv4_or_ipv6, tunnel_ipv6_over_ipv4, tunnel_ipv4_over_ipv6 ]
       role: #Name in ETSI NFV IFA011: cpRole
         type: string
         description: Identifies the role of the port in the context of the traffic flow patterns in the VNF or parent NS 
@@ -285,3 +346,4 @@ policy_types:
           - greater_or_equal: 0
           - less_or_equal: 65535
         default: 65535
+        
