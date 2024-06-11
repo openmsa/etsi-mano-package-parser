@@ -33,11 +33,11 @@ node_types:
         default: "0.2"
         constraints: [ equal: "0.2" ]
       provider:
-        default: "ExampleCorp"
-        constraints: [ equal: "ExampleCorp" ]
+        default: "ExampleCorp 💦"
+        constraints: [ equal: "ExampleCorp 💦" ]
       product_name:
-        default: "vDB"
-        constraints: [ equal: "vDB" ]
+        default: "vDB 💎"
+        constraints: [ equal: "vDB 💎" ]
       software_version:
         default: "0.1"
         constraints: [ equal: "0.1" ]
@@ -182,12 +182,34 @@ topology_template:
       properties:
         name: "lb"
         description: "Advanced Software Load Balancer"
+        configurable_properties:
+          additional_vnfc_configurable_properties:
+        requested_additional_capabilities:
+          name:
+            preferred_requested_additional_capability_version: string
+            target_performance_parameters:
+              key: value
+            requested_additional_capability_name: string
+            support_mandatory: false
+            min_requested_additional_capability_version: string
+        logical_node:
+          name:
+            logical_node_requirements:
+              key: value
+        mcio_constraint_params:
+          - NODE_POOL
+        mcio_identification_data: # McioIdentificationData
+          name: name
+          type: Deployment
         nfvi_constraints:
           a: b
-        requested_additional_capabilities: {}
         vdu_profile:
           min_number_of_instances: 1
           max_number_of_instances: 4
+          nfvi_maintenance_info:
+            supported_migration_type:
+              - NO_MIGRATION
+              - OFFLINE_MIGRATION
       requirements:
         - container: Vdu_1_Container_1
 
@@ -200,6 +222,20 @@ topology_template:
         cpu_resource_limit: 1000 # In Milli-Cpus, ie 1 CPU, single threaded
         requested_memory_resources: 10 MiB
         memory_resource_limit: 100 MiB
+        requested_ephemeral_storage_resources: 1GiB
+        ephemeral_storage_resource_limit: 1 GiB
+        extended_resource_requests: # List tosca.datatypes.nfv.ExtendedResourceData
+          - extended_resource:
+              key: value
+            amount: 1234
+        huge_pages_resources: # List of list of tosca.datatypes.nfv.Hugepages
+          - hugepage_size: 512 Mib
+            requested_size: 1 Gib
+        cpu_pinning_requirements: # tosca.datatypes.nfv.VirtualCpuPinning
+          virtual_cpu_pinning_policy: static
+          virtual_cpu_pinning_rule:
+            - a
+            - b
       artifacts:
         sw_image:
           type: tosca.artifacts.nfv.SwImage
@@ -216,6 +252,11 @@ topology_template:
     opendbDbStorage:
       type: tosca.nodes.nfv.Vdu.VirtualBlockStorage
       properties:
-        virtual_block_storage_data:
+        virtual_block_storage_data: # tosca.datatypes.nfv.VirtualBlockStorageData
           size_of_storage: 5 GB
+          vdu_storage_requirements:
+            key: value
           rdma_enabled: false
+        per_vnfc_instance: true
+        nfvi_maintenance_info:
+        
