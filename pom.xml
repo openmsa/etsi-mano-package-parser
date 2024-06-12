@@ -39,7 +39,7 @@
 		<version.expressly>5.0.0</version.expressly>
 		<version.hibernate-validator>8.0.1.Final</version.hibernate-validator>
 		<version.jakarta.annotation-api>2.1.1</version.jakarta.annotation-api>
-		<version.jakarta.validation-api>3.0.2</version.jakarta.validation-api>
+		<version.jakarta.validation-api>3.1.0</version.jakarta.validation-api>
 		<version.javapoet>1.13.0</version.javapoet>
 		<version.junit.jupiter>5.10.2</version.junit.jupiter>
 		<version.logback-classic>1.5.6</version.logback-classic>
