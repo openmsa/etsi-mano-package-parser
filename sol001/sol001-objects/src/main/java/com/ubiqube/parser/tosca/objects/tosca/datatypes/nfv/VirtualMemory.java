@@ -16,14 +16,15 @@
  */
 package com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv;
 
+import java.util.List;
 import java.util.Map;
-
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ubiqube.parser.tosca.objects.tosca.datatypes.Root;
 import com.ubiqube.parser.tosca.scalar.Size;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * supports the specification of requirements related to virtual memory of a
@@ -46,6 +47,14 @@ public class VirtualMemory extends Root {
 	@NotNull
 	@JsonProperty("virtual_mem_size")
 	private Size virtualMemSize;
+
+	/**
+	 * The requirement for huge pages resources. Each element in the list indicates
+	 * a hugepage size and the total memory requested for hugepages of that size.
+	 */
+	@Valid
+	@JsonProperty("huge_pages_requirements")
+	private List<Hugepages> hugePagesRequirements;
 
 	/**
 	 * The hardware platform specific VDU memory requirements. A map of strings that
@@ -80,6 +89,14 @@ public class VirtualMemory extends Root {
 
 	public void setVirtualMemSize(@NotNull final Size virtualMemSize) {
 		this.virtualMemSize = virtualMemSize;
+	}
+
+	public List<Hugepages> getHugePagesRequirements() {
+		return this.hugePagesRequirements;
+	}
+
+	public void setHugePagesRequirements(final List<Hugepages> hugePagesRequirements) {
+		this.hugePagesRequirements = hugePagesRequirements;
 	}
 
 	public Map<String, String> getVduMemRequirements() {
