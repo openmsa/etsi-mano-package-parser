@@ -31,6 +31,7 @@ import com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv.L3AddressData;
 import com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv.NsProfile;
 import com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv.ServiceData;
 import com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv.VduProfile;
+import com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv.VirtualMemory;
 import com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv.VirtualNetworkInterfaceRequirements;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.Forwarding;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.NFP;
@@ -96,6 +97,9 @@ public interface NodeMapper {
 	VirtualNetworkInterfaceRequirements mapToVirtualNetworkInterfaceRequirements(tosca.datatypes.nfv.VirtualNetworkInterfaceRequirements o);
 
 	Compute mapToCompute(tosca.nodes.nfv.vdu.Compute o);
+
+	@Mapping(target = "hugePagesRequirements", ignore = true)
+	VirtualMemory mapToVirtualMemory(tosca.datatypes.nfv.VirtualMemory o);
 
 	@AfterMapping
 	default void mapSwImageData(final tosca.nodes.nfv.vdu.Compute src, @MappingTarget final Compute dst) {
