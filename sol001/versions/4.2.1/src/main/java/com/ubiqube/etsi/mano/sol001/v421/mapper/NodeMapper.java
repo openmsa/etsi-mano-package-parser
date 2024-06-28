@@ -21,6 +21,7 @@ import org.mapstruct.Mapping;
 
 import com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv.L3AddressData;
 import com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv.ServiceData;
+import com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv.VirtualMemory;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.Forwarding;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.Mciop;
 import com.ubiqube.parser.tosca.objects.tosca.nodes.nfv.NFP;
@@ -82,6 +83,9 @@ public interface NodeMapper {
 	VnfExtCp mapToVnfExtCp(tosca.nodes.nfv.VnfExtCp o);
 
 	Compute mapToCompute(tosca.nodes.nfv.vdu.Compute o);
+
+	@Mapping(target = "hugePagesRequirements", ignore = true)
+	VirtualMemory mapToVirtualMemory(tosca.datatypes.nfv.VirtualMemory o);
 
 	VirtualBlockStorage mapToVirtualBlockStorage(tosca.nodes.nfv.vdu.VirtualBlockStorage o);
 
