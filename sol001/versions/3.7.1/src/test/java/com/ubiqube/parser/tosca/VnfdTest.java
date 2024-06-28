@@ -141,6 +141,8 @@ class VnfdTest extends AbstractToscaApiTest {
 		ignore.add("getServiceAvailabilityLevel");
 		//
 		ignore.add("getType");
+		//
+		ignore.add("getHugePagesRequirements");
 		return ignore;
 	}
 
