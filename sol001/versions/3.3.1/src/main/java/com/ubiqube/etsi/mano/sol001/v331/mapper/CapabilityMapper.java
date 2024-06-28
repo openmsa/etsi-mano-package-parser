@@ -17,11 +17,13 @@
 package com.ubiqube.etsi.mano.sol001.v331.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import com.ubiqube.parser.tosca.objects.tosca.capabilities.nfv.Forwarding;
 import com.ubiqube.parser.tosca.objects.tosca.capabilities.nfv.VirtualBindable;
 import com.ubiqube.parser.tosca.objects.tosca.capabilities.nfv.VirtualCompute;
 import com.ubiqube.parser.tosca.objects.tosca.capabilities.nfv.VirtualStorage;
+import com.ubiqube.parser.tosca.objects.tosca.datatypes.nfv.VirtualMemory;
 
 @Mapper
 public interface CapabilityMapper {
@@ -30,6 +32,9 @@ public interface CapabilityMapper {
 	VirtualBindable mapToVirtualBindable(tosca.capabilities.nfv.VirtualBindable o);
 
 	VirtualCompute mapToVirtualCompute(tosca.capabilities.nfv.VirtualCompute o);
+
+	@Mapping(target = "hugePagesRequirements", ignore = true)
+	VirtualMemory mapToVirtualMemory(tosca.datatypes.nfv.VirtualMemory o);
 
 	VirtualStorage mapToVirtualStorage(tosca.capabilities.nfv.VirtualStorage o);
 
