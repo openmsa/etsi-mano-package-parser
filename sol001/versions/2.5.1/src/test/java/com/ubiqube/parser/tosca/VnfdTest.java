@@ -165,6 +165,8 @@ class VnfdTest extends AbstractToscaApiTest {
 		ignore.add("getVnfProfile");
 		//
 		ignore.add("getChecksum");
+		//
+		ignore.add("getHugePagesRequirements");
 		return ignore;
 	}
 
