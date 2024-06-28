@@ -160,6 +160,8 @@ class VnfdTest extends AbstractToscaApiTest {
 		ignore.add("getDescription");
 		ignore.add("getArtifactVersion");
 		ignore.add("getDeployPath");
+		//
+		ignore.add("getHugePagesRequirements");
 		return ignore;
 	}
 
