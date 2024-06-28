@@ -239,6 +239,9 @@ topology_template:
             req: requirement
           virtual_memory: # tosca.datatypes.nfv.VirtualMemory
             virtual_mem_size: 2 GiB
+            huge_pages_requirements:
+              - hugepage_size: 1Gib
+                requested_size: 1 Gib
             virtual_mem_oversubscription_policy: what
             vdu_mem_requirements:
               read: openstack
