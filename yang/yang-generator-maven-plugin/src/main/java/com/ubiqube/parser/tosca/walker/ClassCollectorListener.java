@@ -22,15 +22,13 @@ import com.ubiqube.parser.tosca.sol006.statement.LeafStatement;
 import com.ubiqube.parser.tosca.sol006.statement.ListStatement;
 import com.ubiqube.parser.tosca.sol006.statement.TypeStatement;
 import com.ubiqube.parser.tosca.sol006.statement.UsesStatement;
+import lombok.Getter;
 
+@Getter
 public class ClassCollectorListener implements WalkerListener {
 	private final MultiValueMap map = new MultiValueMap();
 
-	public MultiValueMap getMap() {
-		return map;
-	}
-
-	@Override
+    @Override
 	public void startContainer(final ContainerStatement container) {
 		map.add(container);
 	}

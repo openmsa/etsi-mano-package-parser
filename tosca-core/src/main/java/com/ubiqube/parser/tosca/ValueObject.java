@@ -21,15 +21,23 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ubiqube.parser.tosca.constraints.Constraint;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
 public class ValueObject {
-	private String type;
-	private Boolean required = Boolean.TRUE;
+	@Getter
+    private String type;
+	@Getter
+    private Boolean required = Boolean.TRUE;
 	private Object def;
-	private String description;
+	@Getter
+    private String description;
 	private EntrySchema entrySchema;
-	private List<Constraint> constraints = new ArrayList<>();
-	private String status;
+	@Getter
+    private List<Constraint> constraints = new ArrayList<>();
+	@Getter
+    private String status;
 
 	public ValueObject() {
 		// Nothing.
@@ -57,65 +65,17 @@ public class ValueObject {
 		return vo;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(final String type) {
-		this.type = type;
-	}
-
-	public Boolean getRequired() {
-		return required;
-	}
-
-	public void setRequired(final Boolean required) {
-		this.required = required;
-	}
-
-	@JsonProperty("default")
+    @JsonProperty("default")
 	public Object getDef() {
 		return def;
 	}
 
-	public void setDef(final Object def) {
-		this.def = def;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(final String description) {
-		this.description = description;
-	}
-
-	@JsonProperty("entry_schema")
+    @JsonProperty("entry_schema")
 	public EntrySchema getEntrySchema() {
 		return entrySchema;
 	}
 
-	public void setEntrySchema(final EntrySchema entrySchema) {
-		this.entrySchema = entrySchema;
-	}
-
-	public List<Constraint> getConstraints() {
-		return constraints;
-	}
-
-	public void setConstraints(final List<Constraint> constraints) {
-		this.constraints = constraints;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(final String status) {
-		this.status = status;
-	}
-
-	@Override
+    @Override
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();
 		sb.append("ValueObject [type=" + type + ", ");

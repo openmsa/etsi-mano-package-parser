@@ -16,11 +16,16 @@
  */
 package com.ubiqube.etsi.mano.sol004.manifest;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  *
  * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
+@Setter
+@Getter
 public class SignatureElements {
 	private String source;
 	private String algorithm;
@@ -34,46 +39,6 @@ public class SignatureElements {
 		this.algorithm = algorithm;
 		this.hash = hash;
 		this.signature = signature;
-		this.certificate = certificate;
-	}
-
-	public String getSource() {
-		return source;
-	}
-
-	public void setSource(final String source) {
-		this.source = source;
-	}
-
-	public String getAlgorithm() {
-		return algorithm;
-	}
-
-	public void setAlgorithm(final String algorithm) {
-		this.algorithm = algorithm;
-	}
-
-	public String getHash() {
-		return hash;
-	}
-
-	public void setHash(final String hash) {
-		this.hash = hash;
-	}
-
-	public String getSignature() {
-		return signature;
-	}
-
-	public void setSignature(final String signature) {
-		this.signature = signature;
-	}
-
-	public String getCertificate() {
-		return certificate;
-	}
-
-	public void setCertificate(final String certificate) {
 		this.certificate = certificate;
 	}
 

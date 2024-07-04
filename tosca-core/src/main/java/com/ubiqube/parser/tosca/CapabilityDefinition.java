@@ -22,7 +22,11 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.ubiqube.parser.tosca.deserializer.CapabilityDeserializer;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @JsonDeserialize(using = CapabilityDeserializer.class)
 public class CapabilityDefinition {
 	private String type;
@@ -32,53 +36,5 @@ public class CapabilityDefinition {
 	@JsonProperty("valid_source_types")
 	private List<String> validSourceTypes;
 	private Occurrences occurrences;
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(final String type) {
-		this.type = type;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(final String description) {
-		this.description = description;
-	}
-
-	public ToscaProperties getProperties() {
-		return properties;
-	}
-
-	public void setProperties(final ToscaProperties properties) {
-		this.properties = properties;
-	}
-
-	public Map<String, ValueObject> getAttributes() {
-		return attributes;
-	}
-
-	public void setAttributes(final Map<String, ValueObject> attributes) {
-		this.attributes = attributes;
-	}
-
-	public List<String> getValidSourceTypes() {
-		return validSourceTypes;
-	}
-
-	public void setValidSourceTypes(final List<String> validSourceTypes) {
-		this.validSourceTypes = validSourceTypes;
-	}
-
-	public Occurrences getOccurrences() {
-		return occurrences;
-	}
-
-	public void setOccurrences(final Occurrences occurrences) {
-		this.occurrences = occurrences;
-	}
 
 }

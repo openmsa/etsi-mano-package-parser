@@ -16,8 +16,13 @@
  */
 package com.ubiqube.parser.tosca;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class ToscaClassHolder {
-	private ToscaClassHolder parent;
+	@Setter
+    @Getter
+    private ToscaClassHolder parent;
 	private final ToscaClass node;
 	private final String name;
 
@@ -26,15 +31,7 @@ public class ToscaClassHolder {
 		this.name = name;
 	}
 
-	public ToscaClassHolder getParent() {
-		return parent;
-	}
-
-	public void setParent(final ToscaClassHolder parent) {
-		this.parent = parent;
-	}
-
-	@Override
+    @Override
 	public String toString() {
 		return "ToscaClassHolder [parent=" + parent + ", node=" + node + "]\n";
 	}

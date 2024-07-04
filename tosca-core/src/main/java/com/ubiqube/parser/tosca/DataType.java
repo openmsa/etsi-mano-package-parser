@@ -20,7 +20,11 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ubiqube.parser.tosca.constraints.Constraint;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class DataType extends ToscaBasePropertiesEntity {
 	private List<Constraint> constraints;
 	// 1.3
@@ -29,29 +33,5 @@ public class DataType extends ToscaBasePropertiesEntity {
 	// 1.3
 	@JsonProperty("entry_schema")
 	private Object entrySchema;
-
-	public List<Constraint> getConstraints() {
-		return constraints;
-	}
-
-	public void setConstraints(final List<Constraint> constraints) {
-		this.constraints = constraints;
-	}
-
-	public Object getKeySchema() {
-		return keySchema;
-	}
-
-	public void setKeySchema(final Object keySchema) {
-		this.keySchema = keySchema;
-	}
-
-	public Object getEntrySchema() {
-		return entrySchema;
-	}
-
-	public void setEntrySchema(final Object entrySchema) {
-		this.entrySchema = entrySchema;
-	}
 
 }

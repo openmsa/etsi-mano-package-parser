@@ -21,17 +21,13 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.ubiqube.parser.tosca.deserializer.PropertyDeserializer;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @JsonDeserialize(using = PropertyDeserializer.class)
 public class ToscaProperties {
 	private Map<String, ValueObject> properties = new HashMap<>();
-
-	public void setProperties(final Map<String, ValueObject> properties) {
-		this.properties = properties;
-	}
-
-	public Map<String, ValueObject> getProperties() {
-		return properties;
-	}
 
 }

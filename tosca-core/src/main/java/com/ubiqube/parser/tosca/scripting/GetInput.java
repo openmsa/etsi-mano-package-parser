@@ -21,7 +21,11 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.ubiqube.parser.tosca.ParseException;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class GetInput extends ScriptingValue {
 
 	private List<String> properties = new ArrayList<>();
@@ -32,14 +36,6 @@ public class GetInput extends ScriptingValue {
 		} else {
 			throw new ParseException("Unable to parse GetInput value : " + value);
 		}
-	}
-
-	public List<String> getProperties() {
-		return properties;
-	}
-
-	public void setProperties(final List<String> properties) {
-		this.properties = properties;
 	}
 
 }

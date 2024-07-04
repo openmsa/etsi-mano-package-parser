@@ -23,6 +23,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import lombok.Setter;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.VFS;
@@ -34,7 +35,8 @@ import com.ubiqube.etsi.mano.sol004.Sol004Exception;
 public class VfsResolver extends Resolver {
 	private static final Logger LOG = LoggerFactory.getLogger(VfsResolver.class);
 	private final Pattern urlMatcher = Pattern.compile("(?<!\\\\):");
-	private FileObject parent;
+	@Setter
+    private FileObject parent;
 	private final Set<String> imported = new LinkedHashSet<>();
 
 	public VfsResolver() {
@@ -72,11 +74,7 @@ public class VfsResolver extends Resolver {
 		return res.find();
 	}
 
-	public void setParent(final FileObject parent) {
-		this.parent = parent;
-	}
-
-	@Override
+    @Override
 	public String resolvePath(final String path) {
 		if (imported.contains(path) || isUrl(path)) {
 			return path;

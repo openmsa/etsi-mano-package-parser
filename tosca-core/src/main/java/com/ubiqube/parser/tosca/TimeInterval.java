@@ -17,27 +17,15 @@
 package com.ubiqube.parser.tosca;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class TimeInterval {
 	@JsonProperty("start_time")
 	private String startTime;
 	@JsonProperty("end_time")
 	private String endTime;
-
-	public String getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(final String start_time) {
-		this.startTime = start_time;
-	}
-
-	public String getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(final String end_time) {
-		this.endTime = end_time;
-	}
 
 }

@@ -17,12 +17,16 @@
 package com.ubiqube.parser.tosca.scalar;
 
 import com.ubiqube.parser.tosca.ParseException;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
+@Setter
+@Getter
 public class Range implements Scalar {
 	long min;
 	long max;
@@ -39,22 +43,6 @@ public class Range implements Scalar {
 	@Override
 	public String toString() {
 		return min + " - " + max;
-	}
-
-	public long getMin() {
-		return min;
-	}
-
-	public void setMin(final long min) {
-		this.min = min;
-	}
-
-	public long getMax() {
-		return max;
-	}
-
-	public void setMax(final long max) {
-		this.max = max;
 	}
 
 }

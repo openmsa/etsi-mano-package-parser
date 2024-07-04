@@ -22,7 +22,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.ubiqube.parser.tosca.sol006.statement.NamedStatement;
+import lombok.Getter;
 
+@Getter
 public class MultiValueMap {
 	private final Map<String, List<NamedStatement>> map = new HashMap<>();
 
@@ -35,11 +37,7 @@ public class MultiValueMap {
 		r.add(smt);
 	}
 
-	public Map<String, List<NamedStatement>> getMap() {
-		return map;
-	}
-
-	@Override
+    @Override
 	public String toString() {
 		return map.toString();
 	}

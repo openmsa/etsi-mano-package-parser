@@ -20,44 +20,16 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class RelationshipType extends ToscaBaseEntity {
 	private ToscaProperties properties;
 	private Map<String, ValueObject> attributes;
 	private Object interfaces;
 	@JsonProperty("valid_target_types")
 	private List<String> validTargetTypes;
-
-	public ToscaProperties getProperties() {
-		return properties;
-	}
-
-	public void setProperties(final ToscaProperties properties) {
-		this.properties = properties;
-	}
-
-	public Map<String, ValueObject> getAttributes() {
-		return attributes;
-	}
-
-	public void setAttributes(final Map<String, ValueObject> attributes) {
-		this.attributes = attributes;
-	}
-
-	public Object getInterfaces() {
-		return interfaces;
-	}
-
-	public void setInterfaces(final Object interfaces) {
-		this.interfaces = interfaces;
-	}
-
-	public List<String> getValidTargetTypes() {
-		return validTargetTypes;
-	}
-
-	public void setValidTargetTypes(final List<String> validTargetTypes) {
-		this.validTargetTypes = validTargetTypes;
-	}
 
 }
