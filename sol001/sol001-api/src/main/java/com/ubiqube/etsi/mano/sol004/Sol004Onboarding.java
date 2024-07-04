@@ -34,6 +34,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
+import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -73,9 +74,11 @@ public class Sol004Onboarding {
 	private CsarArchive csar;
 	private final ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
-	private ToscaVersion toscaVersion;
+	@Getter
+    private ToscaVersion toscaVersion;
 
-	private Optional<Sol001Version> sol001Version;
+	@Getter
+    private Optional<Sol001Version> sol001Version;
 
 	public CsarModeEnum getToscaMode(final String fileName) {
 		if (isCsarExtension(fileName)) {
@@ -221,11 +224,7 @@ public class Sol004Onboarding {
 		return null;
 	}
 
-	public ToscaVersion getToscaVersion() {
-		return toscaVersion;
-	}
-
-	private void detectVersion(final String content) {
+    private void detectVersion(final String content) {
 		JsonNode doc;
 		try {
 			doc = mapper.readTree(content);
@@ -249,11 +248,7 @@ public class Sol004Onboarding {
 				.map(Sol001Version::fromValue);
 	}
 
-	public Optional<Sol001Version> getSol001Version() {
-		return sol001Version;
-	}
-
-	public IResolver getResolver() {
+    public IResolver getResolver() {
 		return csar.getResolver();
 	}
 

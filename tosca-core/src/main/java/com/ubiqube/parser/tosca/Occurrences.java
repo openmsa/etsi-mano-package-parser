@@ -18,6 +18,8 @@ package com.ubiqube.parser.tosca;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.ubiqube.parser.tosca.deserializer.OccurrencesDeserializer;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * implied default of [1,UNBOUNDED]
@@ -25,6 +27,8 @@ import com.ubiqube.parser.tosca.deserializer.OccurrencesDeserializer;
  * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
+@Setter
+@Getter
 @JsonDeserialize(using = OccurrencesDeserializer.class)
 public class Occurrences {
 
@@ -34,22 +38,6 @@ public class Occurrences {
 	public Occurrences(final int _min, final int _max) {
 		min = _min;
 		max = _max;
-	}
-
-	public int getMin() {
-		return min;
-	}
-
-	public void setMin(final int min) {
-		this.min = min;
-	}
-
-	public int getMax() {
-		return max;
-	}
-
-	public void setMax(final int max) {
-		this.max = max;
 	}
 
 }

@@ -22,12 +22,16 @@ import java.security.DigestInputStream;
 
 import com.ubiqube.etsi.mano.sol004.Sol004Exception;
 import com.ubiqube.etsi.mano.sol004.crypto.SignatureInputStream;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
+@Setter
+@Getter
 public class InputStreamHolder implements AutoCloseable {
 	private InputStream root;
 
@@ -37,39 +41,7 @@ public class InputStreamHolder implements AutoCloseable {
 
 	private SignatureInputStream signature;
 
-	public InputStream getRoot() {
-		return root;
-	}
-
-	public void setRoot(final InputStream root) {
-		this.root = root;
-	}
-
-	public InputStream getLast() {
-		return last;
-	}
-
-	public void setLast(final InputStream last) {
-		this.last = last;
-	}
-
-	public DigestInputStream getHash() {
-		return hash;
-	}
-
-	public void setHash(final DigestInputStream hash) {
-		this.hash = hash;
-	}
-
-	public SignatureInputStream getSignature() {
-		return signature;
-	}
-
-	public void setSignature(final SignatureInputStream signature) {
-		this.signature = signature;
-	}
-
-	@Override
+    @Override
 	public void close() {
 		try {
 			if (null != hash) {

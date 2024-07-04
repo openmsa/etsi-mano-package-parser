@@ -18,7 +18,11 @@ package com.ubiqube.parser.tosca.constraints;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.ubiqube.parser.tosca.ParseException;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class InRange implements Constraint {
 
 	private String min;
@@ -33,23 +37,7 @@ public class InRange implements Constraint {
 		max = key.get(1).asText();
 	}
 
-	public String getMin() {
-		return min;
-	}
-
-	public void setMin(final String min) {
-		this.min = min;
-	}
-
-	public String getMax() {
-		return max;
-	}
-
-	public void setMax(final String max) {
-		this.max = max;
-	}
-
-	@Override
+    @Override
 	public Object evaluate(final Object value) {
 		if (value instanceof final Integer i) {
 			return (Integer.valueOf(min) >= i) && (i <= (Integer.valueOf(max)));

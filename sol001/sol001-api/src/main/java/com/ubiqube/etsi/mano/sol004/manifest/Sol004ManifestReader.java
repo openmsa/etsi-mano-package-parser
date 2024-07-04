@@ -34,12 +34,14 @@ import java.util.stream.Collectors;
 
 import com.ubiqube.etsi.mano.sol004.Sol004Exception;
 import com.ubiqube.etsi.mano.tosca.ArtefactInformations;
+import lombok.Getter;
 
 /**
  *
  * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
+@Getter
 public class Sol004ManifestReader {
 	private static final Pattern CMS_PATTERN = Pattern.compile("----- BEGIN (?<crypto>[a-zA-Z0-9]*) -----");
 	private static final String CERTIFICATE = "Certificate";
@@ -78,15 +80,7 @@ public class Sol004ManifestReader {
 		return new Sol004ManifestReader(stream);
 	}
 
-	public List<Certificate> getCms() {
-		return cms;
-	}
-
-	public Map<String, String> getKeyValues() {
-		return keyValues;
-	}
-
-	private void parseManifest(final List<String> lines) {
+    private void parseManifest(final List<String> lines) {
 		final ManifestParsingContext rootCtx = new ManifestParsingContext(lines);
 		while (rootCtx.haveNext()) {
 			final String line = rootCtx.getNextLine();
@@ -181,11 +175,7 @@ public class Sol004ManifestReader {
 		}
 	}
 
-	public List<ArtefactInformations> getArtefacts() {
-		return artefacts;
-	}
-
-	private static boolean isEndSignatureToken(final String x) {
+    private static boolean isEndSignatureToken(final String x) {
 		return x.startsWith("----- END ") && x.endsWith(" -----");
 	}
 

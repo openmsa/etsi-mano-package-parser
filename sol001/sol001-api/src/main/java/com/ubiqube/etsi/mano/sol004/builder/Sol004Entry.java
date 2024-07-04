@@ -16,6 +16,9 @@
  */
 package com.ubiqube.etsi.mano.sol004.builder;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.File;
 
 /**
@@ -23,6 +26,8 @@ import java.io.File;
  * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
+@Setter
+@Getter
 public class Sol004Entry {
 	private File file;
 	private String zipName;
@@ -35,46 +40,6 @@ public class Sol004Entry {
 		this.file = file;
 		this.zipName = zipName;
 		this.hashAlgorithm = hashAlgorithm;
-	}
-
-	public File getFile() {
-		return file;
-	}
-
-	public void setFile(final File file) {
-		this.file = file;
-	}
-
-	public String getZipName() {
-		return zipName;
-	}
-
-	public void setZipName(final String zipName) {
-		this.zipName = zipName;
-	}
-
-	public HashAlgorithm getHashAlgorithm() {
-		return hashAlgorithm;
-	}
-
-	public void setHashAlgorithm(final HashAlgorithm hashAlgorithm) {
-		this.hashAlgorithm = hashAlgorithm;
-	}
-
-	public String getHash() {
-		return hash;
-	}
-
-	public void setHash(final String hash) {
-		this.hash = hash;
-	}
-
-	public String getSignaturePath() {
-		return signaturePath;
-	}
-
-	public void setSignaturePath(final String signaturePath) {
-		this.signaturePath = signaturePath;
 	}
 
 }

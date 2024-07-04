@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ubiqube.parser.tosca.generator.YangException;
+import lombok.Setter;
 
 /**
  *
@@ -27,7 +28,8 @@ import com.ubiqube.parser.tosca.generator.YangException;
  *
  */
 public abstract class AbstractStatementImpl implements Statement {
-	protected String namespace;
+	@Setter
+    protected String namespace;
 	protected List<RevisionStatement> revision = new ArrayList<>();
 	protected Statement parent;
 
@@ -36,11 +38,7 @@ public abstract class AbstractStatementImpl implements Statement {
 		return namespace;
 	}
 
-	public void setNamespace(final String namespace) {
-		this.namespace = namespace;
-	}
-
-	@Override
+    @Override
 	public RevisionStatement getLatestRevision() {
 		if (revision.isEmpty()) {
 			throw new YangException("No revision in " + this.getClass());

@@ -23,6 +23,7 @@ import java.security.Signature;
 import java.security.SignatureException;
 
 import com.ubiqube.etsi.mano.sol004.Sol004Exception;
+import lombok.Getter;
 
 /**
  *
@@ -31,7 +32,8 @@ import com.ubiqube.etsi.mano.sol004.Sol004Exception;
  */
 public class SignatureInputStream extends InputStream {
 
-	private final Signature sig;
+	@Getter
+    private final Signature sig;
 
 	private final InputStream is;
 
@@ -41,11 +43,7 @@ public class SignatureInputStream extends InputStream {
 
 	}
 
-	public Signature getSig() {
-		return sig;
-	}
-
-	@Override
+    @Override
 	public int hashCode() {
 		return is.hashCode();
 	}

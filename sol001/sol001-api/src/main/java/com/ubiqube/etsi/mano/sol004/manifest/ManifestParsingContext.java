@@ -22,6 +22,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import com.ubiqube.etsi.mano.sol004.Sol004Exception;
+import lombok.Getter;
 
 /**
  * Context for parsing manifest.mf files.
@@ -33,7 +34,8 @@ import com.ubiqube.etsi.mano.sol004.Sol004Exception;
 public class ManifestParsingContext {
 	private final List<String> lines;
 	private int currentLine;
-	private List<String> stopWords;
+	@Getter
+    private List<String> stopWords;
 
 	public ManifestParsingContext(final List<String> lines) {
 		this.lines = lines;
@@ -53,11 +55,7 @@ public class ManifestParsingContext {
 		return lines.get(currentLine++);
 	}
 
-	public List<String> getStopWords() {
-		return stopWords;
-	}
-
-	public String getNextLine() {
+    public String getNextLine() {
 		for (int i = currentLine; i < lines.size(); i++) {
 			final String line = lines.get(i);
 			if (line.isBlank()) {

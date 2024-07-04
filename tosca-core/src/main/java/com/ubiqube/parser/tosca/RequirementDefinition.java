@@ -21,7 +21,11 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.ubiqube.parser.tosca.deserializer.RequirementDeserialization;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @JsonDeserialize(using = RequirementDeserialization.class)
 public class RequirementDefinition {
 	private List<Map<String, Requirement>> requirements;
@@ -32,14 +36,6 @@ public class RequirementDefinition {
 
 	public RequirementDefinition(final List<Map<String, Requirement>> reqMap) {
 		requirements = reqMap;
-	}
-
-	public List<Map<String, Requirement>> getRequirements() {
-		return requirements;
-	}
-
-	public void setRequirements(final List<Map<String, Requirement>> requirements) {
-		this.requirements = requirements;
 	}
 
 }

@@ -16,6 +16,11 @@
  */
 package com.ubiqube.parser.tosca.constraints;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class SimpleValue {
 
 	private Object value;
@@ -25,14 +30,6 @@ public class SimpleValue {
 	}
 
 	public SimpleValue(final Object value) {
-		this.value = value;
-	}
-
-	public Object getValue() {
-		return value;
-	}
-
-	public void setValue(final Object value) {
 		this.value = value;
 	}
 

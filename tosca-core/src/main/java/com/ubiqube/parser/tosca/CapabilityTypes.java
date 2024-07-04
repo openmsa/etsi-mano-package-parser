@@ -20,26 +20,14 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class CapabilityTypes extends ToscaBasePropertiesEntity {
 	private Map<String, ValueObject> attributes;
 	@JsonProperty("valid_source_types")
 	private List<String> validSourceTypes;
-
-	public Map<String, ValueObject> getAttributes() {
-		return attributes;
-	}
-
-	public void setAttributes(final Map<String, ValueObject> attributes) {
-		this.attributes = attributes;
-	}
-
-	public List<String> getValidSourceTypes() {
-		return validSourceTypes;
-	}
-
-	public void setValidSourceTypes(final List<String> validSourceTypes) {
-		this.validSourceTypes = validSourceTypes;
-	}
 
 }

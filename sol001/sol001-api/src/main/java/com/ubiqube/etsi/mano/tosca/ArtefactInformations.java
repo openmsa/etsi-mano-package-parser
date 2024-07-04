@@ -18,16 +18,15 @@ package com.ubiqube.etsi.mano.tosca;
 
 import java.util.Map;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 /**
  *
  * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
+@Setter
+@Getter
 @Builder
 @ToString
 @NoArgsConstructor
@@ -44,70 +43,6 @@ public class ArtefactInformations {
 
 	public boolean isEncrypted() {
 		return path.endsWith(".enc.cms");
-	}
-
-	public String getChecksum() {
-		return checksum;
-	}
-
-	public void setChecksum(final String checksum) {
-		this.checksum = checksum;
-	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(final String path) {
-		this.path = path;
-	}
-
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(final Map<String, String> metadata) {
-		this.metadata = metadata;
-	}
-
-	public String getAlgorithm() {
-		return algorithm;
-	}
-
-	public void setAlgorithm(final String algorithm) {
-		this.algorithm = algorithm;
-	}
-
-	public String getSignature() {
-		return signature;
-	}
-
-	public void setSignature(final String signature) {
-		this.signature = signature;
-	}
-
-	public String getCertificate() {
-		return certificate;
-	}
-
-	public void setCertificate(final String certificate) {
-		this.certificate = certificate;
-	}
-
-	public String getNonManoSetIndentifier() {
-		return nonManoSetIndentifier;
-	}
-
-	public void setNonManoSetIndentifier(final String nonManoSetIndentifier) {
-		this.nonManoSetIndentifier = nonManoSetIndentifier;
-	}
-
-	public String getClassifier() {
-		return classifier;
-	}
-
-	public void setClassifier(final String classifier) {
-		this.classifier = classifier;
 	}
 
 }
