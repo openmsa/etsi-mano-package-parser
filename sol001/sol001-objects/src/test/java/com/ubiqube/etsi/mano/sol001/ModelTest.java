@@ -63,7 +63,7 @@ class ModelTest {
 		final Map<String, Set<String>> subtype = reflections.getStore().get("SubTypes");
 		subtype.forEach((x, y) -> {
 			handle(x);
-			y.forEach(z -> handle(z));
+			y.forEach(ModelTest::handle);
 		});
 	}
 
@@ -106,7 +106,7 @@ class ModelTest {
 			if ((null != mw) && (null != mr)) {
 				final Class<?> ret = mr.getReturnType();
 				if (Modifier.isAbstract(ret.getModifiers())) {
-					// continue;
+					// continue
 				}
 				mw.invoke(obj, createType(ret));
 			}
