@@ -3,7 +3,7 @@
   <parent>
     <groupId>com.ubiqube.mano.sol001</groupId>
     <artifactId>sol001-version-aggregator</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>4.0.0</version>
   </parent>
   <artifactId>test-tools</artifactId>
   <dependencies>
