@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ubiqube.mano</groupId>
 	<artifactId>tosca-parser-parent</artifactId>
-	<version>4.0.0</version>
+	<version>4.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
 		<module>tosca-core</module>
