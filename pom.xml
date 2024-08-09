@@ -14,7 +14,7 @@
 		<module>yang</module>
 	</modules>
 	<scm>
-		<developerConnection>scm:git:https://github.com/openmsa/etsi-mano-package-parser.git</developerConnection>
+		<developerConnection>scm:git:ssh://git@github.com/openmsa/etsi-mano-package-parser.git</developerConnection>
 	  <tag>4.0.0</tag>
   </scm>
 	<distributionManagement>
