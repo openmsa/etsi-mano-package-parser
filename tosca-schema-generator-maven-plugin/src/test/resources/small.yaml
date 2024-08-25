@@ -1,0 +1,15 @@
+
+description: blah blak
+bbaadd: 123
+policies:
+  key:
+    type: tosca.policies.nfv.AffinityRule
+    properties:
+      scope: vnf
+
+
+  key2:
+    type: tosca.policies.nfv.LcmCoordinationsForLcmOperation
+    properties:
+      vnf_lcm_operation: vnf
+

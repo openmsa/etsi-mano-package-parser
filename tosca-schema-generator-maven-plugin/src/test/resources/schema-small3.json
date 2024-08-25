@@ -1,0 +1,214 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"description": {
+			"type": "string"
+		},
+		"bbaadd": {
+			"type": "integer"
+		},
+		"policies": {
+			"type": "object",
+			"patternProperties": {
+				".*": {
+					"type": "object",
+					"properties": {
+						"type": {
+							"type": "string"
+						},
+						"properties": {
+							"type": "object"
+						}
+					},
+					"required": [
+						"type",
+						"properties"
+					],
+					"additionalProperties": false,
+					"allOf": [
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.AffinityRule"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.AffinityRule"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.VnfPackageChange"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.VnfPackageChange"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.LcmCoordinationsForLcmOperation"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.LcmCoordinationsForLcmOperation"
+							}
+						}
+					]
+				}
+			},
+			"additionalProperties": false
+		}
+	},
+	"$defs": {
+		"tosca.policies.nfv.AffinityRule": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"scope": {
+							"type": "string",
+							"enum": [
+								"vnf"
+							]
+						}
+					},
+					"required": [
+						"scope"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+				"tosca.policies.nfv.VnfPackageChange": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"referenced_coordination_actions": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"additionalProperties": false
+							},
+							"additionalProperties": false
+						},
+						"destination_flavour_id": {
+							"type": "string",
+							"additionalProperties": false
+						},
+						"component_mappings": {
+							"type": "array",
+							"items": {
+								"properties": {
+									"component_type": {
+										"type": "string",
+										"additionalProperties": false
+									},
+									"destination_id": {
+										"type": "string",
+										"additionalProperties": false
+									},
+									"description": {
+										"type": "string",
+										"additionalProperties": false
+									},
+									"source_id": {
+										"type": "string",
+										"additionalProperties": false
+									}
+								},
+								"additionalProperties": false
+							},
+							"additionalProperties": false
+						},
+						"additional_modification_description": {
+							"type": "string",
+							"additionalProperties": false
+						},
+						"selector": {
+							"type": "array",
+							"items": {
+								"properties": {
+									"source_descriptor_id": {
+										"type": "string",
+										"additionalProperties": false
+									},
+									"source_flavour_id": {
+										"type": "string",
+										"additionalProperties": false
+									},
+									"destination_descriptor_id": {
+										"type": "string",
+										"additionalProperties": false
+									}
+								},
+								"additionalProperties": false
+							},
+							"additionalProperties": false
+						},
+						"modification_qualifier": {
+							"type": "string",
+							"additionalProperties": false
+						},
+						"actions": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"additionalProperties": false
+							},
+							"additionalProperties": false
+						}
+					},
+					"required": [
+						"destination_flavour_id",
+						"selector",
+						"modification_qualifier"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.LcmCoordinationsForLcmOperation": {
+			"properties": {
+				"properties": {
+					"properties": {
+						"referenced_coordination_actions": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"additionalProperties": false
+							},
+							"additionalProperties": false
+						},
+						"vnf_lcm_operation": {
+							"type": "string",
+							"additionalProperties": false
+						},
+						"actions": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"additionalProperties": false
+							},
+							"additionalProperties": false
+						}
+					},
+					"required": [
+						"vnf_lcm_operation"
+					],
+					"additionalProperties": false
+				}
+			}
+		}
+	}
+}

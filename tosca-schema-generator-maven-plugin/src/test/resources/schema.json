@@ -1,0 +1,70 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"type": "object",
+	"unevaluatedProperties": false,
+	"properties": {
+		"tosca_definitions_version": {
+			"type": "string"
+		},
+		"description": {
+			"type": "string"
+		},
+		"groups": {
+			"type": "object"
+		},
+		"imports": {
+			"type": "array"
+		},
+		"repositories": {
+			"type": "object"
+		},
+		"interface_types": {
+			"type": "object"
+		},
+		"node_types": {
+			"type": "object"
+		},
+		"topology_template": {
+			"type": "object"
+		},
+		"policies": {
+			"type": "object",
+			"patternProperties": {
+				"^": {
+					"type": "object",
+					"properties": {
+						"type": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"type"
+					],
+					"if": {
+						"properties": {
+							"type": {
+								"const": "tosca.policies.nfv.InstantiationLevels"
+							}
+						}
+					},
+					"then": {
+						"properties": {
+							"fieldA1": {
+								"type": "string"
+							},
+							"fieldA2": {
+								"type": "number"
+							}
+						},
+						"required": [
+							"fieldA1",
+							"fieldA2"
+						]
+					}
+				}
+			},
+			"additionalProperties": false
+		}
+	},
+	"additionalProperties": false
+}
