@@ -1,0 +1,849 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"type": "object",
+	"title": "ETSI MANO VNFD schema",
+	"description": "ETSI MANO VNFD schema SOL001 4.5.1",
+	"properties": {
+		"tosca_definitions_version": {
+			"type": "string"
+		},
+		"description": {
+			"type": "string"
+		},
+		"policies": {
+			"type": "object",
+			"patternProperties": {
+				"^": {
+					"properties": {
+						"type": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"type"
+					],
+					"allOf": [
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.LcmCoordinationsForLcmOperation"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.LcmCoordinationsForLcmOperation"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.AffinityRule"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.AffinityRule"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.VnfPackageChange"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.VnfPackageChange"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.Abstract.SecurityGroupRule"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.Abstract.SecurityGroupRule"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.VnfIndicator"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.VnfIndicator"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.LcmCoordinationAction"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.LcmCoordinationAction"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.SupportedVnfInterface"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.SupportedVnfInterface"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.VduScalingAspectDeltas"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.VduScalingAspectDeltas"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.VirtualLinkBitrateScalingAspectDeltas"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.VirtualLinkBitrateScalingAspectDeltas"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.VduInstantiationLevels"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.VduInstantiationLevels"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.VirtualLinkInstantiationLevels"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.VirtualLinkInstantiationLevels"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.VduInitialDelta"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.VduInitialDelta"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.VirtualLinkBitrateInitialDelta"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.VirtualLinkBitrateInitialDelta"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.AntiAffinityRule"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.AntiAffinityRule"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.InstantiationLevels"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.InstantiationLevels"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.ScalingAspects"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.ScalingAspects"
+							}
+						},
+						{
+							
+						}
+					]
+				}
+			}
+		},
+		"groups": {
+			"type": "object"
+		}
+	},
+	"$defs": {
+		"tosca.policies.nfv.LcmCoordinationsForLcmOperation": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"referenced_coordination_actions": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"additionalProperties": false
+							}
+						},
+						"vnf_lcm_operation": {
+							"type": "string"
+						},
+						"actions": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"additionalProperties": false
+							}
+						}
+					},
+					"required": [
+						"vnf_lcm_operation"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.AffinityRule": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"scope": {
+							"type": "string"
+						},
+						"nfvi_maintenance_group_info": {
+							"properties": {
+								"supported_migration_type": {
+									"type": "array",
+									"items": {
+										"type": "string",
+										"additionalProperties": false
+									}
+								},
+								"impact_notification_lead_time": {
+									"type": "string"
+								},
+								"min_recovery_time_between_impacts": {
+									"type": "string"
+								},
+								"min_number_of_preserved_instances": {
+									"type": "array",
+									"items": {
+										"properties": {
+											"group_size": {
+												"type": "number"
+											},
+											"min_number_of_preserved_instances": {
+												"type": "number"
+											}
+										},
+										"additionalProperties": false
+									}
+								},
+								"max_number_of_impacted_instances": {
+									"type": "array",
+									"items": {
+										"properties": {
+											"group_size": {
+												"type": "number"
+											},
+											"max_number_of_impacted_instances": {
+												"type": "number"
+											}
+										},
+										"additionalProperties": false
+									}
+								},
+								"is_impact_mitigation_requested": {
+									"type": "boolean"
+								},
+								"max_undetectable_interruption_time": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"required": [
+						"scope"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.VnfPackageChange": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"referenced_coordination_actions": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"additionalProperties": false
+							}
+						},
+						"destination_flavour_id": {
+							"type": "string"
+						},
+						"component_mappings": {
+							"type": "array",
+							"items": {
+								"properties": {
+									"component_type": {
+										"type": "string"
+									},
+									"destination_id": {
+										"type": "string"
+									},
+									"description": {
+										"type": "string"
+									},
+									"source_id": {
+										"type": "string"
+									}
+								},
+								"additionalProperties": false
+							}
+						},
+						"additional_modification_description": {
+							"type": "string"
+						},
+						"selector": {
+							"type": "array",
+							"items": {
+								"properties": {
+									"source_descriptor_id": {
+										"type": "string"
+									},
+									"source_flavour_id": {
+										"type": "string"
+									},
+									"destination_descriptor_id": {
+										"type": "string"
+									}
+								},
+								"additionalProperties": false
+							}
+						},
+						"modification_qualifier": {
+							"type": "string"
+						},
+						"actions": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"additionalProperties": false
+							}
+						}
+					},
+					"required": [
+						"destination_flavour_id",
+						"selector",
+						"modification_qualifier"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.Abstract.SecurityGroupRule": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"protocol": {
+							"type": "string"
+						},
+						"ether_type": {
+							"type": "string"
+						},
+						"description": {
+							"type": "string"
+						},
+						"port_range_max": {
+							"type": "number"
+						},
+						"direction": {
+							"type": "string"
+						},
+						"port_range_min": {
+							"type": "number"
+						}
+					},
+					"required": [
+						"protocol",
+						"ether_type",
+						"port_range_max",
+						"direction",
+						"port_range_min"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.VnfIndicator": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"source": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"source"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.LcmCoordinationAction": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"action_name": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"action_name"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.SupportedVnfInterface": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"interface_name": {
+							"type": "string"
+						},
+						"details": {
+							"properties": {
+								"interface_specific_data": {
+									"type": "object",
+									"patternProperties": {
+										"^": {
+											"type": "string",
+											"additionalProperties": false
+										}
+									}
+								},
+								"uri_components": {
+									"properties": {
+										"path": {
+											"type": "string"
+										},
+										"fragment": {
+											"type": "string"
+										},
+										"scheme": {
+											"type": "string"
+										},
+										"authority": {
+											"properties": {
+												"user_info": {
+													"type": "string"
+												},
+												"port": {
+													"type": "string"
+												},
+												"host": {
+													"type": "string"
+												}
+											}
+										},
+										"query": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					},
+					"required": [
+						"interface_name"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.VduScalingAspectDeltas": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"aspect": {
+							"type": "string"
+						},
+						"deltas": {
+							"type": "object",
+							"patternProperties": {
+								"^": {
+									"properties": {
+										"number_of_instances": {
+											"type": "number"
+										}
+									},
+									"additionalProperties": false
+								}
+							}
+						}
+					},
+					"required": [
+						"aspect",
+						"deltas"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.VirtualLinkBitrateScalingAspectDeltas": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"aspect": {
+							"type": "string"
+						},
+						"deltas": {
+							"type": "object",
+							"patternProperties": {
+								"^": {
+									"properties": {
+										"bitrate_requirements": {
+											"properties": {
+												"root": {
+													"type": "number"
+												},
+												"leaf": {
+													"type": "number"
+												}
+											}
+										}
+									},
+									"additionalProperties": false
+								}
+							}
+						}
+					},
+					"required": [
+						"aspect",
+						"deltas"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.VduInstantiationLevels": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"levels": {
+							"type": "object",
+							"patternProperties": {
+								"^": {
+									"properties": {
+										"number_of_instances": {
+											"type": "number"
+										}
+									},
+									"additionalProperties": false
+								}
+							}
+						}
+					},
+					"required": [
+						"levels"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.VirtualLinkInstantiationLevels": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"levels": {
+							"type": "object",
+							"patternProperties": {
+								"^": {
+									"properties": {
+										"bitrate_requirements": {
+											"properties": {
+												"root": {
+													"type": "number"
+												},
+												"leaf": {
+													"type": "number"
+												}
+											}
+										}
+									},
+									"additionalProperties": false
+								}
+							}
+						}
+					},
+					"required": [
+						"levels"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.VduInitialDelta": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"initial_delta": {
+							"properties": {
+								"number_of_instances": {
+									"type": "number"
+								}
+							}
+						}
+					},
+					"required": [
+						"initial_delta"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.VirtualLinkBitrateInitialDelta": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"initial_delta": {
+							"properties": {
+								"bitrate_requirements": {
+									"properties": {
+										"root": {
+											"type": "number"
+										},
+										"leaf": {
+											"type": "number"
+										}
+									}
+								}
+							}
+						}
+					},
+					"required": [
+						"initial_delta"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.AntiAffinityRule": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"scope": {
+							"type": "string"
+						},
+						"nfvi_maintenance_group_info": {
+							"properties": {
+								"supported_migration_type": {
+									"type": "array",
+									"items": {
+										"type": "string",
+										"additionalProperties": false
+									}
+								},
+								"impact_notification_lead_time": {
+									"type": "string"
+								},
+								"min_recovery_time_between_impacts": {
+									"type": "string"
+								},
+								"min_number_of_preserved_instances": {
+									"type": "array",
+									"items": {
+										"properties": {
+											"group_size": {
+												"type": "number"
+											},
+											"min_number_of_preserved_instances": {
+												"type": "number"
+											}
+										},
+										"additionalProperties": false
+									}
+								},
+								"max_number_of_impacted_instances": {
+									"type": "array",
+									"items": {
+										"properties": {
+											"group_size": {
+												"type": "number"
+											},
+											"max_number_of_impacted_instances": {
+												"type": "number"
+											}
+										},
+										"additionalProperties": false
+									}
+								},
+								"is_impact_mitigation_requested": {
+									"type": "boolean"
+								},
+								"max_undetectable_interruption_time": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"required": [
+						"scope"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.InstantiationLevels": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"default_level": {
+							"type": "string"
+						},
+						"levels": {
+							"type": "object",
+							"patternProperties": {
+								"^": {
+									"properties": {
+										"description": {
+											"type": "string"
+										},
+										"scale_info": {
+											"type": "object",
+											"patternProperties": {
+												"^": {
+													"properties": {
+														"scale_level": {
+															"type": "number"
+														}
+													},
+													"additionalProperties": false
+												}
+											}
+										}
+									},
+									"additionalProperties": false
+								}
+							}
+						}
+					},
+					"required": [
+						"levels"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.ScalingAspects": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"aspects": {
+							"type": "object",
+							"patternProperties": {
+								"^": {
+									"properties": {
+										"step_deltas": {
+											"type": "array",
+											"items": {
+												"type": "string",
+												"additionalProperties": false
+											}
+										},
+										"max_scale_level": {
+											"type": "number"
+										},
+										"name": {
+											"type": "string"
+										},
+										"description": {
+											"type": "string"
+										}
+									},
+									"additionalProperties": false
+								}
+							}
+						}
+					},
+					"required": [
+						"aspects"
+					],
+					"additionalProperties": false
+				}
+			}
+		}
+	}
+}

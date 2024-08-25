@@ -12,6 +12,7 @@
 		<module>sol001</module>
 		<module>tosca-test-utils</module>
 		<module>yang</module>
+		<module>tosca-schema-generator-maven-plugin</module>
 	</modules>
 	<scm>
 		<developerConnection>scm:git:ssh://git@github.com/openmsa/etsi-mano-package-parser.git</developerConnection>

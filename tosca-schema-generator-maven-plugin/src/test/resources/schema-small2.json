@@ -1,0 +1,96 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"type": "object",
+	"title": "ETSI MANO VNFD schema",
+	"description": "ETSI MANO VNFD schema SOL001 4.5.1",
+	"properties": {
+		"description": {
+			"type": "string"
+		},
+		"policies": {
+			"type": "object",
+			"patternProperties": {
+				".*": {
+					"properties": {
+						"type": {
+							"type": "string"
+						},
+						"testprops": {
+							"type": "string"
+						},
+						"properties": {
+							"properties": {
+								"scope": {
+									"type": "string"
+								},
+								"additionalProperties": false
+							},
+							"additionalProperties": false
+						}
+					},
+					"additionalProperties": false,
+					"oneOf": [
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.LcmCoordinationsForLcmOperation"
+									}
+								}
+							},
+							"then": {
+									"$ref": "#/$defs/tosca.policies.nfv.LcmCoordinationsForLcmOperation"
+							},
+							"additionalProperties": false
+						}
+					]
+				},
+				"required": [
+					"type"
+				],
+				"additionalProperties": false
+			},
+			"additionalProperties": false
+		},
+		"additionalProperties": false
+	},
+	"additionalProperties": false,
+	"$defs": {
+		"tosca.policies.nfv.LcmCoordinationsForLcmOperation": {
+			"properties": {
+				"type": {
+					"type": "string"
+				},
+				"properties": {
+					"properties": {
+						"referenced_coordination_actions": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"additionalProperties": false
+							},
+							"additionalProperties": false
+						},
+						"vnf_lcm_operation": {
+							"type": "string",
+							"additionalProperties": false
+						},
+						"actions": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"additionalProperties": false
+							},
+							"additionalProperties": false
+						}
+					},
+					"required": [
+						"vnf_lcm_operation"
+					],
+					"additionalProperties": false
+				}
+			}
+		}
+	}
+}
+
