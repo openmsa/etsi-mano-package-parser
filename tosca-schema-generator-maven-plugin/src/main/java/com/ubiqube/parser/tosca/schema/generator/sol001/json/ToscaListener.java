@@ -11,6 +11,7 @@ public class ToscaListener {
 	private final ObjectMapper om = new ObjectMapper();
 	private final Map<String, Object> root = new LinkedHashMap<>();
 	private final Map<String, Object> rootProperties = new LinkedHashMap<>();
+	private LinkedHashMap<String, PropertyBlock> defs;
 
 	public void startDocument() {
 		root.put("$schema", "https://json-schema.org/draft/2020-12/schema");
@@ -18,6 +19,8 @@ public class ToscaListener {
 		root.put("title", "ETSI MANO VNFD schema");
 		root.put("description", "ETSI MANO VNFD schema SOL001 4.5.1");
 		root.put("properties", rootProperties);
+		defs = new LinkedHashMap<>();
+		root.put("$defs", defs);
 		pushSimpleField(rootProperties, "tosca_definitions_version", "string");
 		pushSimpleField(rootProperties, "description", "string");
 		// "unevaluatedProperties": false,
@@ -56,4 +59,9 @@ public class ToscaListener {
 			throw new RuntimeException(e);
 		}
 	}
+
+	public LinkedHashMap<String, PropertyBlock> getDefs() {
+		return defs;
+	}
+
 }

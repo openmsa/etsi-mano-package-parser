@@ -16,6 +16,7 @@ import com.ubiqube.parser.tosca.DataType;
 import com.ubiqube.parser.tosca.GroupType;
 import com.ubiqube.parser.tosca.ParseException;
 import com.ubiqube.parser.tosca.PolicyType;
+import com.ubiqube.parser.tosca.ToscaClass;
 import com.ubiqube.parser.tosca.ToscaContext;
 import com.ubiqube.parser.tosca.ToscaParser;
 import com.ubiqube.parser.tosca.ToscaProperties;
@@ -33,7 +34,7 @@ public class ToscaWalker {
 	private ToscaContext root = null;
 	private final Map<String, DataType> primitive = new HashMap<>();
 	private final Set<String> cache = new HashSet<>();
-	private final Set<String> basic = Set.of("string", "integer", "scalar-unit.time", "boolean");
+	private final Set<String> basic = Set.of("string", "integer", "scalar-unit.time", "boolean", "version", "scalar-unit.size", "float");
 
 	public ToscaWalker() {
 		//
@@ -67,18 +68,9 @@ public class ToscaWalker {
 	}
 
 	private void handlePolicies(final ToscaListener listener) {
-		final Map<String, Object> schemaRoot = listener.getRoot();
 		final PropertyBlock grp = listener.createObject("policies");
-		final PropertyBlock pattern = new PropertyBlock();
-//		pattern.setType("object");
-		final PropertyBlock sp = new PropertyBlock();
-		sp.setType("string");
-		final Map<String, PropertyBlock> map = new LinkedHashMap<>();
-		map.put("type", sp);
-		pattern.setProperties(map);
-		pattern.setRequired(List.of("type"));
-		final Map<String, PropertyBlock> defs = new LinkedHashMap<>();
-		schemaRoot.put("$defs", defs);
+		final PropertyBlock pattern = createDefaultFields();
+		final LinkedHashMap<String, PropertyBlock> defs = listener.getDefs();
 		grp.setPatternProperties(Map.of("^", pattern));
 		final Map<String, PolicyType> grd = root.getPoliciesType();
 		final List<PropertyBlock> allOf = grd.entrySet().stream().map(x -> {
@@ -167,7 +159,9 @@ public class ToscaWalker {
 			final DataType res = lookupToscaClass(type);
 			final ToscaProperties p2 = res.getProperties();
 			final PropertyBlock rin = handleProperties(p2);
-			pb.setProperties(rin.getProperties());
+			if (null != rin) {
+				pb.setProperties(rin.getProperties());
+			}
 		}
 		pb.setMandatory(v.getRequired());
 		return pb;
@@ -204,6 +198,9 @@ public class ToscaWalker {
 		case "boolean" -> "boolean";
 		case "scalar-unit.time" -> "string";
 		case "integer" -> "number";
+		case "version" -> "string";
+		case "scalar-unit.size" -> "string";
+		case "float" -> "number";
 		default -> throw new IllegalArgumentException("Unexpected value: " + type);
 		};
 	}
@@ -213,8 +210,55 @@ public class ToscaWalker {
 	}
 
 	private void handleTopologyTemplate(final ToscaListener listener) {
-		// TODO Auto-generated method stub
+		final LinkedHashMap<String, PropertyBlock> defs = listener.getDefs();
+		final PropertyBlock tt = listener.createObject("topology_template");
+		createTopologyFields(tt);
+		final PropertyBlock grp = tt.getProperties().get("node_templates");
+		final PropertyBlock pattern = createDefaultFields();
+		grp.setPatternProperties(Map.of("^", pattern));
+		final Map<String, ToscaClass> grd = root.getNodeType();
+		final List<PropertyBlock> allOf = grd.entrySet().stream().map(x -> {
+			final ToscaClass v = x.getValue();
+			final String k = x.getKey();
+			final ToscaProperties props = v.getProperties();
+			final PropertyBlock res = handleProperties(props);
+			if (res == null) {
+				System.err.println("Res is null");
+				return new PropertyBlock();
+			}
+			final PropertyBlock ifSmt = createIf(k);
+			final PropertyBlock nw = new PropertyBlock();
+			nw.setIfSmt(ifSmt);
+			final PropertyBlock props2 = new PropertyBlock();
+			res.setType("object");
+			props2.setProperties(Map.of("properties", res));
+			final PropertyBlock ref = new PropertyBlock();
+			ref.setRef("#/$defs/%s".formatted(k));
+			nw.setThen(ref);
+			defs.put(k, props2);
+			return nw;
+		}).toList();
+		pattern.setAllOf(allOf);
+	}
 
+	private static void createTopologyFields(final PropertyBlock grp) {
+		grp.setProperties(new LinkedHashMap<>());
+		final PropertyBlock inputs = PropertyBlock.ofType("object");
+		grp.getProperties().put("inputs", inputs);
+		final PropertyBlock nodeTemplates = PropertyBlock.ofType("object");
+		grp.getProperties().put("node_templates", nodeTemplates);
+	}
+
+	private PropertyBlock createDefaultFields() {
+		final PropertyBlock pattern = new PropertyBlock();
+//		pattern.setType("object");
+		final PropertyBlock sp = new PropertyBlock();
+		sp.setType("string");
+		final Map<String, PropertyBlock> map = new LinkedHashMap<>();
+		map.put("type", sp);
+		pattern.setProperties(map);
+		pattern.setRequired(List.of("type"));
+		return pattern;
 	}
 
 	private void handleImport(final ToscaListener listener) {

@@ -10,10 +10,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @JsonInclude(Include.NON_NULL)
 @JsonPropertyOrder(value = { "type", "if", "then", "else" })
+@NoArgsConstructor
 public class PropertyBlock {
 
 	private String type;
@@ -36,4 +38,10 @@ public class PropertyBlock {
 	private String ref;
 	@JsonIgnore
 	private boolean mandatory;
+
+	public static PropertyBlock ofType(final String type) {
+		final PropertyBlock pb = new PropertyBlock();
+		pb.setType(type);
+		return pb;
+	}
 }

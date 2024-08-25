@@ -1,0 +1,2691 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"type": "object",
+	"title": "ETSI MANO VNFD schema",
+	"description": "ETSI MANO VNFD schema SOL001 4.5.1",
+	"properties": {
+		"tosca_definitions_version": {
+			"type": "string"
+		},
+		"description": {
+			"type": "string"
+		},
+		"topology_template": {
+			"type": "object",
+			"properties": {
+				"inputs": {
+					"type": "object"
+				},
+				"node_templates": {
+					"type": "object",
+					"patternProperties": {
+						"^": {
+							"properties": {
+								"type": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"type"
+							],
+							"allOf": [
+								{
+									
+								},
+								{
+									
+								},
+								{
+									
+								},
+								{
+									
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.SoftwareComponent"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.SoftwareComponent"
+									}
+								},
+								{
+									
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.WebApplication"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.WebApplication"
+									}
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.DBMS"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.DBMS"
+									}
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.Database"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.Database"
+									}
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.Abstract.Storage"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.Abstract.Storage"
+									}
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.Storage.ObjectStorage"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.Storage.ObjectStorage"
+									}
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.Storage.BlockStorage"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.Storage.BlockStorage"
+									}
+								},
+								{
+									
+								},
+								{
+									
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.LoadBalancer"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.LoadBalancer"
+									}
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.network.Network"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.network.Network"
+									}
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.network.Port"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.network.Port"
+									}
+								},
+								{
+									
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.nfv.VNF"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.nfv.VNF"
+									}
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.nfv.VnfExtCp"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.nfv.VnfExtCp"
+									}
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.nfv.Vdu.Compute"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.nfv.Vdu.Compute"
+									}
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.nfv.Vdu.VirtualBlockStorage"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.nfv.Vdu.VirtualBlockStorage"
+									}
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.nfv.Vdu.VirtualObjectStorage"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.nfv.Vdu.VirtualObjectStorage"
+									}
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.nfv.Vdu.VirtualFileStorage"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.nfv.Vdu.VirtualFileStorage"
+									}
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.nfv.VduCp"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.nfv.VduCp"
+									}
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.nfv.VnfVirtualLink"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.nfv.VnfVirtualLink"
+									}
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.nfv.VipCp"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.nfv.VipCp"
+									}
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.nfv.VduSubCp"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.nfv.VduSubCp"
+									}
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.nfv.Vdu.OsContainer"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.nfv.Vdu.OsContainer"
+									}
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.nfv.Vdu.OsContainerDeployableUnit"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.nfv.Vdu.OsContainerDeployableUnit"
+									}
+								},
+								{
+									
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.nfv.VirtualCp"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.nfv.VirtualCp"
+									}
+								},
+								{
+									"if": {
+										"properties": {
+											"type": {
+												"const": "tosca.nodes.nfv.Cp"
+											}
+										}
+									},
+									"then": {
+										"$ref": "#/$defs/tosca.nodes.nfv.Cp"
+									}
+								}
+							]
+						}
+					}
+				}
+			}
+		},
+		"policies": {
+			"type": "object",
+			"patternProperties": {
+				"^": {
+					"properties": {
+						"type": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"type"
+					],
+					"allOf": [
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.LcmCoordinationsForLcmOperation"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.LcmCoordinationsForLcmOperation"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.AffinityRule"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.AffinityRule"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.VnfPackageChange"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.VnfPackageChange"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.Abstract.SecurityGroupRule"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.Abstract.SecurityGroupRule"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.VnfIndicator"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.VnfIndicator"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.LcmCoordinationAction"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.LcmCoordinationAction"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.SupportedVnfInterface"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.SupportedVnfInterface"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.VduScalingAspectDeltas"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.VduScalingAspectDeltas"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.VirtualLinkBitrateScalingAspectDeltas"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.VirtualLinkBitrateScalingAspectDeltas"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.VduInstantiationLevels"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.VduInstantiationLevels"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.VirtualLinkInstantiationLevels"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.VirtualLinkInstantiationLevels"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.VduInitialDelta"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.VduInitialDelta"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.VirtualLinkBitrateInitialDelta"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.VirtualLinkBitrateInitialDelta"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.AntiAffinityRule"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.AntiAffinityRule"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.InstantiationLevels"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.InstantiationLevels"
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "tosca.policies.nfv.ScalingAspects"
+									}
+								}
+							},
+							"then": {
+								"$ref": "#/$defs/tosca.policies.nfv.ScalingAspects"
+							}
+						},
+						{
+							
+						}
+					]
+				}
+			}
+		},
+		"groups": {
+			"type": "object"
+		}
+	},
+	"$defs": {
+		"tosca.nodes.SoftwareComponent": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"admin_credential": {
+							"properties": {
+								"protocol": {
+									"type": "string"
+								},
+								"keys": {
+									"type": "object",
+									"patternProperties": {
+										"^": {
+											"type": "string",
+											"additionalProperties": false
+										}
+									}
+								},
+								"token_type": {
+									"type": "string"
+								},
+								"user": {
+									"type": "string"
+								},
+								"token": {
+									"type": "string"
+								}
+							}
+						},
+						"component_version": {
+							"type": "string"
+						}
+					},
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.WebApplication": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"context_root": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"context_root"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.DBMS": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"port": {
+							"type": "number"
+						},
+						"root_password": {
+							"type": "string"
+						}
+					},
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.Database": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"password": {
+							"type": "string"
+						},
+						"port": {
+							"type": "number"
+						},
+						"name": {
+							"type": "string"
+						},
+						"user": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"name"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.Abstract.Storage": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"size": {
+							"type": "string"
+						},
+						"name": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"size",
+						"name"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.Storage.ObjectStorage": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"maxsize": {
+							"type": "string"
+						}
+					},
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.Storage.BlockStorage": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"volume_id": {
+							"type": "string"
+						},
+						"snapshot_id": {
+							"type": "string"
+						}
+					},
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.LoadBalancer": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"algorithm": {
+							"type": "string"
+						}
+					},
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.network.Network": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"physical_network": {
+							"type": "string"
+						},
+						"dhcp_enabled": {
+							"type": "boolean"
+						},
+						"segmentation_id": {
+							"type": "string"
+						},
+						"network_id": {
+							"type": "string"
+						},
+						"ip_version": {
+							"type": "number"
+						},
+						"start_ip": {
+							"type": "string"
+						},
+						"network_name": {
+							"type": "string"
+						},
+						"cidr": {
+							"type": "string"
+						},
+						"gateway_ip": {
+							"type": "string"
+						},
+						"network_type": {
+							"type": "string"
+						},
+						"end_ip": {
+							"type": "string"
+						}
+					},
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.network.Port": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"ip_range_end": {
+							"type": "string"
+						},
+						"ip_range_start": {
+							"type": "string"
+						},
+						"ip_address": {
+							"type": "string"
+						},
+						"is_default": {
+							"type": "boolean"
+						},
+						"order": {
+							"type": "number"
+						}
+					},
+					"required": [
+						"order"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.nfv.VNF": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"vnf_profile": {
+							"properties": {
+								"instantiation_level": {
+									"type": "string"
+								},
+								"service_availability_level": {
+									"type": "number"
+								},
+								"min_number_of_instances": {
+									"type": "number"
+								},
+								"max_number_of_instances": {
+									"type": "number"
+								}
+							}
+						},
+						"product_info_name": {
+							"type": "string"
+						},
+						"default_localization_language": {
+							"type": "string"
+						},
+						"flavour_id": {
+							"type": "string"
+						},
+						"lcm_operations_configuration": {
+							"properties": {
+								"operate": {
+									"properties": {
+										"max_recommended_graceful_stop_timeout": {
+											"type": "string"
+										},
+										"min_graceful_stop_timeout": {
+											"type": "string"
+										}
+									}
+								},
+								"scale_to_level": {
+									"properties": {
+										"arbitrary_target_levels_supported": {
+											"type": "boolean"
+										}
+									}
+								},
+								"change_current_package": {
+									
+								},
+								"change_flavour": {
+									
+								},
+								"heal": {
+									"properties": {
+										"causes": {
+											"type": "array",
+											"items": {
+												"type": "string",
+												"additionalProperties": false
+											}
+										}
+									}
+								},
+								"scale": {
+									"properties": {
+										"scaling_by_more_than_one_step_supported": {
+											"type": "boolean"
+										}
+									}
+								},
+								"change_ext_connectivity": {
+									
+								},
+								"terminate": {
+									"properties": {
+										"min_graceful_termination_timeout": {
+											"type": "string"
+										},
+										"max_recommended_graceful_termination_timeout": {
+											"type": "string"
+										}
+									}
+								},
+								"instantiate": {
+									
+								},
+								"revert_to_snapshot": {
+									
+								},
+								"create_snapshot": {
+									
+								}
+							}
+						},
+						"flavour_description": {
+							"type": "string"
+						},
+						"product_name": {
+							"type": "string"
+						},
+						"descriptor_id": {
+							"type": "string"
+						},
+						"product_info_description": {
+							"type": "string"
+						},
+						"provider": {
+							"type": "string"
+						},
+						"monitoring_parameters": {
+							"type": "object",
+							"patternProperties": {
+								"^": {
+									"properties": {
+										"collection_period": {
+											"type": "string"
+										},
+										"performance_metric": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										}
+									},
+									"additionalProperties": false
+								}
+							}
+						},
+						"descriptor_version": {
+							"type": "string"
+						},
+						"vnfm_info": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"additionalProperties": false
+							}
+						},
+						"software_version": {
+							"type": "string"
+						},
+						"localization_languages": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"additionalProperties": false
+							}
+						}
+					},
+					"required": [
+						"flavour_id",
+						"flavour_description",
+						"product_name",
+						"descriptor_id",
+						"provider",
+						"descriptor_version",
+						"vnfm_info",
+						"software_version"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.nfv.VnfExtCp": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"virtual_network_interface_requirements": {
+							"type": "array",
+							"items": {
+								"properties": {
+									"network_interface_requirements": {
+										"type": "object",
+										"patternProperties": {
+											"^": {
+												"type": "string",
+												"additionalProperties": false
+											}
+										}
+									},
+									"name": {
+										"type": "string"
+									},
+									"support_mandatory": {
+										"type": "boolean"
+									},
+									"description": {
+										"type": "string"
+									},
+									"nic_io_requirements": {
+										"properties": {
+											"logical_node_requirements": {
+												"type": "object",
+												"patternProperties": {
+													"^": {
+														"type": "string",
+														"additionalProperties": false
+													}
+												}
+											}
+										}
+									}
+								},
+								"additionalProperties": false
+							}
+						}
+					},
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.nfv.Vdu.Compute": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"boot_data": {
+							"properties": {
+								"kvp_data": {
+									"properties": {
+										"data": {
+											"type": "object",
+											"patternProperties": {
+												"^": {
+													"type": "string",
+													"additionalProperties": false
+												}
+											}
+										}
+									}
+								},
+								"vim_specific_properties": {
+									"properties": {
+										"vim_type": {
+											"type": "string"
+										},
+										"properties": {
+											"type": "object",
+											"patternProperties": {
+												"^": {
+													"type": "string",
+													"additionalProperties": false
+												}
+											}
+										}
+									}
+								},
+								"content_or_file_data": {
+									"properties": {
+										"destination_path": {
+											"type": "string"
+										},
+										"data": {
+											"type": "object",
+											"patternProperties": {
+												"^": {
+													"type": "string",
+													"additionalProperties": false
+												}
+											}
+										},
+										"source_path": {
+											"type": "string"
+										},
+										"content": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						},
+						"name": {
+							"type": "string"
+						},
+						"nfvi_constraints": {
+							"type": "object",
+							"patternProperties": {
+								"^": {
+									"type": "string",
+									"additionalProperties": false
+								}
+							}
+						},
+						"monitoring_parameters": {
+							"type": "object",
+							"patternProperties": {
+								"^": {
+									"properties": {
+										"collection_period": {
+											"type": "string"
+										},
+										"performance_metric": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										}
+									},
+									"additionalProperties": false
+								}
+							}
+						},
+						"description": {
+							"type": "string"
+						},
+						"boot_order": {
+							"type": "boolean"
+						},
+						"vdu_profile": {
+							"properties": {
+								"nfvi_maintenance_info": {
+									"properties": {
+										"supported_migration_type": {
+											"type": "array",
+											"items": {
+												"type": "string",
+												"additionalProperties": false
+											}
+										},
+										"impact_notification_lead_time": {
+											"type": "string"
+										},
+										"min_recovery_time_between_impacts": {
+											"type": "string"
+										},
+										"min_number_of_preserved_instances": {
+											"type": "array",
+											"items": {
+												"properties": {
+													"group_size": {
+														"type": "number"
+													},
+													"min_number_of_preserved_instances": {
+														"type": "number"
+													}
+												},
+												"additionalProperties": false
+											}
+										},
+										"max_number_of_impacted_instances": {
+											"type": "array",
+											"items": {
+												"properties": {
+													"group_size": {
+														"type": "number"
+													},
+													"max_number_of_impacted_instances": {
+														"type": "number"
+													}
+												},
+												"additionalProperties": false
+											}
+										},
+										"is_impact_mitigation_requested": {
+											"type": "boolean"
+										},
+										"max_undetectable_interruption_time": {
+											"type": "string"
+										}
+									}
+								},
+								"min_number_of_instances": {
+									"type": "number"
+								},
+								"max_number_of_instances": {
+									"type": "number"
+								}
+							}
+						}
+					},
+					"required": [
+						"name",
+						"description",
+						"boot_order",
+						"vdu_profile"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.nfv.Vdu.VirtualBlockStorage": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"per_vnfc_instance": {
+							"type": "boolean"
+						},
+						"nfvi_maintenance_info": {
+							"properties": {
+								"supported_migration_type": {
+									"type": "array",
+									"items": {
+										"type": "string",
+										"additionalProperties": false
+									}
+								},
+								"impact_notification_lead_time": {
+									"type": "string"
+								},
+								"min_recovery_time_between_impacts": {
+									"type": "string"
+								},
+								"min_number_of_preserved_instances": {
+									"type": "array",
+									"items": {
+										"properties": {
+											"group_size": {
+												"type": "number"
+											},
+											"min_number_of_preserved_instances": {
+												"type": "number"
+											}
+										},
+										"additionalProperties": false
+									}
+								},
+								"max_number_of_impacted_instances": {
+									"type": "array",
+									"items": {
+										"properties": {
+											"group_size": {
+												"type": "number"
+											},
+											"max_number_of_impacted_instances": {
+												"type": "number"
+											}
+										},
+										"additionalProperties": false
+									}
+								},
+								"is_impact_mitigation_requested": {
+									"type": "boolean"
+								},
+								"max_undetectable_interruption_time": {
+									"type": "string"
+								}
+							}
+						},
+						"virtual_block_storage_data": {
+							"properties": {
+								"vdu_storage_requirements": {
+									"type": "object",
+									"patternProperties": {
+										"^": {
+											"type": "string",
+											"additionalProperties": false
+										}
+									}
+								},
+								"size_of_storage": {
+									"type": "string"
+								},
+								"rdma_enabled": {
+									"type": "boolean"
+								}
+							}
+						}
+					},
+					"required": [
+						"per_vnfc_instance",
+						"virtual_block_storage_data"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.nfv.Vdu.VirtualObjectStorage": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"per_vnfc_instance": {
+							"type": "boolean"
+						},
+						"virtual_object_storage_data": {
+							"properties": {
+								"max_size_of_storage": {
+									"type": "string"
+								}
+							}
+						},
+						"nfvi_maintenance_info": {
+							"properties": {
+								"supported_migration_type": {
+									"type": "array",
+									"items": {
+										"type": "string",
+										"additionalProperties": false
+									}
+								},
+								"impact_notification_lead_time": {
+									"type": "string"
+								},
+								"min_recovery_time_between_impacts": {
+									"type": "string"
+								},
+								"min_number_of_preserved_instances": {
+									"type": "array",
+									"items": {
+										"properties": {
+											"group_size": {
+												"type": "number"
+											},
+											"min_number_of_preserved_instances": {
+												"type": "number"
+											}
+										},
+										"additionalProperties": false
+									}
+								},
+								"max_number_of_impacted_instances": {
+									"type": "array",
+									"items": {
+										"properties": {
+											"group_size": {
+												"type": "number"
+											},
+											"max_number_of_impacted_instances": {
+												"type": "number"
+											}
+										},
+										"additionalProperties": false
+									}
+								},
+								"is_impact_mitigation_requested": {
+									"type": "boolean"
+								},
+								"max_undetectable_interruption_time": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"required": [
+						"per_vnfc_instance",
+						"virtual_object_storage_data"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.nfv.Vdu.VirtualFileStorage": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"per_vnfc_instance": {
+							"type": "boolean"
+						},
+						"virtual_file_storage_data": {
+							"properties": {
+								"size_of_storage": {
+									"type": "string"
+								},
+								"file_system_protocol": {
+									"type": "string"
+								}
+							}
+						},
+						"nfvi_maintenance_info": {
+							"properties": {
+								"supported_migration_type": {
+									"type": "array",
+									"items": {
+										"type": "string",
+										"additionalProperties": false
+									}
+								},
+								"impact_notification_lead_time": {
+									"type": "string"
+								},
+								"min_recovery_time_between_impacts": {
+									"type": "string"
+								},
+								"min_number_of_preserved_instances": {
+									"type": "array",
+									"items": {
+										"properties": {
+											"group_size": {
+												"type": "number"
+											},
+											"min_number_of_preserved_instances": {
+												"type": "number"
+											}
+										},
+										"additionalProperties": false
+									}
+								},
+								"max_number_of_impacted_instances": {
+									"type": "array",
+									"items": {
+										"properties": {
+											"group_size": {
+												"type": "number"
+											},
+											"max_number_of_impacted_instances": {
+												"type": "number"
+											}
+										},
+										"additionalProperties": false
+									}
+								},
+								"is_impact_mitigation_requested": {
+									"type": "boolean"
+								},
+								"max_undetectable_interruption_time": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"required": [
+						"per_vnfc_instance",
+						"virtual_file_storage_data"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.nfv.VduCp": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"virtual_network_interface_requirements": {
+							"type": "array",
+							"items": {
+								"properties": {
+									"network_interface_requirements": {
+										"type": "object",
+										"patternProperties": {
+											"^": {
+												"type": "string",
+												"additionalProperties": false
+											}
+										}
+									},
+									"name": {
+										"type": "string"
+									},
+									"support_mandatory": {
+										"type": "boolean"
+									},
+									"description": {
+										"type": "string"
+									},
+									"nic_io_requirements": {
+										"properties": {
+											"logical_node_requirements": {
+												"type": "object",
+												"patternProperties": {
+													"^": {
+														"type": "string",
+														"additionalProperties": false
+													}
+												}
+											}
+										}
+									}
+								},
+								"additionalProperties": false
+							}
+						},
+						"bitrate_requirement": {
+							"type": "number"
+						},
+						"vnic_type": {
+							"type": "string"
+						},
+						"order": {
+							"type": "number"
+						}
+					},
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.nfv.VnfVirtualLink": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"vl_profile": {
+							"properties": {
+								"qos": {
+									"properties": {
+										"latency": {
+											"type": "string"
+										},
+										"packet_loss_ratio": {
+											"type": "number"
+										},
+										"packet_delay_variation": {
+											"type": "string"
+										}
+									}
+								},
+								"min_bitrate_requirements": {
+									"properties": {
+										"root": {
+											"type": "number"
+										},
+										"leaf": {
+											"type": "number"
+										}
+									}
+								},
+								"virtual_link_protocol_data": {
+									"type": "array",
+									"items": {
+										"properties": {
+											"associated_layer_protocol": {
+												"type": "string"
+											},
+											"l2_protocol_data": {
+												"properties": {
+													"segmentation_id": {
+														"type": "string"
+													},
+													"name": {
+														"type": "string"
+													},
+													"vlan_transparent": {
+														"type": "boolean"
+													},
+													"network_type": {
+														"type": "string"
+													},
+													"mtu": {
+														"type": "number"
+													}
+												}
+											},
+											"l3_protocol_data": {
+												"properties": {
+													"dhcp_enabled": {
+														"type": "boolean"
+													},
+													"ip_allocation_pools": {
+														"type": "array",
+														"items": {
+															"properties": {
+																"start_ip_address": {
+																	"type": "string"
+																},
+																"end_ip_address": {
+																	"type": "string"
+																}
+															},
+															"additionalProperties": false
+														}
+													},
+													"ipv6_address_mode": {
+														"type": "string"
+													},
+													"ip_version": {
+														"type": "string"
+													},
+													"name": {
+														"type": "string"
+													},
+													"cidr": {
+														"type": "string"
+													},
+													"gateway_ip": {
+														"type": "string"
+													}
+												}
+											}
+										},
+										"additionalProperties": false
+									}
+								},
+								"max_bitrate_requirements": {
+									"properties": {
+										"root": {
+											"type": "number"
+										},
+										"leaf": {
+											"type": "number"
+										}
+									}
+								}
+							}
+						},
+						"monitoring_parameters": {
+							"type": "object",
+							"patternProperties": {
+								"^": {
+									"properties": {
+										"collection_period": {
+											"type": "string"
+										},
+										"performance_metric": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										}
+									},
+									"additionalProperties": false
+								}
+							}
+						},
+						"nfvi_maintenance_info": {
+							"properties": {
+								"supported_migration_type": {
+									"type": "array",
+									"items": {
+										"type": "string",
+										"additionalProperties": false
+									}
+								},
+								"impact_notification_lead_time": {
+									"type": "string"
+								},
+								"min_recovery_time_between_impacts": {
+									"type": "string"
+								},
+								"min_number_of_preserved_instances": {
+									"type": "array",
+									"items": {
+										"properties": {
+											"group_size": {
+												"type": "number"
+											},
+											"min_number_of_preserved_instances": {
+												"type": "number"
+											}
+										},
+										"additionalProperties": false
+									}
+								},
+								"max_number_of_impacted_instances": {
+									"type": "array",
+									"items": {
+										"properties": {
+											"group_size": {
+												"type": "number"
+											},
+											"max_number_of_impacted_instances": {
+												"type": "number"
+											}
+										},
+										"additionalProperties": false
+									}
+								},
+								"is_impact_mitigation_requested": {
+									"type": "boolean"
+								},
+								"max_undetectable_interruption_time": {
+									"type": "string"
+								}
+							}
+						},
+						"description": {
+							"type": "string"
+						},
+						"test_access": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"additionalProperties": false
+							}
+						},
+						"connectivity_type": {
+							"properties": {
+								"layer_protocols": {
+									"type": "array",
+									"items": {
+										"type": "string",
+										"additionalProperties": false
+									}
+								},
+								"flow_pattern": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"required": [
+						"vl_profile",
+						"connectivity_type"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.nfv.VipCp": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"dedicated_ip_address": {
+							"type": "boolean"
+						},
+						"vip_function": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"dedicated_ip_address",
+						"vip_function"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.nfv.VduSubCp": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"segmentation_id": {
+							"type": "number"
+						},
+						"segmentation_type": {
+							"type": "string"
+						}
+					},
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.nfv.Vdu.OsContainer": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"ephemeral_storage_resource_limit": {
+							"type": "string"
+						},
+						"requested_memory_resources": {
+							"type": "string"
+						},
+						"memory_resource_limit": {
+							"type": "string"
+						},
+						"cpu_resource_limit": {
+							"type": "number"
+						},
+						"huge_pages_resources": {
+							"type": "array",
+							"items": {
+								"properties": {
+									"hugepage_size": {
+										"type": "string"
+									},
+									"requested_size": {
+										"type": "string"
+									}
+								},
+								"additionalProperties": false
+							}
+						},
+						"name": {
+							"type": "string"
+						},
+						"requested_cpu_resources": {
+							"type": "number"
+						},
+						"description": {
+							"type": "string"
+						},
+						"extended_resource_requests": {
+							"type": "array",
+							"items": {
+								"properties": {
+									"amount": {
+										"type": "number"
+									},
+									"extended_resource": {
+										"type": "object",
+										"patternProperties": {
+											"^": {
+												"type": "string",
+												"additionalProperties": false
+											}
+										}
+									}
+								},
+								"additionalProperties": false
+							}
+						},
+						"requested_ephemeral_storage_resources": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"name",
+						"description"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.nfv.Vdu.OsContainerDeployableUnit": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"requested_additional_capabilities": {
+							"type": "object",
+							"patternProperties": {
+								"^": {
+									"properties": {
+										"preferred_requested_additional_capability_version": {
+											"type": "string"
+										},
+										"target_performance_parameters": {
+											"type": "object",
+											"patternProperties": {
+												"^": {
+													"type": "string",
+													"additionalProperties": false
+												}
+											}
+										},
+										"requested_additional_capability_name": {
+											"type": "string"
+										},
+										"support_mandatory": {
+											"type": "boolean"
+										},
+										"min_requested_additional_capability_version": {
+											"type": "string"
+										}
+									},
+									"additionalProperties": false
+								}
+							}
+						},
+						"mcio_constraint_params": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"additionalProperties": false
+							}
+						},
+						"name": {
+							"type": "string"
+						},
+						"nfvi_constraints": {
+							"type": "object",
+							"patternProperties": {
+								"^": {
+									"type": "string",
+									"additionalProperties": false
+								}
+							}
+						},
+						"description": {
+							"type": "string"
+						},
+						"logical_node": {
+							"type": "object",
+							"patternProperties": {
+								"^": {
+									"properties": {
+										"logical_node_requirements": {
+											"type": "object",
+											"patternProperties": {
+												"^": {
+													"type": "string",
+													"additionalProperties": false
+												}
+											}
+										}
+									},
+									"additionalProperties": false
+								}
+							}
+						},
+						"vdu_profile": {
+							"properties": {
+								"nfvi_maintenance_info": {
+									"properties": {
+										"supported_migration_type": {
+											"type": "array",
+											"items": {
+												"type": "string",
+												"additionalProperties": false
+											}
+										},
+										"impact_notification_lead_time": {
+											"type": "string"
+										},
+										"min_recovery_time_between_impacts": {
+											"type": "string"
+										},
+										"min_number_of_preserved_instances": {
+											"type": "array",
+											"items": {
+												"properties": {
+													"group_size": {
+														"type": "number"
+													},
+													"min_number_of_preserved_instances": {
+														"type": "number"
+													}
+												},
+												"additionalProperties": false
+											}
+										},
+										"max_number_of_impacted_instances": {
+											"type": "array",
+											"items": {
+												"properties": {
+													"group_size": {
+														"type": "number"
+													},
+													"max_number_of_impacted_instances": {
+														"type": "number"
+													}
+												},
+												"additionalProperties": false
+											}
+										},
+										"is_impact_mitigation_requested": {
+											"type": "boolean"
+										},
+										"max_undetectable_interruption_time": {
+											"type": "string"
+										}
+									}
+								},
+								"min_number_of_instances": {
+									"type": "number"
+								},
+								"max_number_of_instances": {
+									"type": "number"
+								}
+							}
+						}
+					},
+					"required": [
+						"name",
+						"description",
+						"vdu_profile"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.nfv.VirtualCp": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"additionalServiceData": {
+							"type": "array",
+							"items": {
+								"properties": {
+									"serviceData": {
+										"type": "string"
+									},
+									"portData": {
+										"type": "array",
+										"items": {
+											"properties": {
+												"protocol": {
+													"type": "string"
+												},
+												"portConfigurable": {
+													"type": "boolean"
+												},
+												"port": {
+													"type": "number"
+												},
+												"name": {
+													"type": "string"
+												}
+											},
+											"additionalProperties": false
+										}
+									}
+								},
+								"additionalProperties": false
+							}
+						}
+					},
+					"required": [
+						"additionalServiceData"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.nodes.nfv.Cp": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"protocol": {
+							"type": "array",
+							"items": {
+								"properties": {
+									"associated_layer_protocol": {
+										"type": "string"
+									},
+									"address_data": {
+										"type": "array",
+										"items": {
+											"properties": {
+												"address_type": {
+													"type": "string"
+												},
+												"l2_address_data": {
+													"properties": {
+														"mac_address_assignment": {
+															"type": "boolean"
+														}
+													}
+												},
+												"l3_address_data": {
+													"properties": {
+														"number_of_ip_address": {
+															"type": "number"
+														},
+														"fixed_ip_address": {
+															"type": "array",
+															"items": {
+																"type": "string",
+																"additionalProperties": false
+															}
+														},
+														"ip_address_assignment": {
+															"type": "boolean"
+														},
+														"ip_address_type": {
+															"type": "string"
+														},
+														"floating_ip_activated": {
+															"type": "boolean"
+														}
+													}
+												}
+											},
+											"additionalProperties": false
+										}
+									}
+								},
+								"additionalProperties": false
+							}
+						},
+						"trunk_mode": {
+							"type": "boolean"
+						},
+						"layer_protocols": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"additionalProperties": false
+							}
+						},
+						"role": {
+							"type": "string"
+						},
+						"description": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"layer_protocols"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.LcmCoordinationsForLcmOperation": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"referenced_coordination_actions": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"additionalProperties": false
+							}
+						},
+						"vnf_lcm_operation": {
+							"type": "string"
+						},
+						"actions": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"additionalProperties": false
+							}
+						}
+					},
+					"required": [
+						"vnf_lcm_operation"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.AffinityRule": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"scope": {
+							"type": "string"
+						},
+						"nfvi_maintenance_group_info": {
+							"properties": {
+								"supported_migration_type": {
+									"type": "array",
+									"items": {
+										"type": "string",
+										"additionalProperties": false
+									}
+								},
+								"impact_notification_lead_time": {
+									"type": "string"
+								},
+								"min_recovery_time_between_impacts": {
+									"type": "string"
+								},
+								"min_number_of_preserved_instances": {
+									"type": "array",
+									"items": {
+										"properties": {
+											"group_size": {
+												"type": "number"
+											},
+											"min_number_of_preserved_instances": {
+												"type": "number"
+											}
+										},
+										"additionalProperties": false
+									}
+								},
+								"max_number_of_impacted_instances": {
+									"type": "array",
+									"items": {
+										"properties": {
+											"group_size": {
+												"type": "number"
+											},
+											"max_number_of_impacted_instances": {
+												"type": "number"
+											}
+										},
+										"additionalProperties": false
+									}
+								},
+								"is_impact_mitigation_requested": {
+									"type": "boolean"
+								},
+								"max_undetectable_interruption_time": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"required": [
+						"scope"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.VnfPackageChange": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"referenced_coordination_actions": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"additionalProperties": false
+							}
+						},
+						"destination_flavour_id": {
+							"type": "string"
+						},
+						"component_mappings": {
+							"type": "array",
+							"items": {
+								"properties": {
+									"component_type": {
+										"type": "string"
+									},
+									"destination_id": {
+										"type": "string"
+									},
+									"description": {
+										"type": "string"
+									},
+									"source_id": {
+										"type": "string"
+									}
+								},
+								"additionalProperties": false
+							}
+						},
+						"additional_modification_description": {
+							"type": "string"
+						},
+						"selector": {
+							"type": "array",
+							"items": {
+								"properties": {
+									"source_descriptor_id": {
+										"type": "string"
+									},
+									"source_flavour_id": {
+										"type": "string"
+									},
+									"destination_descriptor_id": {
+										"type": "string"
+									}
+								},
+								"additionalProperties": false
+							}
+						},
+						"modification_qualifier": {
+							"type": "string"
+						},
+						"actions": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"additionalProperties": false
+							}
+						}
+					},
+					"required": [
+						"destination_flavour_id",
+						"selector",
+						"modification_qualifier"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.Abstract.SecurityGroupRule": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"protocol": {
+							"type": "string"
+						},
+						"ether_type": {
+							"type": "string"
+						},
+						"description": {
+							"type": "string"
+						},
+						"port_range_max": {
+							"type": "number"
+						},
+						"direction": {
+							"type": "string"
+						},
+						"port_range_min": {
+							"type": "number"
+						}
+					},
+					"required": [
+						"protocol",
+						"ether_type",
+						"port_range_max",
+						"direction",
+						"port_range_min"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.VnfIndicator": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"source": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"source"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.LcmCoordinationAction": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"action_name": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"action_name"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.SupportedVnfInterface": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"interface_name": {
+							"type": "string"
+						},
+						"details": {
+							"properties": {
+								"interface_specific_data": {
+									"type": "object",
+									"patternProperties": {
+										"^": {
+											"type": "string",
+											"additionalProperties": false
+										}
+									}
+								},
+								"uri_components": {
+									"properties": {
+										"path": {
+											"type": "string"
+										},
+										"fragment": {
+											"type": "string"
+										},
+										"scheme": {
+											"type": "string"
+										},
+										"authority": {
+											"properties": {
+												"user_info": {
+													"type": "string"
+												},
+												"port": {
+													"type": "string"
+												},
+												"host": {
+													"type": "string"
+												}
+											}
+										},
+										"query": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					},
+					"required": [
+						"interface_name"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.VduScalingAspectDeltas": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"aspect": {
+							"type": "string"
+						},
+						"deltas": {
+							"type": "object",
+							"patternProperties": {
+								"^": {
+									"properties": {
+										"number_of_instances": {
+											"type": "number"
+										}
+									},
+									"additionalProperties": false
+								}
+							}
+						}
+					},
+					"required": [
+						"aspect",
+						"deltas"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.VirtualLinkBitrateScalingAspectDeltas": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"aspect": {
+							"type": "string"
+						},
+						"deltas": {
+							"type": "object",
+							"patternProperties": {
+								"^": {
+									"properties": {
+										"bitrate_requirements": {
+											"properties": {
+												"root": {
+													"type": "number"
+												},
+												"leaf": {
+													"type": "number"
+												}
+											}
+										}
+									},
+									"additionalProperties": false
+								}
+							}
+						}
+					},
+					"required": [
+						"aspect",
+						"deltas"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.VduInstantiationLevels": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"levels": {
+							"type": "object",
+							"patternProperties": {
+								"^": {
+									"properties": {
+										"number_of_instances": {
+											"type": "number"
+										}
+									},
+									"additionalProperties": false
+								}
+							}
+						}
+					},
+					"required": [
+						"levels"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.VirtualLinkInstantiationLevels": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"levels": {
+							"type": "object",
+							"patternProperties": {
+								"^": {
+									"properties": {
+										"bitrate_requirements": {
+											"properties": {
+												"root": {
+													"type": "number"
+												},
+												"leaf": {
+													"type": "number"
+												}
+											}
+										}
+									},
+									"additionalProperties": false
+								}
+							}
+						}
+					},
+					"required": [
+						"levels"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.VduInitialDelta": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"initial_delta": {
+							"properties": {
+								"number_of_instances": {
+									"type": "number"
+								}
+							}
+						}
+					},
+					"required": [
+						"initial_delta"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.VirtualLinkBitrateInitialDelta": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"initial_delta": {
+							"properties": {
+								"bitrate_requirements": {
+									"properties": {
+										"root": {
+											"type": "number"
+										},
+										"leaf": {
+											"type": "number"
+										}
+									}
+								}
+							}
+						}
+					},
+					"required": [
+						"initial_delta"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.AntiAffinityRule": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"scope": {
+							"type": "string"
+						},
+						"nfvi_maintenance_group_info": {
+							"properties": {
+								"supported_migration_type": {
+									"type": "array",
+									"items": {
+										"type": "string",
+										"additionalProperties": false
+									}
+								},
+								"impact_notification_lead_time": {
+									"type": "string"
+								},
+								"min_recovery_time_between_impacts": {
+									"type": "string"
+								},
+								"min_number_of_preserved_instances": {
+									"type": "array",
+									"items": {
+										"properties": {
+											"group_size": {
+												"type": "number"
+											},
+											"min_number_of_preserved_instances": {
+												"type": "number"
+											}
+										},
+										"additionalProperties": false
+									}
+								},
+								"max_number_of_impacted_instances": {
+									"type": "array",
+									"items": {
+										"properties": {
+											"group_size": {
+												"type": "number"
+											},
+											"max_number_of_impacted_instances": {
+												"type": "number"
+											}
+										},
+										"additionalProperties": false
+									}
+								},
+								"is_impact_mitigation_requested": {
+									"type": "boolean"
+								},
+								"max_undetectable_interruption_time": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"required": [
+						"scope"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.InstantiationLevels": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"default_level": {
+							"type": "string"
+						},
+						"levels": {
+							"type": "object",
+							"patternProperties": {
+								"^": {
+									"properties": {
+										"description": {
+											"type": "string"
+										},
+										"scale_info": {
+											"type": "object",
+											"patternProperties": {
+												"^": {
+													"properties": {
+														"scale_level": {
+															"type": "number"
+														}
+													},
+													"additionalProperties": false
+												}
+											}
+										}
+									},
+									"additionalProperties": false
+								}
+							}
+						}
+					},
+					"required": [
+						"levels"
+					],
+					"additionalProperties": false
+				}
+			}
+		},
+		"tosca.policies.nfv.ScalingAspects": {
+			"properties": {
+				"properties": {
+					"type": "object",
+					"properties": {
+						"aspects": {
+							"type": "object",
+							"patternProperties": {
+								"^": {
+									"properties": {
+										"step_deltas": {
+											"type": "array",
+											"items": {
+												"type": "string",
+												"additionalProperties": false
+											}
+										},
+										"max_scale_level": {
+											"type": "number"
+										},
+										"name": {
+											"type": "string"
+										},
+										"description": {
+											"type": "string"
+										}
+									},
+									"additionalProperties": false
+								}
+							}
+						}
+					},
+					"required": [
+						"aspects"
+					],
+					"additionalProperties": false
+				}
+			}
+		}
+	}
+}

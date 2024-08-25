@@ -27,7 +27,7 @@ class ToscaListenerTest extends TestCase {
 
 	@Test
 	void testYaml() {
-		final String schemaData = readString("test.json");
+		final String schemaData = readString("test2.json");
 		final String inputData = readString("vnfd.yaml");
 		final JsonSchemaFactory factory = JsonSchemaFactory.getInstance(VersionFlag.V202012,
 				builder -> builder.jsonNodeReader(JsonNodeReader.builder().locationAware().build()));
@@ -56,8 +56,8 @@ class ToscaListenerTest extends TestCase {
 	}
 
 	String readString(final String classpath) {
-		try (InputStream mappting = this.getClass().getClassLoader().getResourceAsStream(classpath)) {
-			return new String(mappting.readAllBytes());
+		try (InputStream mapping = this.getClass().getClassLoader().getResourceAsStream(classpath)) {
+			return new String(mapping.readAllBytes());
 		} catch (final IOException e) {
 			throw new RuntimeException(e);
 		}
