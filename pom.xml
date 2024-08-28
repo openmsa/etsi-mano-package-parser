@@ -45,7 +45,7 @@
 		<version.logback-classic>1.5.7</version.logback-classic>
 		<version.lombok>1.18.34</version.lombok>
 		<version.mapstruct>1.6.0</version.mapstruct>
-		<version.mockito>5.12.0</version.mockito>
+		<version.mockito>5.13.0</version.mockito>
 		<version.slf4j-api>2.0.16</version.slf4j-api>
 		<version.mano-repo-api>4.0.0</version.mano-repo-api>
 		<version.reflections>0.10.2</version.reflections>
