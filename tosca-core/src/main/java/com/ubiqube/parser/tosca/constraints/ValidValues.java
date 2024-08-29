@@ -17,7 +17,6 @@
 package com.ubiqube.parser.tosca.constraints;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -31,9 +30,7 @@ public class ValidValues implements Constraint {
 	}
 
 	public ValidValues(final ArrayNode value) {
-		final Iterator<JsonNode> ite = value.iterator();
-		while (ite.hasNext()) {
-			final JsonNode node = ite.next();
+		for (JsonNode node : value) {
 			values.add(node.asText());
 		}
 	}
@@ -47,4 +44,9 @@ public class ValidValues implements Constraint {
 	public Object evaluate(final Object value) {
 		return values.stream().anyMatch(x -> x.equals(value));
 	}
+
+	public List<String> getValues() {
+		return values;
+	}
+
 }
