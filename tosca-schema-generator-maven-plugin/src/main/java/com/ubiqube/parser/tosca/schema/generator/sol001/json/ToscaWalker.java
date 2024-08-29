@@ -21,6 +21,16 @@ import com.ubiqube.parser.tosca.ToscaContext;
 import com.ubiqube.parser.tosca.ToscaParser;
 import com.ubiqube.parser.tosca.ToscaProperties;
 import com.ubiqube.parser.tosca.ValueObject;
+import com.ubiqube.parser.tosca.constraints.Constraint;
+import com.ubiqube.parser.tosca.constraints.GreaterOrEqual;
+import com.ubiqube.parser.tosca.constraints.GreaterThan;
+import com.ubiqube.parser.tosca.constraints.InRange;
+import com.ubiqube.parser.tosca.constraints.Length;
+import com.ubiqube.parser.tosca.constraints.LessOrEqual;
+import com.ubiqube.parser.tosca.constraints.MaxLength;
+import com.ubiqube.parser.tosca.constraints.MinLength;
+import com.ubiqube.parser.tosca.constraints.Pattern;
+import com.ubiqube.parser.tosca.constraints.ValidValues;
 import com.ubiqube.parser.tosca.schema.generator.sol001.json.stmt.PropertyBlock;
 
 public class ToscaWalker {
@@ -147,24 +157,60 @@ public class ToscaWalker {
 			pb.setType("object");
 			final String tm = v.getEntrySchema().getType();
 			final PropertyBlock pattern = handleContainer(tm);
+			pattern.setDescription(v.getDescription());
 			pb.setPatternProperties(Map.of("^", pattern));
 		} else if ("list".equals(type)) {
 			pb.setType("array");
 			final String tm = v.getEntrySchema().getType();
 			final PropertyBlock pattern = handleContainer(tm);
+			pattern.setDescription(v.getDescription());
 			pb.setItems(pattern);
 		} else if (isBasic(type)) {
 			pb.setType(convertType(type));
+			applyConstraints(pb, v.getConstraints());
+			pb.setDescription(v.getDescription());
 		} else {
 			final DataType res = lookupToscaClass(type);
 			final ToscaProperties p2 = res.getProperties();
 			final PropertyBlock rin = handleProperties(p2);
 			if (null != rin) {
 				pb.setProperties(rin.getProperties());
+				pb.setDescription(v.getDescription());
 			}
 		}
 		pb.setMandatory(v.getRequired());
 		return pb;
+	}
+
+	private static void applyConstraints(final PropertyBlock pb, final List<Constraint> constraints) {
+		constraints.forEach(x -> {
+			switch (x) {
+			case final Length l -> {
+				pb.setMinLength((Integer) l.getValue());
+				pb.setMaxLength((Integer) l.getValue());
+			}
+			case final MinLength ml -> pb.setMinLength((Integer) ml.getValue());
+			case final MaxLength ml -> pb.setMaxLength((Integer) ml.getValue());
+			case final Pattern p -> pb.setPattern((String) p.getValue());
+			case final LessOrEqual loe -> {
+//				pb.setMinimum(Integer.valueOf(goe.getValue().toString()));
+			}
+			case final GreaterOrEqual goe -> {
+//				pb.setMinimum(Integer.valueOf(goe.getValue().toString()));
+			}
+			case final GreaterThan gt -> {
+				//
+			}
+			case final InRange ir -> {
+//				pb.setMinimum(Integer.valueOf(ir.getMin()));
+//				pb.setMaximum(Integer.valueOf(ir.getMax()));
+			}
+			case final ValidValues vv -> pb.setEnumStmt(vv.getValues());
+			default -> {
+				throw new ParseException("Unknown constraint " + x.getClass().getSimpleName());
+			}
+			}
+		});
 	}
 
 	private PropertyBlock handleContainer(final String type) {

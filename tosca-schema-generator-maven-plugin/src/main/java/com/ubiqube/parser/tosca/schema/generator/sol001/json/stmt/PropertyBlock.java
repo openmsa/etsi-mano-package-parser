@@ -17,8 +17,15 @@ import lombok.NoArgsConstructor;
 @JsonPropertyOrder(value = { "type", "if", "then", "else" })
 @NoArgsConstructor
 public class PropertyBlock {
+	@JsonProperty("$defs")
+	private Map<String, PropertyBlock> defs;
+	@JsonProperty("$ref")
+	private String ref;
+	@JsonProperty("$comment")
+	private String comment;
 
 	private String type;
+	private String description;
 	private Map<String, PropertyBlock> properties;
 	private PropertyBlock items;
 	private List<String> required;
@@ -32,12 +39,16 @@ public class PropertyBlock {
 	@JsonProperty("const")
 	private String cnst;
 	private List<PropertyBlock> allOf;
-	@JsonProperty("$defs")
-	private Map<String, PropertyBlock> defs;
-	@JsonProperty("$ref")
-	private String ref;
 	@JsonIgnore
 	private boolean mandatory;
+	private Integer minLength;
+	private Integer maxLength;
+	private String pattern;
+	private Integer minimum;
+	private Integer maximum;
+	private Boolean exclusiveMaximum;
+	@JsonProperty("enum")
+	private List<String> enumStmt;
 
 	public static PropertyBlock ofType(final String type) {
 		final PropertyBlock pb = new PropertyBlock();
