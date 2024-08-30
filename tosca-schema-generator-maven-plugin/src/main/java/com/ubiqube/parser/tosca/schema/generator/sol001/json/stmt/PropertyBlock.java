@@ -39,8 +39,10 @@ public class PropertyBlock {
 	@JsonProperty("const")
 	private String cnst;
 	private List<PropertyBlock> allOf;
+	private List<PropertyBlock> oneOf;
 	@JsonIgnore
 	private boolean mandatory;
+	private String format;
 	private Integer minLength;
 	private Integer maxLength;
 	private String pattern;
