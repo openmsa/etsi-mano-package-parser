@@ -69,7 +69,7 @@ public class Resolver implements IResolver {
 		} catch (final MalformedURLException | IllegalArgumentException e) {
 			LOG.trace("Not an URL: " + url, e);
 		}
-		LOG.info("Opening: {}", url);
+		LOG.info("  ➖ Opening: {}", url);
 		final URL classpath = this.getClass().getClassLoader().getResource(url);
 		if (classpath != null) {
 			return classpath;
