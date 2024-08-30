@@ -334,7 +334,7 @@ public class ToscaWalker {
 	}
 
 	private void generateToscaClass(final String className, final ToscaClass toscaClass, final ToscaListener listener) {
-		LOG.info("generate class: {}", className);
+		LOG.info("✅ Generate class: {}", className);
 		startClass(className, toscaClass.getDerivedFrom(), listener);
 		Optional.ofNullable(toscaClass.getProperties()).ifPresent(x -> generateFields(listener, x.getProperties()));
 		Optional.ofNullable(toscaClass.getAttributes()).ifPresent(x -> generateFields(listener, x));

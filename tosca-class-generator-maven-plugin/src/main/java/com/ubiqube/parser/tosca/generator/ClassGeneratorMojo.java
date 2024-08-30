@@ -53,7 +53,7 @@ public class ClassGeneratorMojo extends AbstractMojo {
 		final JavaPoetWalker jw = new JavaPoetWalker(outputDirectory.getAbsolutePath());
 		final ToscaWalker tw = new ToscaWalker();
 		files.forEach(x -> {
-			getLog().info("Starting class generation using: " + x);
+			getLog().info("🪄 Starting class generation using: " + x);
 			tw.generate(x.getAbsolutePath(), jw);
 		});
 		try {
