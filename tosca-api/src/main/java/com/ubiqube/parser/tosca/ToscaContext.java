@@ -454,4 +454,7 @@ public class ToscaContext {
 		return false;
 	}
 
+	public ToscaClassHolder getChildOf(final String clazz) {
+		return classHierarchy.get(clazz);
+	}
 }
