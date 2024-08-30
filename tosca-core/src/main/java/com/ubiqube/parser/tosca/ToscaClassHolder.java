@@ -21,8 +21,8 @@ import lombok.Setter;
 
 public class ToscaClassHolder {
 	@Setter
-    @Getter
-    private ToscaClassHolder parent;
+	@Getter
+	private ToscaClassHolder parent;
 	private final ToscaClass node;
 	private final String name;
 
@@ -31,7 +31,7 @@ public class ToscaClassHolder {
 		this.name = name;
 	}
 
-    @Override
+	@Override
 	public String toString() {
 		return "ToscaClassHolder [parent=" + parent + ", node=" + node + "]\n";
 	}
@@ -51,4 +51,13 @@ public class ToscaClassHolder {
 		}
 		return false;
 	}
+
+	public ToscaClass getNode() {
+		return node;
+	}
+
+	public String getName() {
+		return name;
+	}
+
 }
