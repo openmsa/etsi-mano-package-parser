@@ -193,7 +193,7 @@ public class JavaPoetWalker implements ToscaListener {
 		} else {
 			final ClassName n = ClassName.get(Object.class);
 			currentField = FieldSpec.builder(n, fieldName, Modifier.PRIVATE);
-			LOG.warn("Unknown type for fieldname {}", fieldName);
+			LOG.warn("❓ Unknown type for fieldname {}", fieldName);
 		}
 	}
 
@@ -459,7 +459,6 @@ public class JavaPoetWalker implements ToscaListener {
 		private final boolean lNonnull;
 
 		public Context(final String lCurrentClassName, final Builder lClassBuilder, final com.squareup.javapoet.FieldSpec.Builder lCurrentField, final TypeName lCurrentFieldType, final boolean lNonnull) {
-			super();
 			this.lCurrentClassName = lCurrentClassName;
 			this.lClassBuilder = lClassBuilder;
 			this.lCurrentField = lCurrentField;
