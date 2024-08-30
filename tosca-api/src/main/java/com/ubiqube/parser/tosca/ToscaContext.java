@@ -394,6 +394,7 @@ public class ToscaContext {
 	}
 
 	public void addRoot(final ToscaRoot root2) {
+		description = root2.getDescription();
 		Optional.ofNullable(root2.getArtifactTypes()).ifPresent(x -> artifacts.putAll(x));
 		Optional.ofNullable(root2.getCapabilityTypes()).ifPresent(x -> capabilities.putAll(x));
 		Optional.ofNullable(root2.getImports()).ifPresent(x -> {
