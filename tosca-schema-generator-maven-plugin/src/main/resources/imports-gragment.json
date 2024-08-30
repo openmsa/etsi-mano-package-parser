@@ -1,0 +1,36 @@
+{
+	"type": "array",
+	"items": {
+		"oneOf": [
+			{
+				"type": "string",
+				"format": "uri"
+			},
+			{
+				"type": "object",
+				"properties": {
+					"file": {
+						"type": "string"
+					},
+					"repository": {
+						"type": "string"
+					},
+					"namespace_uri": {
+						"type": "string",
+						"format": "uri"
+					},
+					"namespace_prefix": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"file",
+					"repository",
+					"namespace_uri",
+					"namespace_prefix"
+				],
+				"additionalProperties": false
+			}
+		]
+	}
+}
