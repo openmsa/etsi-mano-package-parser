@@ -236,13 +236,13 @@ public class ToscaContext {
 		}
 		final Set<Entry<String, Import>> entry = imports.entrySet();
 		for (final Entry<String, Import> entry2 : entry) {
-			LOG.info("Resolving: {} -> {}", entry2.getKey(), entry2.getValue());
+			LOG.debug("Resolving: {} -> {}", entry2.getKey(), entry2.getValue().getUrl());
 			final Import value = entry2.getValue();
 			final String resolv = resolver.resolvePath(value.getUrl());
 			value.setResolved(resolv);
 			final String content = resolver.getContent(value.getResolved());
 			if (null == content) {
-				LOG.warn("Failed to resolv {}", value);
+				LOG.warn("🔴 Failed to resolv {}", value);
 				continue;
 			}
 			final ToscaParser main = new ToscaParser(content, resolver);
