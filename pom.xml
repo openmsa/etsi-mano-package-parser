@@ -31,7 +31,7 @@
 		<maven.compiler.target>21</maven.compiler.target>
 		<maven.compiler.source>21</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.version.jackson.databind>2.17.2</project.version.jackson.databind>
+		<project.version.jackson.databind>2.18.0</project.version.jackson.databind>
 		<version.bouncycastle>1.78.1</version.bouncycastle>
 		<version.commons-io>2.17.0</version.commons-io>
 		<version.commons-vfs2>2.9.0</version.commons-vfs2>
