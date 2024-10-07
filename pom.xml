@@ -41,7 +41,7 @@
 		<version.jakarta.annotation-api>3.0.0</version.jakarta.annotation-api>
 		<version.jakarta.validation-api>3.1.0</version.jakarta.validation-api>
 		<version.javapoet>1.13.0</version.javapoet>
-		<version.junit.jupiter>5.11.1</version.junit.jupiter>
+		<version.junit.jupiter>5.11.2</version.junit.jupiter>
 		<version.logback-classic>1.5.8</version.logback-classic>
 		<version.lombok>1.18.34</version.lombok>
 		<version.mapstruct>1.6.2</version.mapstruct>
