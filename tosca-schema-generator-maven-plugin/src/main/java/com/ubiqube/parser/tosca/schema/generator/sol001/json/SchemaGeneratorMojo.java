@@ -30,7 +30,7 @@ public class SchemaGeneratorMojo extends AbstractMojo {
 
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
-		final ToscaWalker tw = new ToscaWalker();
+		final ToscaJsonSchemaWalker tw = new ToscaJsonSchemaWalker();
 		files.forEach(x -> {
 			getLog().info("Starting class generation using: " + x);
 			// tw.generate(x.getAbsolutePath());

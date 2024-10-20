@@ -38,8 +38,8 @@ import com.ubiqube.parser.tosca.constraints.Pattern;
 import com.ubiqube.parser.tosca.constraints.ValidValues;
 import com.ubiqube.parser.tosca.schema.generator.sol001.json.stmt.PropertyBlock;
 
-public class ToscaWalker {
-	private static final Logger LOG = LoggerFactory.getLogger(ToscaWalker.class);
+public class ToscaJsonSchemaWalker {
+	private static final Logger LOG = LoggerFactory.getLogger(ToscaJsonSchemaWalker.class);
 	private static final String BOOLEAN = "boolean";
 	private static final String OBJECT = "object";
 	private static final String STRING = "string";
@@ -48,11 +48,11 @@ public class ToscaWalker {
 	private final Set<String> basic = Set.of(STRING, "integer", "scalar-unit.time", BOOLEAN, "version", "scalar-unit.size", "float", "scalar-unit.frequency", "range");
 	private final Set<String> noAttributesNodes = new HashSet<>();
 
-	public ToscaWalker() {
+	public ToscaJsonSchemaWalker() {
 		//
 	}
 
-	public String generate(final String file, final ToscaListener listener) {
+	public String generate(final String file, final ToscaJsonSchemaGenerator listener) {
 		final ToscaParser tp = new ToscaParser(new File(file));
 		root = tp.getContext();
 		listener.startDocument(root.getDescription());
@@ -63,7 +63,7 @@ public class ToscaWalker {
 		return listener.serialize();
 	}
 
-	private void handleGroupType(final ToscaListener listener) {
+	private void handleGroupType(final ToscaJsonSchemaGenerator listener) {
 		final PropertyBlock grp = listener.createObject("groups");
 		final Map<String, GroupType> grd = root.getGroupType();
 		grd.forEach((k, v) -> {
@@ -74,15 +74,15 @@ public class ToscaWalker {
 
 	}
 
-	private void handlePolicies(final ToscaListener listener) {
+	private void handlePolicies(final ToscaJsonSchemaGenerator listener) {
 		final PropertyBlock grp = listener.createObject("policies");
 		final PropertyBlock pattern = createDefaultFields();
 		final Map<String, PropertyBlock> defs = listener.getDefs();
 		grp.setPatternProperties(Map.of("^", pattern));
 		final Map<String, PolicyType> grd = root.getPoliciesType();
 		final List<PropertyBlock> allOf = grd.entrySet().stream().map(x -> {
+			final String type = x.getKey();
 			final PolicyType policyType = x.getValue();
-			final String k = x.getKey();
 			final ToscaProperties props = policyType.getProperties();
 			final PropertyBlock res = Optional.ofNullable(handleProperties(props)).orElseGet(() -> {
 				final PropertyBlock ret = new PropertyBlock();
@@ -93,8 +93,8 @@ public class ToscaWalker {
 			res.getProperties().putAll(parent);
 			final PropertyBlock props2 = new PropertyBlock();
 			props2.setProperties(Map.of("properties", res));
-			defs.put(k, props2);
-			return createIfBlock(k, res);
+			defs.put(type, props2);
+			return createIfBlock(type, res);
 		}).toList();
 		pattern.setAllOf(allOf);
 	}
@@ -236,11 +236,11 @@ public class ToscaWalker {
 		case BOOLEAN -> BOOLEAN;
 		case "scalar-unit.time" -> STRING;
 		case "integer" -> "number";
-		case "version" -> "string";
-		case "scalar-unit.size" -> "string";
-		case "scalar-unit.frequency" -> "string";
+		case "version" -> STRING;
+		case "scalar-unit.size" -> STRING;
+		case "scalar-unit.frequency" -> STRING;
 		case "float" -> "number";
-		case "range" -> "string";
+		case "range" -> STRING;
 		default -> throw new IllegalArgumentException("Unexpected value: " + type);
 		};
 	}
@@ -249,7 +249,7 @@ public class ToscaWalker {
 		return basic.contains(type);
 	}
 
-	private void handleTopologyTemplate(final ToscaListener listener) {
+	private void handleTopologyTemplate(final ToscaJsonSchemaGenerator listener) {
 		final Map<String, PropertyBlock> defs = listener.getDefs();
 		final PropertyBlock tt = listener.createObject("topology_template");
 		createTopologyFields(tt);
@@ -258,9 +258,8 @@ public class ToscaWalker {
 		grp.setPatternProperties(Map.of("^", pattern));
 		final Map<String, ToscaClass> grd = root.getNodeType();
 		final List<PropertyBlock> allOf = grd.entrySet().stream().map(x -> {
-			LOG.info("✳️ Derived from: {}", x.getValue().getDerivedFrom());
-			final ToscaClass toscaClass = x.getValue();
 			final String type = x.getKey();
+			final ToscaClass toscaClass = x.getValue();
 			final ToscaProperties props = toscaClass.getProperties();
 			final PropertyBlock res = Optional.ofNullable(handleProperties(props)).orElseGet(() -> {
 				final PropertyBlock ret = new PropertyBlock();
@@ -270,19 +269,26 @@ public class ToscaWalker {
 			final Map<String, PropertyBlock> parent = handleDerivedFrom(toscaClass.getDerivedFrom());
 			res.getProperties().putAll(parent);
 			final PropertyBlock props2 = new PropertyBlock();
-			final Map<String, PropertyBlock> lvl0 = new LinkedHashMap<>();
-			lvl0.put("properties", res);
-			props2.setProperties(lvl0);
-			// Capabilities
-			final Map<String, CapabilityDefinition> caps = toscaClass.getCapabilities();
-			final PropertyBlock capabilities = createCapabilities(caps);
-			if (null != capabilities) {
-				props2.getProperties().put("capabilities", capabilities);
-			}
+			wrapToProperties(res, props2);
+			addCapabilities(toscaClass, props2);
 			defs.put(type, props2);
 			return createIfBlock(type, res);
 		}).toList();
 		pattern.setAllOf(allOf);
+	}
+
+	private static void wrapToProperties(final PropertyBlock res, final PropertyBlock props2) {
+		final Map<String, PropertyBlock> lvl0 = new LinkedHashMap<>();
+		lvl0.put("properties", res);
+		props2.setProperties(lvl0);
+	}
+
+	private void addCapabilities(final ToscaClass toscaClass, final PropertyBlock props2) {
+		final Map<String, CapabilityDefinition> caps = toscaClass.getCapabilities();
+		final PropertyBlock capabilities = createCapabilities(caps);
+		if (null != capabilities) {
+			props2.getProperties().put("capabilities", capabilities);
+		}
 	}
 
 	private PropertyBlock createCapabilities(final Map<String, CapabilityDefinition> caps) {
@@ -349,7 +355,7 @@ public class ToscaWalker {
 	private static PropertyBlock createDefaultFields() {
 		final PropertyBlock pattern = new PropertyBlock();
 		final PropertyBlock sp = new PropertyBlock();
-		sp.setType("string");
+		sp.setType(STRING);
 		final Map<String, PropertyBlock> map = new LinkedHashMap<>();
 		map.put("type", sp);
 		pattern.setProperties(map);

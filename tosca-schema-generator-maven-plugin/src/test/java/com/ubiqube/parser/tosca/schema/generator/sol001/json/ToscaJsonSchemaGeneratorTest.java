@@ -21,7 +21,7 @@ class ToscaJsonSchemaGeneratorTest extends TestCase {
 
 	@Test
 	void testName2() throws Exception {
-		final ToscaWalker tw = new ToscaWalker();
+		final ToscaJsonSchemaWalker tw = new ToscaJsonSchemaWalker();
 		final ToscaJsonSchemaGenerator tl = new ToscaJsonSchemaGenerator();
 		final String res = tw.generate("/home/olivier/git/mano-root/etsi-mano-package-demo/vnf-full-tosca/Definitions/etsi_nfv_sol001_vnfd_types.yaml", tl);
 		assertNotNull(res);
