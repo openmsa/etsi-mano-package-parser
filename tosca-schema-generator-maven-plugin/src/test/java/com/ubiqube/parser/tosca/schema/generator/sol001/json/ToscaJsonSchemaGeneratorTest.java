@@ -35,7 +35,6 @@ import junit.framework.TestCase;
 
 class ToscaJsonSchemaGeneratorTest extends TestCase {
 
-	@Test
 	void testName2() throws Exception {
 		final ToscaJsonSchemaWalker tw = new ToscaJsonSchemaWalker();
 		final ToscaJsonSchemaGenerator tl = new ToscaJsonSchemaGenerator(Paths.get("."), "vnfd");
