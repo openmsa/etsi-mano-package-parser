@@ -1,5 +1,6 @@
 package com.ubiqube.parser.tosca.schema.generator.sol001.json;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Set;
@@ -16,13 +17,17 @@ import com.networknt.schema.serialization.JsonNodeReader;
 
 import junit.framework.TestCase;
 
-class ToscaListenerTest extends TestCase {
+class ToscaJsonSchemaGeneratorTest extends TestCase {
 
 	@Test
 	void testName2() throws Exception {
 		final ToscaWalker tw = new ToscaWalker();
-		final ToscaListener tl = new ToscaListener();
-		tw.generate("/home/olivier/git/mano-root/etsi-mano-package-demo/vnf-full-tosca/Definitions/tosca_ubi.yaml", tl);
+		final ToscaJsonSchemaGenerator tl = new ToscaJsonSchemaGenerator();
+		final String res = tw.generate("/home/olivier/git/mano-root/etsi-mano-package-demo/vnf-full-tosca/Definitions/etsi_nfv_sol001_vnfd_types.yaml", tl);
+		assertNotNull(res);
+		try (FileOutputStream fos = new FileOutputStream("src/test/resources/test2.json")) {
+			fos.write(res.getBytes());
+		}
 	}
 
 	@Test
@@ -61,6 +66,5 @@ class ToscaListenerTest extends TestCase {
 		} catch (final IOException e) {
 			throw new RuntimeException(e);
 		}
-
 	}
 }

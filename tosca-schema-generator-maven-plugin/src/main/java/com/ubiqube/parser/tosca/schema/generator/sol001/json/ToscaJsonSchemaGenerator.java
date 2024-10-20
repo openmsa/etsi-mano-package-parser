@@ -10,14 +10,14 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.ubiqube.parser.tosca.ParseException;
 import com.ubiqube.parser.tosca.schema.generator.sol001.json.stmt.PropertyBlock;
 
-public class ToscaListener {
+public class ToscaJsonSchemaGenerator {
 	private static final String OBJECT = "object";
 	private final ObjectMapper om = new ObjectMapper();
 	private final Map<String, Object> root = new LinkedHashMap<>();
 	private final Map<String, Object> rootProperties = new LinkedHashMap<>();
 	private LinkedHashMap<String, PropertyBlock> defs;
 
-	public ToscaListener() {
+	public ToscaJsonSchemaGenerator() {
 		om.enable(SerializationFeature.INDENT_OUTPUT);
 	}
 
