@@ -38,7 +38,7 @@ public class ToscaListener {
 	}
 
 	private void createImports() {
-		final String str = SchemaUtils.readString("imports-gragment.json");
+		final String str = SchemaUtils.readString("imports-fragment.json");
 		try {
 			final PropertyBlock res = om.readValue(str.getBytes(), PropertyBlock.class);
 			rootProperties.put("imports", res);
