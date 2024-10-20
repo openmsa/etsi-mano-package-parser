@@ -52,6 +52,35 @@
 		<plugins>
 			<plugin>
 				<groupId>com.ubiqube.mano</groupId>
+				<artifactId>tosca-schema-generator-maven-plugin</artifactId>
+				<version>4.0.1-SNAPSHOT</version>
+				<configuration>
+					<files>
+						<file>
+							<file>src/main/resources/etsi_nfv_sol001_vnfd_types.yaml</file>
+							<type>vnfd</type>
+						</file>
+						<file>
+							<file>src/main/resources/etsi_nfv_sol001_pnfd_types.yaml</file>
+							<type>pnfd</type>
+						</file>
+						<file>
+							<file>src/main/resources/etsi_nfv_sol001_nsd_types.yaml</file>
+							<type>nsd</type>
+						</file>
+					</files>
+				</configuration>
+				<executions>
+					<execution>
+						<id>schema-gen</id>
+						<goals>
+							<goal>tosca-json-generator</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.ubiqube.mano</groupId>
 				<artifactId>tosca-class-generator-maven-plugin</artifactId>
 				<version>4.0.1-SNAPSHOT</version>
 				<configuration>
