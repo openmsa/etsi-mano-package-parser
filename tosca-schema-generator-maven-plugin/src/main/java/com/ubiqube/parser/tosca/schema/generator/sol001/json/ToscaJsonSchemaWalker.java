@@ -1,3 +1,19 @@
+/**
+ *     Copyright (C) 2019-2024 Ubiqube.
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ */
 package com.ubiqube.parser.tosca.schema.generator.sol001.json;
 
 import java.io.File;
@@ -52,15 +68,16 @@ public class ToscaJsonSchemaWalker {
 		//
 	}
 
-	public String generate(final String file, final ToscaJsonSchemaGenerator listener) {
+	public void generate(final String file, final ToscaJsonSchemaGenerator listener) {
 		final ToscaParser tp = new ToscaParser(new File(file));
 		root = tp.getContext();
+		listener.setVersion(Optional.ofNullable(root.getMetadata()).map(x -> x.get("template_version")).orElse("2.4.1"));
 		listener.startDocument(root.getDescription());
 		handleTopologyTemplate(listener);
 		handlePolicies(listener);
 		handleGroupType(listener);
 		listener.terminateDocument();
-		return listener.serialize();
+		listener.serialize();
 	}
 
 	private void handleGroupType(final ToscaJsonSchemaGenerator listener) {

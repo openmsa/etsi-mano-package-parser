@@ -1,8 +1,24 @@
+/**
+ *     Copyright (C) 2019-2024 Ubiqube.
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ */
 package com.ubiqube.parser.tosca.schema.generator.sol001.json;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Paths;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -22,12 +38,8 @@ class ToscaJsonSchemaGeneratorTest extends TestCase {
 	@Test
 	void testName2() throws Exception {
 		final ToscaJsonSchemaWalker tw = new ToscaJsonSchemaWalker();
-		final ToscaJsonSchemaGenerator tl = new ToscaJsonSchemaGenerator();
-		final String res = tw.generate("/home/olivier/git/mano-root/etsi-mano-package-demo/vnf-full-tosca/Definitions/etsi_nfv_sol001_vnfd_types.yaml", tl);
-		assertNotNull(res);
-		try (FileOutputStream fos = new FileOutputStream("src/test/resources/test2.json")) {
-			fos.write(res.getBytes());
-		}
+		final ToscaJsonSchemaGenerator tl = new ToscaJsonSchemaGenerator(Paths.get("."), "vnfd");
+		tw.generate("/home/olivier/git/mano-root/etsi-mano-package-demo/vnf-full-tosca/Definitions/etsi_nfv_sol001_vnfd_types.yaml", tl);
 	}
 
 	@Test
