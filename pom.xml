@@ -45,7 +45,7 @@
 		<version.junit.jupiter>5.11.3</version.junit.jupiter>
 		<version.logback-classic>1.5.12</version.logback-classic>
 		<version.lombok>1.18.34</version.lombok>
-		<version.mapstruct>1.6.2</version.mapstruct>
+		<version.mapstruct>1.6.3</version.mapstruct>
 		<version.mockito>5.14.2</version.mockito>
 		<version.slf4j-api>2.0.16</version.slf4j-api>
 		<version.mano-repo-api>4.0.0</version.mano-repo-api>
