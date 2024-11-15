@@ -44,7 +44,7 @@
 		<version.javapoet>1.13.0</version.javapoet>
 		<version.junit.jupiter>5.11.3</version.junit.jupiter>
 		<version.logback-classic>1.5.12</version.logback-classic>
-		<version.lombok>1.18.34</version.lombok>
+		<version.lombok>1.18.36</version.lombok>
 		<version.mapstruct>1.6.3</version.mapstruct>
 		<version.mockito>5.14.2</version.mockito>
 		<version.slf4j-api>2.0.16</version.slf4j-api>
