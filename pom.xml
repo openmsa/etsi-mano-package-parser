@@ -34,7 +34,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.version.jackson.databind>2.18.1</project.version.jackson.databind>
 		<version.bouncycastle>1.79</version.bouncycastle>
-		<version.commons-io>2.17.0</version.commons-io>
+		<version.commons-io>2.18.0</version.commons-io>
 		<version.commons-vfs2>2.9.0</version.commons-vfs2>
 		<version.equalsverifier>3.17.3</version.equalsverifier>
 		<version.expressly>5.0.0</version.expressly>
