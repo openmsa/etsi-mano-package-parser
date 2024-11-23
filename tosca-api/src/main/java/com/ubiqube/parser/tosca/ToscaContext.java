@@ -276,6 +276,7 @@ public class ToscaContext {
 		Optional.ofNullable(context.getPoliciesType()).ifPresent(x -> policiesType.putAll(x));
 		// Repositories
 		Optional.ofNullable(context.getRepositories()).ifPresent(x -> repositories.putAll(x));
+		Optional.ofNullable(context.getRelationship()).ifPresent(x -> relationship.putAll(x));
 		if (null != context.getInterfaceTypes()) {
 			if (null == interfaceTypes) {
 				interfaceTypes = context.getInterfaceTypes();
