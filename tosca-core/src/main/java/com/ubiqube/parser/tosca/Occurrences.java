@@ -18,6 +18,7 @@ package com.ubiqube.parser.tosca;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.ubiqube.parser.tosca.deserializer.OccurrencesDeserializer;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,12 +33,17 @@ import lombok.Setter;
 @JsonDeserialize(using = OccurrencesDeserializer.class)
 public class Occurrences {
 
-	private int min;
 	private int max;
+	private int min;
 
 	public Occurrences(final int _min, final int _max) {
 		min = _min;
 		max = _max;
 	}
 
+	@Override
+	public String toString() {
+		final Object m = (max == Integer.MAX_VALUE) ? "UNBOUNDED" : max;
+		return "[" + min + ", " + m + "]";
+	}
 }
