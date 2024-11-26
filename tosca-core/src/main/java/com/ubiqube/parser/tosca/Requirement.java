@@ -16,13 +16,15 @@
  */
 package com.ubiqube.parser.tosca;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
+import lombok.ToString;
 
 @Setter
 @Getter
+@ToString
 public class Requirement {
 	private String description;
 	private String capability;

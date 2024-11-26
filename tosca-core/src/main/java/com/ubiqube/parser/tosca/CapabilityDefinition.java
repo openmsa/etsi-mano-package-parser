@@ -22,12 +22,15 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.ubiqube.parser.tosca.deserializer.CapabilityDeserializer;
+
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
 @JsonDeserialize(using = CapabilityDeserializer.class)
+@ToString
 public class CapabilityDefinition {
 	private String type;
 	private String description;

@@ -21,12 +21,15 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.ubiqube.parser.tosca.deserializer.RequirementDeserialization;
+
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
 @JsonDeserialize(using = RequirementDeserialization.class)
+@ToString
 public class RequirementDefinition {
 	private List<Map<String, Requirement>> requirements;
 
