@@ -38,7 +38,7 @@
 		<version.commons-vfs2>2.9.0</version.commons-vfs2>
 		<version.equalsverifier>3.17.5</version.equalsverifier>
 		<version.expressly>5.0.0</version.expressly>
-		<version.hibernate-validator>8.0.1.Final</version.hibernate-validator>
+		<version.hibernate-validator>8.0.2.Final</version.hibernate-validator>
 		<version.jakarta.annotation-api>3.0.0</version.jakarta.annotation-api>
 		<version.jakarta.validation-api>3.1.0</version.jakarta.validation-api>
 		<version.javapoet>1.13.0</version.javapoet>
