@@ -35,7 +35,7 @@
 		<project.version.jackson.databind>2.18.2</project.version.jackson.databind>
 		<version.bouncycastle>1.80</version.bouncycastle>
 		<version.commons-io>2.18.0</version.commons-io>
-		<version.commons-vfs2>2.9.0</version.commons-vfs2>
+		<version.commons-vfs2>2.10.0</version.commons-vfs2>
 		<version.equalsverifier>3.19</version.equalsverifier>
 		<version.expressly>5.0.0</version.expressly>
 		<version.hibernate-validator>8.0.2.Final</version.hibernate-validator>
