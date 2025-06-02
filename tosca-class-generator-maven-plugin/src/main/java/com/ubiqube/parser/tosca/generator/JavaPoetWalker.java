@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -60,7 +61,6 @@ import com.ubiqube.parser.tosca.constraints.MinLength;
 import com.ubiqube.parser.tosca.constraints.Pattern;
 import com.ubiqube.parser.tosca.constraints.ValidValues;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
@@ -384,14 +384,16 @@ public class JavaPoetWalker implements ToscaListener {
 			return item;
 		}
 		final String type = valueObject.getType();
-		if ("list".equals(type)) {
+		switch (type) {
+		case "list":
 			return handleList(valueObject);
-		}
-		if ("map".equals(type)) {
+		case "map":
 			return handleMap(valueObject);
-		}
-		if ("trigger".equals(type)) {
+		case "trigger":
 			return ClassName.get(TriggerDefinition.class);
+		case null:
+		default:
+			break;
 		}
 		final Class<?> conv = GenericConverters.convert(valueObject.getType());
 		if (null != conv) {
