@@ -36,7 +36,7 @@
 		<maven.compiler.source>21</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.version.jackson.databind>2.19.0</project.version.jackson.databind>
-		<version.bouncycastle>1.80</version.bouncycastle>
+		<version.bouncycastle>1.81</version.bouncycastle>
 		<version.commons-io>2.19.0</version.commons-io>
 		<version.commons-vfs2>2.10.0</version.commons-vfs2>
 		<version.equalsverifier>4.0</version.equalsverifier>
