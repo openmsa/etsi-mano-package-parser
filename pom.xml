@@ -39,7 +39,7 @@
 		<version.bouncycastle>1.81</version.bouncycastle>
 		<version.commons-io>2.19.0</version.commons-io>
 		<version.commons-vfs2>2.10.0</version.commons-vfs2>
-		<version.equalsverifier>4.0.2</version.equalsverifier>
+		<version.equalsverifier>4.0.3</version.equalsverifier>
 		<version.expressly>6.0.0</version.expressly>
 		<version.hibernate-validator>8.0.2.Final</version.hibernate-validator>
 		<version.jakarta.annotation-api>3.0.0</version.jakarta.annotation-api>
