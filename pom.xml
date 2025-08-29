@@ -185,7 +185,7 @@
 			<dependency>
 				<groupId>com.sun.xml.bind</groupId>
 				<artifactId>jaxb-impl</artifactId>
-				<version>${version.jakarta.xml.bind-api}</version>
+				<version>${version.jaxb-impl}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.maven</groupId>
