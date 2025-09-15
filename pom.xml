@@ -56,7 +56,7 @@
 		<version.mano-repo-api>4.0.0</version.mano-repo-api>
 		<version.reflections>0.10.2</version.reflections>
 		<version.antlr4-runtime>4.13.2</version.antlr4-runtime>
-		<version.jakarta.xml.bind-api>4.0.2</version.jakarta.xml.bind-api>
+		<version.jakarta.xml.bind-api>4.0.4</version.jakarta.xml.bind-api>
 		<version.jaxb-impl>4.0.5</version.jaxb-impl>
 		<!-- maven plugin -->
 		<version.jacoco-maven-plugin>0.8.13</version.jacoco-maven-plugin>
