@@ -71,7 +71,6 @@ import org.bouncycastle.operator.jcajce.JcaDigestCalculatorProviderBuilder;
 import org.bouncycastle.pkcs.PKCS8EncryptedPrivateKeyInfo;
 import org.bouncycastle.pkcs.PKCSException;
 import org.bouncycastle.pkcs.bc.BcPKCS12PBEInputDecryptorProviderBuilder;
-import org.bouncycastle.pqc.legacy.math.linearalgebra.ByteUtils;
 import org.bouncycastle.util.Store;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -193,8 +192,8 @@ public class CryptoTest {
 		sig.update(dataBytes);
 		final byte[] signature = sig.sign();
 		LOG.debug("sig algo: {}", fullCert.getSigAlgName());
-		LOG.debug("Sig: {}", signature.length + " " + ByteUtils.toHexString(signature));
-		LOG.debug("Si2: {}", ByteUtils.toHexString(signer.getSignature()));
+		LOG.debug("Sig: {}", signature.length + " " + bytesToHex(signature));
+		LOG.debug("Si2: {}", bytesToHex(signer.getSignature()));
 		// verifySignature.setParameter(spec1);
 		boolean res = checkSignature(fullCert, dataBytes, signature);
 		LOG.debug("res: {}", res);
