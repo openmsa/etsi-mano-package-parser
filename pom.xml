@@ -36,7 +36,7 @@
 		<maven.compiler.source>21</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.version.jackson.annotations>2.20</project.version.jackson.annotations>
-		<project.version.jackson.databind>2.20.0</project.version.jackson.databind>
+		<project.version.jackson.databind>2.20.1</project.version.jackson.databind>
 		<project.version.jackson-dataformat-yaml>2.20.0</project.version.jackson-dataformat-yaml>
 		<version.bouncycastle>1.82</version.bouncycastle>
 		<version.commons-io>2.20.0</version.commons-io>
