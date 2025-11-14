@@ -19,23 +19,22 @@ package com.ubiqube.parser.tosca.schema.generator.sol001.json;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Paths;
-import java.util.Set;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import com.networknt.schema.InputFormat;
-import com.networknt.schema.JsonSchema;
-import com.networknt.schema.JsonSchemaFactory;
-import com.networknt.schema.SchemaValidatorsConfig;
-import com.networknt.schema.SpecVersion.VersionFlag;
-import com.networknt.schema.ValidationMessage;
-import com.networknt.schema.serialization.JsonNodeReader;
+import com.networknt.schema.Schema;
+import com.networknt.schema.SchemaRegistry;
+import com.networknt.schema.SchemaRegistryConfig;
+import com.networknt.schema.SpecificationVersion;
+import com.networknt.schema.serialization.NodeReader;
 
 import junit.framework.TestCase;
 
 class ToscaJsonSchemaGeneratorTest extends TestCase {
 
-	void testName2() throws Exception {
+	void testName2() {
 		final ToscaJsonSchemaWalker tw = new ToscaJsonSchemaWalker();
 		final ToscaJsonSchemaGenerator tl = new ToscaJsonSchemaGenerator(Paths.get("."), "vnfd");
 		tw.generate("/home/olivier/git/mano-root/etsi-mano-package-demo/vnf-full-tosca/Definitions/etsi_nfv_sol001_vnfd_types.yaml", tl);
@@ -45,12 +44,12 @@ class ToscaJsonSchemaGeneratorTest extends TestCase {
 	void testYaml() {
 		final String schemaData = readString("test2.json");
 		final String inputData = readString("vnfd.yaml");
-		final JsonSchemaFactory factory = JsonSchemaFactory.getInstance(VersionFlag.V202012,
-				builder -> builder.jsonNodeReader(JsonNodeReader.builder().locationAware().build()));
-		final SchemaValidatorsConfig config = SchemaValidatorsConfig.builder().build();
-		final JsonSchema schema = factory.getSchema(schemaData, InputFormat.JSON, config);
-		final Set<ValidationMessage> messages = schema.validate(inputData, InputFormat.YAML, executionContext -> {
-			executionContext.getExecutionConfig().setFormatAssertionsEnabled(true);
+		final SchemaRegistry factory = SchemaRegistry.withDefaultDialect(SpecificationVersion.DRAFT_2020_12,
+				builder -> builder.nodeReader(NodeReader.builder().locationAware().build()));
+		final SchemaRegistryConfig config = SchemaRegistryConfig.builder().build();
+		final Schema schema = factory.getSchema(schemaData, InputFormat.JSON);
+		final List<com.networknt.schema.Error> messages = schema.validate(inputData, InputFormat.YAML, executionContext -> {
+			// executionContext.getExecutionConfig().setFormatAssertionsEnabled(true);
 		});
 		messages.forEach(x -> System.out.println(x));
 	}
@@ -59,13 +58,13 @@ class ToscaJsonSchemaGeneratorTest extends TestCase {
 	void testSmall() {
 		final String schemaData = readString("schema-small3.json");
 		final String inputData = readString("small.yaml");
-		final JsonSchemaFactory factory = JsonSchemaFactory.getInstance(VersionFlag.V202012,
-				builder -> builder.jsonNodeReader(JsonNodeReader.builder().locationAware().build()));
-		final SchemaValidatorsConfig config = SchemaValidatorsConfig.builder().build();
-		final JsonSchema schema = factory.getSchema(schemaData, InputFormat.JSON, config);
-		final Set<ValidationMessage> messages = schema.validate(inputData, InputFormat.YAML, executionContext -> {
-			executionContext.getExecutionConfig().setFormatAssertionsEnabled(true);
-			executionContext.getExecutionConfig().setDebugEnabled(true);
+		final SchemaRegistry factory = SchemaRegistry.withDefaultDialect(SpecificationVersion.DRAFT_2020_12,
+				builder -> builder.nodeReader(NodeReader.builder().locationAware().build()));
+		final SchemaRegistryConfig config = SchemaRegistryConfig.builder().build();
+		final Schema schema = factory.getSchema(schemaData, InputFormat.JSON);
+		final List<com.networknt.schema.Error> messages = schema.validate(inputData, InputFormat.YAML, executionContext -> {
+//			executionContext.getExecutionConfig().setFormatAssertionsEnabled(true);
+//			executionContext.getExecutionConfig().setDebugEnabled(true);
 		});
 		System.out.println("-------------------");
 		messages.forEach(x -> System.out.println(x));
