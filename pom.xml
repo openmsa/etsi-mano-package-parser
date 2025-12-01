@@ -32,8 +32,8 @@
 		</repository>
 	</distributionManagement>
 	<properties>
-		<maven.compiler.target>21</maven.compiler.target>
-		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>25</maven.compiler.target>
+		<maven.compiler.source>25</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.version.jackson.annotations>2.20</project.version.jackson.annotations>
 		<project.version.jackson.databind>2.20.1</project.version.jackson.databind>
