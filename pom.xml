@@ -58,6 +58,7 @@
 		<version.antlr4-runtime>4.13.2</version.antlr4-runtime>
 		<version.jakarta.xml.bind-api>4.0.4</version.jakarta.xml.bind-api>
 		<version.jaxb-impl>4.0.6</version.jaxb-impl>
+		<lombok.version>1.18.42</lombok.version>
 		<!-- maven plugin -->
 		<version.jacoco-maven-plugin>0.8.14</version.jacoco-maven-plugin>
 		<version.maven-source-plugin>3.4.0</version.maven-source-plugin>
